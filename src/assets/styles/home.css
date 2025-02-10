@@ -1,0 +1,198 @@
+.hero-section {
+  background: url("/images/banner.png") no-repeat center center;
+  background-size: cover;
+  width: 100%;
+  padding: 100px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-section .container {
+  z-index: 1;
+}
+.hero-section .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-section .row .text-content {
+  color: #fff;
+  text-align: center;
+  padding: 20px 0px;
+}
+.hero-section .row .text-content h2 {
+  font-size: 2.6rem;
+}
+.hero-section .row .text-content h2 span {
+  color: #f3c623;
+}
+.hero-section .row .text-content p {
+  font-size: 1.15rem;
+}
+@media (max-width: 768px) {
+  .hero-section .text-content {
+    width: 60%;
+  }
+}
+@media (max-width: 480px) {
+  .hero-section .hero-section {
+    background: url("/images/hero.jpg") no-repeat center center;
+  }
+  .hero-section .text-content {
+    width: 100%;
+  }
+}
+
+.why-us .why-box {
+  background-color: var(--third);
+  padding: 30px;
+}
+.why-us .why-box h3 {
+  color: var(--second);
+  font-weight: 700;
+  font-size: 34px;
+  margin-bottom: 30px;
+}
+.why-us .why-box p {
+  margin-bottom: 30px;
+  color: var(--grey-light);
+}
+.why-us .icon-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white);
+  text-align: center;
+  padding: 40px 30px;
+  width: 100%;
+  height: 100%;
+  box-shadow: var(--shadow);
+  border: 1px solid color-mix(in srgb, var(--second), transparent 90%);
+  transition: var(--transition);
+}
+.why-us .icon-box i {
+  color: var(--second);
+  font-size: 32px;
+  margin-bottom: 30px;
+  background: color-mix(in srgb, var(--second), transparent 95%);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  transition: 0.3s;
+}
+.why-us .icon-box h4 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 20px 0;
+}
+.why-us .icon-box p {
+  font-size: 15px;
+  color: color-mix(in srgb, var(--gray), transparent 30%);
+}
+.why-us .icon-box:hover {
+  transform: translateY(-8px);
+}
+
+.services {
+  text-align: center;
+  margin-top: 40px;
+  background-color: var(--third);
+  padding: 50px 0;
+}
+.services h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.services .service-card {
+  border: none;
+  text-align: center;
+  padding: 20px;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.services .service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
+.services .service-card .service-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.services .service-card .service-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: 0.3s ease-in-out;
+}
+.services .service-card .service-image img:hover {
+  transform: scale(1.05);
+}
+.services .service-card .service-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: var(--second);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.services .service-card .service-subtitle {
+  font-size: 1rem;
+  color: var(--grey);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.services .pagination {
+  margin-top: 20px;
+  justify-content: center;
+}
+.services .pagination .page-item .page-link {
+  color: var(--white) !important;
+  background-color: var(--second) !important;
+  border: none !important;
+  margin: 0 5px !important;
+}
+.services .pagination .page-item .page-link:hover {
+  opacity: 0.5;
+}
+.services .pagination .page-item .page-link.active {
+  opacity: 0.5;
+}
+
+.latest-works {
+  padding: 50px 0;
+  direction: rtl;
+}
+.latest-works .sec_header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.latest-works .sec_header .section_title h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--second);
+}
+.latest-works .sec_header .section_title p {
+  font-size: 14px;
+  color: var(--gray-light);
+}
+.latest-works .business_swiper {
+  padding: 20px 0;
+}
+.latest-works .business_swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+}/*# sourceMappingURL=home.css.map */

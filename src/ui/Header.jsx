@@ -1,5 +1,37 @@
+import { Link, NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageDropDown from "./header/LanguageDropDown";
+import UserDropDown from "./header/UserDropDown";
+
 export default function Header() {
+  const { t } = useTranslation();
+
   return (
-    <div>Header</div>
-  )
+    <header>
+      <nav className="container">
+        <Link to="/" className="logo">
+          <img
+            src={"/images/logo.svg"}
+            alt="logo"
+          />
+        </Link>
+
+        <div className="nav_links">
+            <>
+              <NavLink to="/">{t("home")}</NavLink>
+              <NavLink to="/aboutus">{t("aboutus")}</NavLink>
+              <NavLink to="/service">{t("services")}</NavLink>
+              <NavLink to="/contact">{t("contactus")}</NavLink>
+            </>
+
+        </div>
+
+        <div className="actions">
+          <LanguageDropDown />
+          <UserDropDown />
+        </div>
+      </nav>
+    </header>
+  );
 }
+

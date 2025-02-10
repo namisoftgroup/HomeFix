@@ -1,0 +1,72 @@
+header {
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--light-gray);
+}
+header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header nav .logo {
+  flex: 1;
+}
+header nav .logo img {
+  height: 40px;
+}
+header nav .nav_links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 2;
+  gap: 42px;
+}
+header nav .nav_links a {
+  font-size: 16px;
+  color: var(--main);
+}
+header nav .nav_links a.active {
+  color: var(--second);
+}
+@media screen and (min-width: 992px) {
+  header nav .nav_links a {
+    display: block;
+  }
+}
+@media screen and (max-width: 992px) {
+  header nav .nav_links a {
+    display: none;
+  }
+}
+header nav .actions {
+  gap: 16px;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+header nav .actions .rounded_btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  background: var(--btn-bg);
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--main);
+  border: 0;
+}
+header nav .actions .rounded_btn:active {
+  background: var(--btn-bg);
+  color: var(--main);
+}
+header nav .actions .rounded_btn.show {
+  background: var(--btn-bg);
+}
+header nav .actions .rounded_btn .fa-globe {
+  color: var(--second);
+}/*# sourceMappingURL=header.css.map */

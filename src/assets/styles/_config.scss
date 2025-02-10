@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @mixin centerFlex {
   display: flex;
   align-items: center;
@@ -52,6 +55,40 @@
 ::-webkit-scrollbar-thumb {
   background: #989898;
   border-radius: 30px;
+}
+:root {
+  --main: #0d0d0f;
+  --second: #479991;
+  --third: #f0faf7;
+  --border: #dddddd;
+  --input-bg: #f8f8f8;
+  --input-hint: #aaaaaa;
+  --btn-bg: #f7f7f7;
+  --close-hover: #f2f2f2;
+  --gray: #777777;
+  --gray-light: #777777cc;
+  --dropdown-bg: #fff;
+  --light-gray: #eeeeee;
+  --star-color: #ffd500;
+  --white: #fff;
+  --input-stroke: #f2f2f2;
+  --border-radius: 12px;
+  --transition: 0.3s ease-in-out;
+  --shadow: 0px 2px 8px #0000001a;
+}
+
+.modal-header {
+  border-bottom: 0;
+  .btn-close {
+    box-shadow: none !important;
+    background-image: url("/icons/close.svg");
+    margin-inline-start: auto !important;
+    margin-inline-end: 0 !important;
+  }
+  h6 {
+    color: var(--main);
+    margin-bottom: 0;
+  }
 }
 
 button,
@@ -145,41 +182,19 @@ input[type="number"] {
 .dropdown-toggle::after {
   display: none;
 }
-
-.modal-header {
-  border-bottom: 0;
-  .btn-close {
-    padding: 0 !important;
-    background: none !important;
-    box-shadow: none !important;
-    margin-inline-end: 0 !important;
-    margin-inline-start: auto !important;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    position: relative;
-    opacity: 1;
-    &::before {
-      @include centerAbsolute();
-      font-family: "Font Awesome 6 Pro";
-      content: "\f00d";
-      font-size: 14px;
-      color: var(--main);
-    }
-    &:hover {
-      background: var(--close-hover) !important;
-    }
-  }
-  h6 {
+.closeModal {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  @include centerFlex();
+  background: var(--close-hover);
+  i {
     color: var(--main);
-    margin-bottom: 0;
+    font-size: 12px;
   }
-}
-
-.modal-content {
-  background: var(--white);
-  border-radius: 24px;
-  overflow: hidden;
 }
 
 .modal .modal-xl {
@@ -488,110 +503,3 @@ input[type="email"] {
   }
 }
 
-// calender
-.calender_modal .rmdp-calendar {
-  border: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 8px;
-  background: var(--white);
-}
-
-.rmdp-wrapper {
-  background: var(--white) !important;
-}
-
-.rmdp-day {
-  width: 52px !important;
-  height: 52px !important;
-  font-size: 16px !important;
-  color: var(--main) !important;
-  transition: var(--transition);
-  span:hover {
-    background-color: var(--close-hover) !important;
-    color: var(--main) !important;
-  }
-  &.rmdp-today span {
-    background-color: var(--close-hover) !important;
-    color: var(--main) !important;
-  }
-  &.rmdp-disabled {
-    color: var(--gray) !important;
-    cursor: not-allowed !important;
-    span {
-      text-decoration: line-through !important;
-      cursor: not-allowed !important;
-      &:hover {
-        background-color: transparent !important;
-        color: var(--gray) !important;
-      }
-    }
-  }
-}
-
-.rmdp-arrow-container {
-  width: 24px !important;
-  height: 24px !important;
-  @include centerFlex();
-  position: relative;
-  i {
-    display: none;
-  }
-  &::before {
-    font-family: "Font Awesome 6 Pro";
-    content: "\f104";
-    font-size: 14px;
-    color: var(--main);
-    @include centerAbsolute();
-  }
-  &.rmdp-right::before {
-    content: "\f105";
-  }
-  &:hover {
-    background: var(--close-hover) !important;
-    box-shadow: none !important;
-  }
-  &.disabled {
-    cursor: not-allowed !important;
-    &::before {
-      color: var(--gray) !important;
-    }
-    &:hover {
-      background: transparent !important;
-      box-shadow: none !important;
-    }
-  }
-}
-
-.rmdp-range {
-  background: var(--main) !important;
-  box-shadow: none !important;
-  color: var(--white) !important;
-  &.rmdp-today span {
-    background: var(--main) !important;
-    color: var(--white) !important;
-  }
-}
-
-.rmdp-week:first-child {
-  margin-bottom: 16px;
-  .rmdp-week-day {
-    color: var(--main) !important;
-  }
-}
-
-.rmdp-header-values {
-  color: var(--main) !important;
-}
-
-.rmdp-shadow {
-  box-shadow: none !important;
-}
-
-.calender_wrapper {
-  min-height: 384px;
-}
-
-.rmdp-week-day {
-  width: 52px !important;
-}

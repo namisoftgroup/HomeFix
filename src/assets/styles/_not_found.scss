@@ -1,0 +1,169 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
+
+.page_not_found {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  text-align: center;
+  direction: rtl;
+  flex-direction: row-reverse;
+
+  [dir="ltr"] & {
+    direction: ltr;
+    flex-direction: row;
+  }
+
+  .cog-wheel1,
+  .cog-wheel2 {
+    transform: scale(0.7);
+  }
+
+  h1 {
+    color: #142833;
+  }
+
+  .first-four {
+    position: relative;
+    right: -16vmin;
+    font-size: 40vmin;
+  }
+
+  .second-four {
+    position: relative;
+    left: -18vmin;
+    z-index: -1;
+    font-size: 40vmin;
+  }
+
+  [dir="ltr"] .first-four {
+    right: unset;
+    left: -16vmin;
+  }
+
+  [dir="ltr"] .second-four {
+    left: unset;
+    right: -18vmin;
+  }
+
+  .wrong-para {
+    font-family: "Montserrat", sans-serif;
+    position: absolute;
+    bottom: 15vmin;
+    padding: 3vmin 0vmin 3vmin 6vmin;
+    font-weight: 600;
+    color: #092532;
+  }
+
+  .back-home-link {
+    display: block;
+    font-size: 16px;
+    color: var(--white);
+    background-color: var(--second);
+    padding: 1vmin 3vmin;
+    border-radius: 12px;
+    font-weight: 500;
+    position: absolute;
+    bottom: 10vmin;
+    right: 48%;
+    transform: translateX(48%);
+    text-align: center;
+    text-decoration: none;
+  }
+
+  [dir="ltr"] .back-home-link {
+    right: unset;
+    left: 48%;
+    transform: translateX(-48%);
+  }
+}
+
+@mixin cog-style($color) {
+  width: 40vmin;
+  height: 40vmin;
+  border-radius: 50%;
+  border: 6vmin solid $color;
+  position: relative;
+
+  .top,
+  .down,
+  .left,
+  .right,
+  .left-top,
+  .left-down,
+  .right-top,
+  .right-down {
+    width: 10vmin;
+    height: 10vmin;
+    background-color: $color;
+    position: absolute;
+  }
+
+  .top {
+    top: -14vmin;
+    left: 9vmin;
+  }
+
+  .down {
+    bottom: -14vmin;
+    left: 9vmin;
+  }
+
+  .left {
+    left: -14vmin;
+    top: 9vmin;
+  }
+
+  .right {
+    right: -14vmin;
+    top: 9vmin;
+  }
+
+  .left-top {
+    transform: rotateZ(-45deg);
+    left: -6vmin;
+    top: -8vmin;
+  }
+
+  .left-down {
+    transform: rotateZ(45deg);
+    left: -6vmin;
+    top: 25vmin;
+  }
+
+  .right-top {
+    transform: rotateZ(45deg);
+    right: -6vmin;
+    top: -8vmin;
+  }
+
+  .right-down {
+    transform: rotateZ(-45deg);
+    right: -6vmin;
+    top: 25vmin;
+  }
+}
+
+.cog1 {
+  @include cog-style(#f3c623);
+}
+
+.cog2 {
+  @include cog-style(var(--second));
+  right: 10.2vmin;
+  bottom: 10vmin;
+}
+
+[dir="ltr"] .cog1 {
+  right: unset;
+  left: 10.2vmin;
+}
+
+[dir="ltr"] .cog2 {
+  right: unset;
+  left: 10.2vmin;
+}
