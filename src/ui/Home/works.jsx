@@ -26,9 +26,9 @@ const LatestWorks = () => {
           <div className="col-12 p-2 mb-4">
             <div className="sec_header">
               <div className="section_title">
-                <h2>{t("Works.title","اخر اعمالنا")}</h2>
+                <h2>{t("Works.title")}</h2>
                 <p>
-                 {t("Works.Desc", "نقدم لمحة عن أحدث مشاريعنا في إصلاح وصيانة المنازل!")}
+                 {t("Works.Desc")}
                 </p>
               </div>
             </div>

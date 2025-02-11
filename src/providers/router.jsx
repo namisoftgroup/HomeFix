@@ -3,6 +3,7 @@ import RootLayout from "../layout/RootLayout";
 import Home from "../routes/Home";
 import PageNotFound from "../routes/PageNotFound";
 import ServiceDetails from "../ui/services/ServiceDetails";
+import Orders from "../routes/Orders";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -17,7 +18,11 @@ export const router = createBrowserRouter([
         path: "/services/:id",
         element: <ServiceDetails />,
       },
-
+      {
+        path: "Orders",
+        element: <Orders />,
+      },
+      
     ],
   },
 ]);

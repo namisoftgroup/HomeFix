@@ -1,7 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import WaveSurfer from "wavesurfer.js";
+import { useTranslation } from "react-i18next";
 
 const AudioRecorder = () => {
+  const { t } = useTranslation(); 
   const [audioURL, setAudioURL] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
   const [waveSurfer, setWaveSurfer] = useState(null);
@@ -68,7 +70,7 @@ const AudioRecorder = () => {
     <div className="section">
       <label className="label-container">
         <img src="/icons/Frame2.svg" alt="icon" className="label-icon" />
-        تسجيل صوتي
+        {t("Services.recordAudio")}
       </label>
       <div className="audio-recorder">
         <button

@@ -73,8 +73,27 @@
     "title13": "Flooring and Walls",
     "subtitle13": "Installing and maintaining tiles and flooring.",
     "title14": "Gypsum and Roofing",
-    "subtitle14": "Designing, installing, and maintaining ceilings and facades."
+    "subtitle14": "Designing, installing, and maintaining ceilings and facades.",
+    "serviceDetails": "Service Details",
+  "faultTitle": "Fault Title",
+  "faultImages": "Fault Images",
+  "uploadImages": "Upload Images",
+  "removeImage": "Remove Image",
+  "faultDescription": "Fault Description",
+  "writeHere": "Write here",
+  "recordAudio": "Record Audio",
+  "requestScheduledAppointment": "Request a Scheduled Appointment",
+  "confirm": "Confirm",
+  "faultLocation": "Fault Location",
+  "selectDate": "Select Date",
+  "selectTime": "Select Time",
+  "errormsg":"You should fill all data"
+
   },
+  "termsAndConditions": "Terms & Conditions",
+  "termsText": "By using our website, you agree to the terms and conditions of our home repair services. Users must be over 18 years old and provide accurate information when requesting a service. The service cost is determined before confirmation, with multiple payment options available. Orders can be canceled up to 24 hours in advance without fees; after that, a cancellation fee may apply. We guarantee service quality but are not responsible for any indirect damages. Your personal data is protected and used only to provide the service. We reserve the right to modify these terms at any time. For more information, contact us via email or phone.",
+  "agreeToTerms": "I agree to the terms & conditions",
+  "requestSuccess":"Your Request is success",
   "Works": {
     "title": "Latest Works",
     "Desc": "!We provide a glimpse of our latest home repair and maintenance projects",

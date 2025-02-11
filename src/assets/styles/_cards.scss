@@ -1,10 +1,9 @@
 .work-card {
-  background: var(--third);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: transform 0.3s ease-in-out;
-  width: 250px;
+  width: 100%;
   position: relative;
   text-align: right;
   cursor: pointer;
@@ -49,3 +48,83 @@
     bottom: 0; 
   }
 }
+
+.order-card {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .details {
+      color: var(--second);
+      cursor: pointer;
+    }
+    .service-icon {
+      background: var(--white);
+      padding: 5px 10px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+      img {
+        width: 24px; 
+        height: 24px;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .order-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 10px 0;
+
+    .order-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+
+      p {
+        margin: 0;
+        font-size: 14px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        i {
+          color: var(--main);
+        }
+      }
+    }
+
+    
+  }
+
+  .cancel-btn {
+    background-color: #f8d7da;
+    color: #d9534f;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    cursor: not-allowed;
+  }
+}
+

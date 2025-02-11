@@ -90,7 +90,28 @@
     margin-bottom: 0;
   }
 }
+// confirmation and success modal
+.confirm-btn {
+  width: 100%;
+  background: var(--second);
+  color: var(--white);
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
 
+  &:hover {
+    filter: brightness(90%);
+  }
+
+  &:disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+}
 button,
 input,
 select,
