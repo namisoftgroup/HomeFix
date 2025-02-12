@@ -17,18 +17,18 @@
       }
     }
     .dropdown {
-      button {
-        background-color:var(--white) !important;
+      .button {
+        background-color: var(--white) !important;
       }
     }
     .file_upload label {
-      background-color:var(--white) !important;
+      background-color: var(--white) !important;
     }
     input,
     select,
     textarea,
     .image_upload {
-      background-color:var(--white) !important;
+      background-color: var(--white) !important;
     }
   }
 
@@ -230,7 +230,7 @@
         top: 4px;
         right: 4px;
         content: "";
-        background-color:var(--white);
+        background-color: var(--white);
       }
       &:checked {
         &::after {
@@ -532,21 +532,27 @@
       display: none;
     }
   }
+
   .phone_field {
     display: flex;
     align-items: center;
     width: 100%;
     align-items: end;
     position: relative;
-    // gap: 2px;
     direction: rtl !important;
 
     input {
       border-radius: 0 12px 12px 0;
     }
     .dropdown {
-      button {
+      height: 52px;
+      .button {
         border-radius: 12px 0 0 12px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        gap: 12px;
       }
     }
     img {
@@ -554,12 +560,13 @@
       aspect-ratio: 3 / 2;
       border-radius: 4px;
     }
-    button {
+    .button {
       background: var(--input-bg);
       padding: 0 12px;
       color: var(--main);
       min-width: 94px;
       border: 1px solid var(--border);
+      border-right: 0;
       span {
         direction: ltr;
         line-height: 1;
@@ -572,7 +579,7 @@
       position: absolute;
       top: 64px;
       left: 0;
-      background:var(--white);
+      background: var(--white);
       z-index: 9;
       padding: 12px;
       border-radius: 12px;
@@ -616,8 +623,8 @@
   }
 }
 
-.head{
-  span{
+.head {
+  span {
     color: var(--second);
   }
 }
@@ -636,13 +643,11 @@
     flex: 1;
     input {
       display: none;
-     
-     
     }
     span {
       min-height: 52px;
       width: 100%;
-      background:var(--white);
+      background: var(--white);
       color: var(--main) !important;
       font-size: 16px !important;
       cursor: pointer;
@@ -652,13 +657,12 @@
       transition: var(--transition);
       padding: 12px;
       white-space: nowrap;
-      &.active{
+      &.active {
         background: var(--second) !important;
         border-color: var(--second) !important;
         color: var(--white) !important;
       }
     }
-    
   }
 }
 .image-upload-wrapper {
@@ -672,7 +676,7 @@
     height: 120px;
     border-radius: 50%;
     position: relative;
-    border: 2px solid #ddd; 
+    border: 2px solid #ddd;
 
     img {
       width: 100%;
@@ -684,7 +688,7 @@
     .upload-button {
       width: 32px;
       height: 32px;
-      background-color: var(--second);  
+      background-color: var(--second);
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -711,9 +715,9 @@
   display: flex;
   gap: 20px;
   width: 100%;
-  
+
   .image-container {
-    width: 50%; 
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -770,23 +774,18 @@
 }
 @media (max-width: 768px) {
   .form_group {
-    flex-direction: column; 
+    flex-direction: column;
 
     .image-container {
-      width: 100%; 
+      width: 100%;
     }
   }
 }
 .upload-hint {
   margin-top: 10px;
   font-size: 15px;
-  color:var(--main) !important;
+  color: var(--main) !important;
 }
-
-
-
-
-
 
 // .stars {
 //   display: flex;
@@ -832,7 +831,7 @@
     height: 80px !important;
     text-align: center;
     border: 1px solid var(--second);
-    background: var(--second)10;
+    background: var(--second) 10;
     font-size: 28px !important;
     font-weight: 600;
     color: var(--second) !important;

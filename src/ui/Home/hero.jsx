@@ -1,24 +1,35 @@
-import { Container, Row, Col } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import { Autoplay } from "swiper/modules";
+import { Swiper } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
+import useGetHomeSlider from "./../../hooks/home/useGetHomeSlider";
 
 export default function Hero() {
-    const { t } = useTranslation();
+  const { data: slider } = useGetHomeSlider();
 
   return (
     <div className="hero-section">
-      <Container>
-        <Row>
-          <Col md={6} className="text-content">
-            <h2>
-              <span>{t("hero_title")}</span> {t("hero_text")}
-            </h2>
-            <p>
-            {t("hero_description")}
-             
-            </p>
-          </Col>
-        </Row>
-      </Container>
+      <div className="container">
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={16}
+          speed={2000}
+          loop={true}
+          className="hero_slider"
+          modules={[Autoplay]}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+        >
+          {slider?.map((slide) => (
+            <SwiperSlide key={slide?.id}>
+              <div className="img">
+                <img src={slide?.image} alt={slide?.title} />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </div>
   );
 }

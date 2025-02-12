@@ -1,16 +1,18 @@
-import { GoogleMap, Marker, StandaloneSearchBox, useLoadScript } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  Marker,
+  StandaloneSearchBox,
+  useLoadScript,
+} from "@react-google-maps/api";
 import { useEffect, useRef, useState } from "react";
-
-const MAPS_API_KEY = import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY; // Store API key in .env file
 
 export default function MapSection({ formData, setFormData }) {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: MAPS_API_KEY,
-    libraries: ["places"],
+    googleMapsApiKey: "AIzaSyCE46OXa1TZgWdjl5gGvV-Vap-ONwdQN1s",
   });
 
   const [markerPosition, setMarkerPosition] = useState({
-    lat: Number(formData?.lat) || 30.0444, // Default to Cairo
+    lat: Number(formData?.lat) || 30.0444,
     lng: Number(formData?.lng) || 31.2357,
   });
 

@@ -19,9 +19,9 @@ function UserRegister({ setFormType, userType, setShow }) {
   const [, setCookie] = useCookies(["token", "id"]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name:"",
-    email:"",
-    city_id:"",
+    name: "",
+    email: "",
+    city_id: "",
     phone: "",
     password: "",
     country_code: "+962",
@@ -33,16 +33,15 @@ function UserRegister({ setFormType, userType, setShow }) {
     try {
       const res = await axiosInstance.post("/auth/users", {
         ...formData,
-        type: userType
+        type: userType,
       });
 
       if (res.data.code === 200) {
-
         const res = await axiosInstance.post("/auth/users", {
           ...formData,
-          type: userType
+          type: userType,
         });
-        
+
         setCookie("token", res.data?.data?.token, {
           path: "/",
           secure: true,
@@ -74,7 +73,6 @@ function UserRegister({ setFormType, userType, setShow }) {
       </div>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form_group">
-         
           <InputField
             required
             label={t("auth.fullName")}
@@ -127,7 +125,6 @@ function UserRegister({ setFormType, userType, setShow }) {
             value={formData.phone}
             countryCode={formData.country_code}
             onChange={(e) => handleChange(e, setFormData)}
-
           />
         </div>
 
@@ -141,7 +138,6 @@ function UserRegister({ setFormType, userType, setShow }) {
             value={formData.password}
             onChange={(e) => handleChange(e, setFormData)}
           />
-        
         </div>
 
         <span className="noAccount mt-2">
@@ -152,10 +148,7 @@ function UserRegister({ setFormType, userType, setShow }) {
         </span>
 
         <div className="d-flex gap-2">
-          <button
-            className="back_btn"
-            onClick={() => setFormType("register-type")}
-          >
+          <button className="back_btn" onClick={() => setFormType("login")}>
             <i className="fal fa-arrow-right"></i>
           </button>
           <SubmitButton name={t("auth.register")} loading={loading} />

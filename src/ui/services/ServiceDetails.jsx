@@ -17,8 +17,8 @@ export default function ServiceDetails() {
     selectedTime: "",
     selectedDate: "",
     isAgreed: false,
-    lat: "23.0000",
-    lng: "46.0000",
+    lat: 23.0000,
+    lng: 46.0000,
   });
 
   const [showModal, setShowModal] = useState(false);

@@ -11,6 +11,7 @@ const queryClient = new QueryClient();
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./assets/styles/all.min.css";
 import "./assets/styles/style.css";
+import "swiper/css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

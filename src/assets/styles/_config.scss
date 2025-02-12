@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 @mixin centerFlex {
@@ -56,6 +56,7 @@
   background: #989898;
   border-radius: 30px;
 }
+
 :root {
   --main: #0d0d0f;
   --second: #479991;
@@ -90,6 +91,8 @@
     margin-bottom: 0;
   }
 }
+
+
 // confirmation and success modal
 .confirm-btn {
   width: 100%;
@@ -523,4 +526,3 @@ input[type="email"] {
     font-size: 16px;
   }
 }
-

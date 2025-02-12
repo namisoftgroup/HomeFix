@@ -5,35 +5,26 @@
 @import "./cards";
 @import "./not_found";
 
-
 body {
-    direction: rtl;
-    font-family: "Baloo Bhaijaan 2", sans-serif;
-    background-color: var(--white);
-    main {
-      min-height: calc(100vh - 100px);
-    }
-  
-    @import "./home";
-    @import "./auth";
-    @import "./services";
-    @import "./orders";
-    // @import "./property_details";
-  
-    &.en {
+  direction: rtl;
+  font-family: "Zain", serif;
+  background-color: var(--white);
+  main {
+    min-height: calc(100vh - 100px);
+  }
+
+  @import "./home";
+  @import "./auth";
+  @import "./services";
+  @import "./orders";
+
+  &.en {
+    direction: ltr;
+    font-family: "Outfit", sans-serif;
+    .form .input-field input,
+    .form .input-field textarea,
+    .form .input-field select {
       direction: ltr;
-      font-family: "Outfit", sans-serif;
-      .form_field {
-        input,
-        select,
-        textarea {
-          direction: ltr;
-        }
-      }
-      // .auth_modal .modal_close_btn {
-      //   left: initial;
-      //   right: 16px;
-      // }
     }
   }
-  
+}
