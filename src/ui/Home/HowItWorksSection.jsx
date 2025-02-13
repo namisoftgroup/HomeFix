@@ -54,9 +54,9 @@ const HowItWorksSection = () => {
         <p className="subtitle text-center text-secondary-emphasis mb-5">
           {t("howItWorks.subtitle")}
         </p>
-        <div className="row">
+        <div className="row gap-lg-0 gap-5">
           <div className="col-lg-4 col-12 d-flex align-items-center justify-content-center">
-            <div className="row h-100">
+            <div className="row h-100 gap-lg-0 gap-3">
               {steps.map((step, index) => (
                 <div className="col-12 d-flex align-items-center" key={index}>
                   <div className="h-card d-flex gap-2" data-aos="fade-up">
@@ -86,7 +86,7 @@ const HowItWorksSection = () => {
           </div>
 
           <div className="col-lg-4 col-12 d-flex align-items-center justify-content-center">
-            <div className="row h-100">
+            <div className="row h-100 gap-lg-0 gap-3">
               {rightSteps.map((step, index) => (
                 <div className="col-12 d-flex align-items-center" key={index}>
                   <div className="h-card left d-flex gap-2" data-aos="fade-up">

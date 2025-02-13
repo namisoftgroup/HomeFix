@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import axiosInstance from "../../utils/axiosInstance";
 
-function useGetCategories() {
+function useGetServices() {
   const lang = useSelector((state) => state.language.lang);
 
   const { isLoading, data, error } = useQuery({
@@ -26,4 +26,4 @@ function useGetCategories() {
   return { isLoading, data, error };
 }
 
-export default useGetCategories;
+export default useGetServices;

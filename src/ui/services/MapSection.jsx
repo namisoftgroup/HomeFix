@@ -5,10 +5,13 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function MapSection({ formData, setFormData }) {
+  const { t } = useTranslation();
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCE46OXa1TZgWdjl5gGvV-Vap-ONwdQN1s",
+    libraries: ["places"],
   });
 
   const [markerPosition, setMarkerPosition] = useState({
@@ -87,14 +90,14 @@ export default function MapSection({ formData, setFormData }) {
         <GoogleMap
           mapContainerStyle={{
             width: "100%",
-            height: "400px",
+            height: "350px",
             borderRadius: "12px",
           }}
           zoom={10}
           center={markerPosition}
         >
           <Marker
-            icon="/images/icons/map-pin.svg"
+            icon="/images/map-pin.svg"
             position={markerPosition}
             draggable={true}
             onDragEnd={handleMarkerDragEnd}
@@ -105,7 +108,7 @@ export default function MapSection({ formData, setFormData }) {
           >
             <input
               type="search"
-              placeholder="Search places..."
+              placeholder={t("searchPlaces")}
               className="mapSearchInput"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}

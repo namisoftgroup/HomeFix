@@ -1,14 +1,19 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AudioRecorder from "../../ui/form-elements/Record";
 import ConfirmationModal from "../modals/ConfirmationModal";
-// import MapSection from "../form-elements/Map";
+import useGetServices from "../../hooks/home/useGetServices";
+import SubmitButton from "../form-elements/SubmitButton";
+import MapSection from "./MapSection";
 
 export default function ServiceDetails() {
   const { t } = useTranslation();
-  const location = useLocation();
-  const service = location.state?.service || {};
+  const { data: services } = useGetServices();
+  const [service, setService] = useState();
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     images: [],
@@ -17,35 +22,11 @@ export default function ServiceDetails() {
     selectedTime: "",
     selectedDate: "",
     isAgreed: false,
-    lat: 23.0000,
-    lng: 46.0000,
+    lat: 23.0,
+    lng: 46.0,
   });
 
   const [showModal, setShowModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const handleConfirmClick = () => {
-    const validations = [
-      {
-        condition:
-          formData.images.length === 0 ||
-          formData.description.trim() === "" ||
-          (formData.isScheduled &&
-            (!formData.selectedTime || !formData.selectedDate)),
-        message: t("Services.errormsg"),
-      },
-    ];
-
-    const firstError = validations.find((v) => v.condition);
-
-    if (firstError) {
-      setErrorMessage(firstError.message);
-      return;
-    }
-
-    setErrorMessage("");
-    setShowModal(true);
-  };
 
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
@@ -71,95 +52,148 @@ export default function ServiceDetails() {
     }));
   };
 
+  useEffect(() => {
+    if (!id) {
+      navigate("/");
+    }
+
+    if (services) {
+      setService(services?.filter((s) => s?.id === +id)[0]);
+    }
+  }, [id, navigate, services]);
+
   return (
-    <div className="service-details container">
-      <h2>{t("Services.serviceDetails")}</h2>
-      <p>{service.title}</p>
-
-      <div className="section">
-        <label className="label-container">
-          <img src="/icons/Frame1.svg" alt="icon" className="label-icon" />
-          {t("Services.faultImages")}
-        </label>
-        <div className="image-upload">
-          {formData.images.map((img, index) => (
-            <div key={index} className="image-preview">
-              <img src={img} alt={`upload-${index}`} />
-              <button className="remove-btn" onClick={() => removeImage(index)}>
-                <i className="fa-solid fa-circle-xmark"></i>
-              </button>
+    <div className="service-details">
+      <div className="container">
+        <form className="row justify-content-center">
+          <div className="col-lg-10 p-2 mb-3">
+            <div className="service_details_card">
+              <div className="img">
+                <img src={service?.image} alt={service?.title} />
+              </div>
+              <div className="content">
+                <h2>{service?.title}</h2>
+                <p>{service?.description}</p>
+                <ul>
+                  <li>
+                    <img src="/images/technical.svg" alt="technical" />
+                    <h6>
+                      {t("availableTechnicans")} {service?.technicals_count}
+                    </h6>
+                  </li>
+                </ul>
+              </div>
             </div>
-          ))}
-          <label className="upload-btn">
-            <img src="/icons/uploadimg.svg" alt="" />
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleImageUpload}
+          </div>
+
+          <div className="col-lg-10 p-2 mb-3">
+            <div className="section">
+              <label className="label-container">
+                <img
+                  src="/icons/Frame1.svg"
+                  alt="icon"
+                  className="label-icon"
+                />
+                {t("Services.faultImages")}
+              </label>
+
+              <div className="image-upload">
+                <label className="upload-btn">
+                  <img src="/icons/uploadimg.svg" alt="" />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleImageUpload}
+                  />
+                </label>
+
+                {formData.images.map((img, index) => (
+                  <div key={index} className="image-preview">
+                    <img src={img} alt={`upload-${index}`} />
+                    <button
+                      className="remove-btn"
+                      onClick={() => removeImage(index)}
+                    >
+                      <span>
+                        <i className="fa-solid fa-xmark"></i>
+                      </span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="col-lg-10 p-2 mb-3">
+            <div className="section">
+              <label className="label-container">
+                <img src="/icons/Fram3.svg" alt="icon" className="label-icon" />
+                {t("Services.faultDescription")}
+              </label>
+              <textarea
+                name="description"
+                placeholder={t("Services.writeHere")}
+                value={formData.description}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="col-lg-10 p-2 mb-3">
+            <MapSection />
+          </div>
+
+          <div className="col-lg-10 p-2 mb-3">
+            <div className="section">
+              <AudioRecorder />
+            </div>
+          </div>
+
+          <div className="col-lg-10 p-2">
+            <div className="section flex-row justify-content-between">
+              <label>{t("Services.requestScheduledAppointment")}</label>
+              <label className="toggle-switch">
+                <input
+                  type="checkbox"
+                  name="isScheduled"
+                  checked={formData.isScheduled}
+                  onChange={handleChange}
+                />
+                <span className="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          {formData.isScheduled && (
+            <div className="col-lg-10 p-2 mb-2">
+              <div className="date-time-container">
+                <input
+                  type="time"
+                  name="selectedTime"
+                  className="date-time-input"
+                  value={formData.selectedTime}
+                  onChange={handleChange}
+                />
+                <input
+                  type="date"
+                  name="selectedDate"
+                  className="date-time-input"
+                  value={formData.selectedDate}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          )}
+
+          <div className="col-lg-10 p-2">
+            <SubmitButton
+              className="confirm-btn"
+              name={t("Services.confirm")}
             />
-          </label>
-        </div>
+          </div>
+        </form>
       </div>
-
-      <div className="section">
-        <label className="label-container">
-          <img src="/icons/Fram3.svg" alt="icon" className="label-icon" />
-          {t("Services.faultDescription")}
-        </label>
-        <textarea
-          name="description"
-          placeholder={t("Services.writeHere")}
-          value={formData.description}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="section">
-        <AudioRecorder />
-      </div>
-
-      <div className="section">
-        <label>{t("Services.requestScheduledAppointment")}</label>
-        <label className="toggle-switch">
-          <input
-            type="checkbox"
-            name="isScheduled"
-            checked={formData.isScheduled}
-            onChange={handleChange}
-          />
-          <span className="slider"></span>
-        </label>
-      </div>
-
-      {/* <div className="section">
-        <MapSection formData={formData} setFormData={setFormData} />
-      </div> */}
-
-      {formData.isScheduled && (
-        <div className="date-time-container">
-          <input
-            type="time"
-            name="selectedTime"
-            className="date-time-input"
-            value={formData.selectedTime}
-            onChange={handleChange}
-          />
-          <input
-            type="date"
-            name="selectedDate"
-            className="date-time-input"
-            value={formData.selectedDate}
-            onChange={handleChange}
-          />
-        </div>
-      )}
-
-      <button className="confirm-btn" onClick={handleConfirmClick}>
-        {t("Services.confirm")}
-      </button>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <ConfirmationModal
         open={showModal}
@@ -169,7 +203,6 @@ export default function ServiceDetails() {
         setIsAgreed={(value) =>
           setFormData((prev) => ({ ...prev, isAgreed: value }))
         }
-        t={t}
       />
     </div>
   );

@@ -1,25 +1,25 @@
 import { useState } from "react";
 import { Modal, Form, Image } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function ConfirmationModal({
-    open,
-    onClose,
-    isAgreed,
-    setIsAgreed,
+  open,
+  onClose,
+  isAgreed,
+  setIsAgreed,
 }) {
-    const { t } = useTranslation();
-    const [showSuccessModal, setShowSuccessModal] = useState(false);
-    const navigate = useNavigate(); 
+  const { t } = useTranslation();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleConfirm = () => {
-    onClose(); 
-    setShowSuccessModal(true); 
+    onClose();
+    setShowSuccessModal(true);
   };
 
   const handleSuccessConfirm = () => {
-    navigate("/Orders"); 
+    navigate("/Orders");
   };
 
   return (
@@ -48,10 +48,14 @@ export default function ConfirmationModal({
           </button>
         </Modal.Footer>
       </Modal>
-     {/* SuccessModal */}
+      {/* SuccessModal */}
       <Modal show={showSuccessModal} centered className="success-modal">
         <Modal.Body className="text-center">
-          <Image src="/images/confirm.gif" alt="Success" className="success-img" />
+          <Image
+            src="/images/confirm.gif"
+            alt="Success"
+            className="success-img"
+          />
           <p className="success-text">{t("requestSuccess")}</p>
         </Modal.Body>
         <Modal.Footer>

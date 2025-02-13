@@ -852,25 +852,23 @@ label {
   }
 }
 
-// .cover-wrap {
-//   cursor: pointer;
-// }
-
 @media screen and (max-width: 576px) {
   .head {
     margin-top: 24px;
   }
 }
+
 .audio-recorder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+  padding: 16px;
   border: 2px dashed #ccc;
   border-radius: 10px;
 
   .record-btn {
     background: var(--second);
+    cursor: pointer;
     color: white;
     border: none;
     border-radius: 50%;
