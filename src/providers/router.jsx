@@ -11,8 +11,6 @@ import FAQs from "../routes/FAQs";
 import UserProfile from "../routes/UserProfile";
 import Contact from "../routes/Contact";
 import Notification from "../routes/Notification";
-import PageLoader from "../ui/loaders/PageLoader";
-
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +23,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/services/:id",
+        path: "/order-service",
         element: <ServiceDetails />,
       },
       {
@@ -46,25 +44,20 @@ export const router = createBrowserRouter([
       },
       {
         path: "faq",
-        element: < FAQs />,
+        element: <FAQs />,
       },
       {
         path: "profile",
-        element: < UserProfile />,
+        element: <UserProfile />,
       },
       {
         path: "contactus",
-        element: < Contact />,
+        element: <Contact />,
       },
       {
         path: "notifications",
         element: <Notification />,
       },
-      {
-        path: "loading",
-        element: <PageLoader />,
-      },
-     
     ],
   },
 ]);

@@ -9,10 +9,12 @@ import AuthModal from "../ui/modals/AuthModal";
 import PageLoader from "../ui/loaders/PageLoader";
 import ResponsiveNav from "../ui/header/ResponsiveNav";
 import useGetHomeSlider from "../hooks/home/useGetHomeSlider";
+import useGetServices from "./../hooks/home/useGetServices";
 
 export default function RootLayout() {
   const location = useLocation();
   const { isLoading } = useGetHomeSlider();
+  const { isLoading: servicesLoading } = useGetServices();
   const { loading } = useAuth();
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export default function RootLayout() {
     }
   }, [location]);
 
-  return loading || isLoading ? (
+  return loading || isLoading || servicesLoading ? (
     <PageLoader />
   ) : (
     <>

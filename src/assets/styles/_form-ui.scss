@@ -871,25 +871,23 @@ label {
   }
 }
 
-// .cover-wrap {
-//   cursor: pointer;
-// }
-
 @media screen and (max-width: 576px) {
   .head {
     margin-top: 24px;
   }
 }
+
 .audio-recorder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+  padding: 16px;
   border: 2px dashed #ccc;
   border-radius: 10px;
 
   .record-btn {
     background: var(--second);
+    cursor: pointer;
     color: white;
     border: none;
     border-radius: 50%;
@@ -929,7 +927,7 @@ label {
   width: 100%;
   max-width: 350px;
   background: #f5f5f5;
-  padding: 10px;
+  padding: 10px 32px;
   border-radius: 10px;
 
   .play-audio-btn {
@@ -960,4 +958,16 @@ label {
       color: darkred;
     }
   }
+}
+
+.form-check .form-check-input {
+  float: unset !important;
+  margin-left: unset !important;
+  margin: unset;
+  box-shadow: none !important;
+}
+
+.modal-footer {
+  padding-top: 0 !important;
+  border: 0 !important;
 }

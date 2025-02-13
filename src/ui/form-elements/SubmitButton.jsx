@@ -2,25 +2,21 @@ export default function SubmitButton({
   loading,
   name,
   className,
-  fileLoading,
-  event = undefined,
   style,
+  onClick,
+  disabled,
 }) {
   return (
     <button
       aria-label="Submit"
-      onClick={event ? event : undefined}
-      style={{ ...style, opacity: loading || fileLoading ? 0.7 : 1 }}
-      disabled={loading || fileLoading}
+      style={{ ...style, opacity: loading ? 0.7 : 1 }}
+      disabled={disabled || loading}
       type="submit"
       className={`log ${className || ""}`}
+      onClick={onClick? onClick : undefined}
     >
-      {fileLoading ? "Wait File Uploading..." : name}{" "}
-      <i
-        className={
-          loading || fileLoading ? "fa-solid fa-spinner fa-pulse fa-spin" : ""
-        }
-      />
+      {name}{" "}
+      <i className={loading ? "fa-solid fa-spinner fa-pulse fa-spin" : ""} />
     </button>
   );
 }
