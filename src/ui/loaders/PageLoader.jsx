@@ -1,6 +1,7 @@
-
 export default function PageLoader() {
   return (
-    <div>loading..</div>
-  )
+    <div className="preloader">
+      <div className="preloaderImg" />
+    </div>
+  );
 }

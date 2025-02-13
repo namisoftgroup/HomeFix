@@ -1,16 +1,19 @@
 import { Outlet, useLocation } from "react-router-dom";
-import AOS from "aos";
 import { useEffect } from "react";
+import AOS from "aos";
+import useAuth from "../hooks/useAuth";
+
 import Header from "../ui/Header";
 import Footer from "../ui/Footer";
 import AuthModal from "../ui/modals/AuthModal";
-import useAuth from "../hooks/useAuth";
-import ResponsiveNav from "../ui/header/ResponsiveNav";
 import PageLoader from "../ui/loaders/PageLoader";
+import ResponsiveNav from "../ui/header/ResponsiveNav";
+import useGetHomeSlider from "../hooks/home/useGetHomeSlider";
 
 export default function RootLayout() {
   const location = useLocation();
-  const { loading, isAuthed } = useAuth();
+  const { isLoading } = useGetHomeSlider();
+  const { loading } = useAuth();
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
@@ -33,10 +36,22 @@ export default function RootLayout() {
   useEffect(() => {
     setTimeout(() => AOS.refresh(), 100);
     window.scrollTo(0, 0);
+
+    if (location.hash) {
+      setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 200);
+    }
   }, [location]);
 
-  return loading ? (
-   <PageLoader />
+  return loading || isLoading ? (
+    <PageLoader />
   ) : (
     <>
       <Header />
@@ -45,7 +60,6 @@ export default function RootLayout() {
       </main>
       <Footer />
       <ResponsiveNav />
-
       <AuthModal />
     </>
   );

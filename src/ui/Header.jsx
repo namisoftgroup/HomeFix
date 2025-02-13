@@ -10,20 +10,16 @@ export default function Header() {
     <header>
       <nav className="container">
         <Link to="/" className="logo">
-          <img
-            src={"/images/logo.svg"}
-            alt="logo"
-          />
+          <img src={"/images/logo.svg"} alt="logo" />
         </Link>
 
         <div className="nav_links">
-            <>
-              <NavLink to="/">{t("home")}</NavLink>
-              <NavLink to="/aboutus">{t("aboutus")}</NavLink>
-              <NavLink to="/service">{t("services")}</NavLink>
-              <NavLink to="/contactus">{t("contactus")}</NavLink>
-            </>
-
+          <>
+            <NavLink to="/">{t("home")}</NavLink>
+            <NavLink to="/aboutus">{t("aboutus")}</NavLink>
+            <Link to="/#services">{t("services")}</Link>
+            <NavLink to="/contactus">{t("contactus")}</NavLink>
+          </>
         </div>
 
         <div className="actions">
@@ -34,4 +30,3 @@ export default function Header() {
     </header>
   );
 }
-

@@ -14,6 +14,7 @@ export default function Hero() {
           spaceBetween={16}
           speed={2000}
           loop={true}
+          centeredSlides={"true"}
           className="hero_slider"
           modules={[Autoplay]}
           autoplay={{

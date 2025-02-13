@@ -7,7 +7,7 @@ export default function Services() {
   const { data: services } = useGetCategories();
 
   return (
-    <section className="services">
+    <section className="services" id="services">
       <div className="container">
         <div className="row">
           <div className="col-12 p-2 mb-3">
