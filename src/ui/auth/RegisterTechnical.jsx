@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { handleChange, handleChangeUserName } from "../../utils/helper";
+import { handleChange} from "../../utils/helper";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
+import axiosInstance from "../../utils/axiosInstance";
+import { toast } from "sonner";
+import { setShowAuthModal } from "../../redux/slices/showAuthModal";
+import useGetCities from "../../hooks/user/useGetCities";
+import useGetCategory from "../../hooks/user/useGetCategory.js";
 import InputField from "../form-elements/InputField";
 import SelectField from "../form-elements/SelectField";
 import PasswordField from "../form-elements/PasswordField";
@@ -13,17 +20,95 @@ import ImageUploadBox from "../form-elements/ImageUploadBox";
 export default function RegisterTechnical({
   setShow,
   setFormType,
-  formData,
-  setFormData,
+  userType,
 }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const [, setCookie] = useCookies(["token", "id"]);
   const [loading, setLoading] = useState(false);
+  const { data: cities } = useGetCities();
+  const { data: categories } = useGetCategory();
 
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    password: "",
+    city_id: "",
+    country_code: "+962",
+    type: userType === "technical" ? "provider" : "client",
+    image: null,
+    front_national_image: null,
+    back_national_image: null,
+    specialty_id: "",
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => setLoading(false), 1000);
+
+    const formDataToSend = new FormData();
+
+    for (const key in formData) {
+      if (formData[key] !== null && formData[key] !== undefined) {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+
+    try {
+      const registerResponse = await axiosInstance.post(
+        "/auth/users", 
+        formDataToSend, 
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", 
+          },
+        }
+      );
+
+      if (registerResponse.data.code === 200) {
+        const loginPayload = {
+          phone: formData.phone,
+          password: formData.password,
+          type: formData.type,
+          country_code: formData.country_code,
+        };
+
+        const loginResponse = await axiosInstance.post(
+          "/auth/login",
+          loginPayload
+        );
+
+        if (loginResponse.data.code === 200) {
+          setCookie("token", loginResponse.data?.data?.token, {
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+
+          setCookie("id", loginResponse.data?.data?.id, {
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+
+          toast.success(loginResponse.data.message);
+          dispatch(setShowAuthModal(false));
+          localStorage.setItem("userType", userType);
+        } else {
+          toast.error(loginResponse.data.message);
+        }
+      } else {
+        toast.error(registerResponse.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Signup or login failed!");
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
     <>
       <div className="mb-1">
@@ -32,24 +117,28 @@ export default function RegisterTechnical({
       <form className="form" onSubmit={handleSubmit}>
         <ImageUpload
           type="file"
-          name="userImage"
+          name="image"
           id="img-upload"
           accept="image/*"
           uploadOnly={true}
           formData={formData}
           setFormData={setFormData}
+          onChange={(e) => {
+            const file = e.target.files[0];
+            setFormData({ ...formData, image: file });
+          }}
         />
 
         <div className="form_group">
-          <InputField
-            required
-            label={t("auth.userName")}
-            placeholder={t("auth.userNamePlaceHolder")}
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={(e) => handleChangeUserName(e, setFormData)}
-          />
+           <InputField
+                     required
+                     label={t("auth.fullName")}
+                     placeholder={t("auth.fullName")}
+                     id="name"
+                     name="name"
+                     value={formData.name}
+                     onChange={(e) => handleChange(e, setFormData)}
+                   />
         </div>
 
         <div className="form_group">
@@ -57,24 +146,32 @@ export default function RegisterTechnical({
             title={t("auth.imgIdTitle")}
             subtitle={t("auth.imgIdSubtitle1")}
             type="file"
-            name="userImageFront"
+            name="front_national_image"
             id="img-upload-front"
             accept="image/*"
             uploadOnly={true}
             formData={formData}
             setFormData={setFormData}
+            onChange={(e) => {
+              const file = e.target.files[0];
+              setFormData({ ...formData, front_national_image: file });
+            }}
           />
 
           <ImageUploadBox
             title={t("auth.imgIdTitle")}
             subtitle={t("auth.imgIdSubtitle2")}
             type="file"
-            name="userImageBack"
+            name="back_national_image"
             id="img-upload-back"
             accept="image/*"
             uploadOnly={true}
             formData={formData}
             setFormData={setFormData}
+            onChange={(e) => {
+              const file = e.target.files[0];
+              setFormData({ ...formData, back_national_image: file });
+            }}
           />
         </div>
         <p className="upload-hint">{t("auth.UploadHint")}</p>
@@ -109,38 +206,23 @@ export default function RegisterTechnical({
             id="city_id"
             name="city_id"
             value={formData.city_id}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                city_id: e.target.value,
-                state_id: "",
-              })
-            }
-            options={[
-              { name: "Cairo", value: "1" },
-              { name: "Alexandria", value: "2" },
-              { name: "Giza", value: "3" },
-            ]}
+            onChange={(e) => setFormData({ ...formData, city_id: e.target.value })}
+            options={cities?.map((city) => ({ name: city.name, value: city.id })) || []}
           />
-
           <SelectField
             required
             loadingText={t("isLoading")}
             label={t("auth.category")}
-            id="category_id"
-            name="category_id"
-            value={formData.state_id}
+            id="specialty_id"
+            name="specialty_id"
+            value={formData.specialty_id}
             onChange={(e) =>
               setFormData({
                 ...formData,
-                state_id: e.target.value,
+                specialty_id: e.target.value,
               })
             }
-            options={[
-              { name: "خدمات السباكه ", value: "1" },
-              { name: "خدمات الصيانه ", value: "2" },
-              { name: "خدمات الكهرباء", value: "3" },
-            ]}
+            options={categories?.map((category) => ({ name: category.title, value: category.id })) || []}
           />
         </div>
 

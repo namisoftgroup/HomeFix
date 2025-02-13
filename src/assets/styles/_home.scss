@@ -209,3 +209,37 @@
       animation: imgDownUp 0.8s forwards cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
     }
   }
+  //download 
+  .download-app {
+    background-color: var(--third);
+    color: var(--main);
+    padding:  20px;
+   border-radius: 15px;
+   margin-bottom: 40px;
+  
+    .text-content {
+      .highlight {
+        color: var(--second);
+      }
+  
+      .download-buttons {
+        margin-top: 20px;
+  
+        .store-button {
+          width: 150px;
+          margin-right: 10px;
+        }
+      }
+    }
+  
+    .image-content {
+      display: flex;
+      justify-content: center;
+      position: relative;
+  
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }

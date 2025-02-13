@@ -107,7 +107,7 @@
     "register": "Create New Account",
     "userName": "Username",
     "userNamePlaceHolder": "Enter username (English letters)",
-    "fullName": "Full Name",
+    "name": "Name",
     "dontHaveAccount": "You don't have an account?",
     "email": "Email",
     "country": "Country",
@@ -149,7 +149,10 @@
     "accountType": "Account Type",
     "client": "Client",
     "send": "send",
-    "createAccount": "create account"
+    "createAccount": "create account",
+    "subject":" Subject messsage",
+    "message":"Message"
+   
   },
   "header": {
     "list": "Orders",
@@ -158,5 +161,28 @@
   "page_not_found": {
     "description": "Uh Oh! Page not found!",
     "button": "Back to Home"
+  },
+  "Download": "Download",
+  "App From Your Gadget.": "App From Your Gadget.",
+  "Download the app to explore deals and ease of booking.": "Download the app to explore deals and ease of booking.",
+  "Google Play": "Google Play",
+  "App Store": "App Store",
+  "aboutUs": {
+    "title": "What is HomeFix?",
+    "description": "HomeFix is a comprehensive app that connects customers with professional home maintenance technicians, providing a seamless and secure experience to complete maintenance tasks effortlessly. Through the app, any technician can register and offer their services, while customers can request home maintenance services such as plumbing, electricity, air conditioning, carpentry, cleaning, and more.",
+
+    "howItWorksTitle": "How the App Works:",
+    "step1": "The customer submits a maintenance request specifying the issue and location.",
+    "step2": "Nearby technicians receive the request and can offer price estimates.",
+    "step3": "The customer selects the best offer based on price, ratings, and estimated time.",
+    "step4": "The service is completed with secure payment options via the app, either electronically or in cash.",
+
+    "featuresTitle": "HomeFix Features:",
+    "feature1": " Easy to Use - A simple and fast interface for booking services anytime.",
+    "feature2": " Certified Technicians - Ensures high-quality work through customer ratings and reviews.",
+    "feature3": " Service Variety - Covers various home maintenance fields professionally and efficiently.",
+    "feature4": " Secure Payment - Provides convenient electronic payment options via trusted gateways.",
+    "feature5": " Fast Support - A dedicated support team to resolve any issues for customers and technicians.",
+    "finalMessage": "HomeFix is the smart solution to keep your home in perfect condition!"
   }
 }

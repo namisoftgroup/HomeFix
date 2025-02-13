@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { handleChange } from "../../utils/helper";
-import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
+import { toast } from "sonner";
 import { useDispatch } from "react-redux";
 import { setShowAuthModal } from "../../redux/slices/showAuthModal";
+import useGetCities from "../../hooks/user/useGetCities";
 import axiosInstance from "../../utils/axiosInstance";
 import PhoneInput from "../form-elements/PhoneInput";
 import PasswordField from "../form-elements/PasswordField";
@@ -18,49 +19,65 @@ function UserRegister({ setFormType, userType, setShow }) {
   const dispatch = useDispatch();
   const [, setCookie] = useCookies(["token", "id"]);
   const [loading, setLoading] = useState(false);
+  const { data: cities, isLoading } = useGetCities(); 
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    city_id: "",
     phone: "",
+    email: "",
     password: "",
+    city_id: "",
     country_code: "+962",
+    type: userType === "technical" ? "provider" : "client",
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      const res = await axiosInstance.post("/auth/users", {
-        ...formData,
-        type: userType,
-      });
+      const registerResponse = await axiosInstance.post(
+        "/auth/users",
+        formData,
+      );
 
-      if (res.data.code === 200) {
-        const res = await axiosInstance.post("/auth/users", {
-          ...formData,
-          type: userType,
-        });
+      if (registerResponse.data.code === 200) {
+        const loginPayload = {
+          phone: formData.phone,
+          password: formData.password,
+          type: formData.type,
+          country_code: formData.country_code,
+        };
 
-        setCookie("token", res.data?.data?.token, {
-          path: "/",
-          secure: true,
-          sameSite: "Strict",
-        });
+        const loginResponse = await axiosInstance.post(
+          "/auth/login",
+          loginPayload
+        );
 
-        setCookie("id", res.data?.data?.id, {
-          path: "/",
-          secure: true,
-          sameSite: "Strict",
-        });
+        if (loginResponse.data.code === 200) {
+          setCookie("token", loginResponse.data?.data?.token, {
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
 
-        toast.success("Login successful!");
-        dispatch(setShowAuthModal(false));
-        localStorage.setItem("userType", userType);
+          setCookie("id", loginResponse.data?.data?.id, {
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+
+          toast.success(loginResponse.data.message);
+          dispatch(setShowAuthModal(false));
+          localStorage.setItem("userType", userType);
+        } else {
+          toast.error(loginResponse.data.message);
+        }
+      } else {
+        toast.error(registerResponse.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Login failed!");
+      toast.error("Signup or login failed!");
     } finally {
       setLoading(false);
     }
@@ -93,27 +110,17 @@ function UserRegister({ setFormType, userType, setShow }) {
           />
         </div>
         <div className="form_group">
-          <SelectField
-            required
-            loading={false}
-            loadingText={t("isLoading")}
-            label={t("auth.city")}
-            id="city_id"
-            name="city_id"
-            value={formData.city_id}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                city_id: e.target.value,
-                state_id: "",
-              })
-            }
-            options={[
-              { name: "1", value: "1" },
-              { name: "2", value: "2" },
-              { name: "3", value: "3" },
-            ]}
-          />
+        <SelectField
+          required
+          loading={isLoading}
+          loadingText={t("isLoading")}
+          label={t("auth.city")}
+          id="city_id"
+          name="city_id"
+          value={formData.city_id}
+          onChange={(e) => setFormData({ ...formData, city_id: e.target.value })}
+          options={cities?.map((city) => ({ name: city.name, value: city.id })) || []}
+        />
         </div>
         <div className="form_group">
           <PhoneInput

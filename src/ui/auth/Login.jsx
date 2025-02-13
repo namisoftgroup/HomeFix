@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { handleChange } from "../../utils/helper";
-import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
+import { toast } from "sonner";
 import { setShowAuthModal } from "../../redux/slices/showAuthModal";
 import axiosInstance from "../../utils/axiosInstance";
 import PasswordField from "../../ui/form-elements/PasswordField";
