@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../utils/axiosInstance";
 
-export default function useGet(enabled) {
+export default function useGetCities(enabled) {
   const { isLoading, data, error, refetch, isFetched } = useQuery({
     queryKey: ["cities"],
     queryFn: async () => {

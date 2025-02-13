@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
@@ -1529,12 +1530,9 @@ footer .copy_rights .social_media a:hover {
   width: 100%;
   height: 180px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  border: 2px dashed #ccc;
-  padding: 15px;
+  position: relative;
+  overflow: hidden;
+  border: 2px dashed var(--border);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1542,6 +1540,12 @@ footer .copy_rights .social_media a:hover {
 }
 .form_group .image-container .upload-box:hover {
   border-color: var(--second);
+}
+.form_group .image-container .upload-box .uploaded-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .form_group .image-container .upload-box .upload-content {
   text-align: center;
@@ -1559,6 +1563,25 @@ footer .copy_rights .social_media a:hover {
 .form_group .image-container .upload-box .upload-content .subtitle {
   font-size: 12px;
   color: #777;
+}
+
+.upload-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  border: 2px dashed #ccc;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.uploaded-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 @media (max-width: 768px) {
@@ -2238,6 +2261,32 @@ body [data-aos=ImgDown] {
 body [data-aos=ImgDown].aos-animate {
   animation: imgDownUp 0.8s forwards cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s;
 }
+body .download-app {
+  background-color: var(--third);
+  color: var(--main);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+}
+body .download-app .text-content .highlight {
+  color: var(--second);
+}
+body .download-app .text-content .download-buttons {
+  margin-top: 20px;
+}
+body .download-app .text-content .download-buttons .store-button {
+  width: 150px;
+  margin-right: 10px;
+}
+body .download-app .image-content {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+body .download-app .image-content img {
+  max-width: 100%;
+  height: auto;
+}
 body .auth_section {
   width: 100%;
   display: flex;
@@ -2764,7 +2813,6 @@ body .profile-container .profile-form .input-field .input-wrapper input.form-con
   border-radius: 6px;
   border: 1px solid #ccc;
   transition: border-color 0.3s ease;
-  padding-left: 10px;
   padding-right: 40px;
 }
 body .profile-container .profile-form .input-field .input-wrapper input.form-control:focus {
@@ -2880,35 +2928,75 @@ body .notifications-container .no-notifications {
   font-size: 14px;
   margin-top: 10px;
 }
-body .about_container {
-  width: 100%;
-  margin: auto;
-  padding: 20px;
-}
-body .about_container .about_content {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-}
-body .about_container .about_content h2 {
+body .about-us {
+  padding: 50px 20px;
   color: var(--main);
+}
+body .about-us .text-content h2 {
+  font-size: 2rem;
   font-weight: bold;
-  font-size: 18px;
+  color: var(--second);
+}
+body .about-us .text-content h3 {
+  font-size: 1.5rem;
+  color: var(--second);
   margin-top: 20px;
 }
-body .about_container .about_content p {
-  font-size: 15px;
-  font-weight: 400;
-  color: var(--gray);
-  line-height: 40px;
-  margin-bottom: 5px;
+body .about-us .text-content p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-top: 10px;
+  color: var(--main);
+}
+body .about-us .text-content ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+body .about-us .text-content ul li {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+body .about-us .text-content ul li::before {
+  content: "✔";
+  color: var(--second);
+  font-weight: bold;
+  margin: 0px 10px;
+}
+body .about-us .image-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .about-us .image-content img {
+  max-width: 100%;
+  height: 70%;
+}
+@media (max-width: 768px) {
+  body .about-us .text-content {
+    text-align: center;
+  }
+  body .about-us .image-content {
+    margin-top: 30px;
+  }
 }
 body.en {
   direction: ltr;
   font-family: "Outfit", sans-serif;
 }
-body.en .form .input-field input,
-body.en .form .input-field textarea,
-body.en .form .input-field select {
-  direction: ltr;
+body.en .settings-list .settings-item .arrow {
+  transform: scaleX(-1);
+}
+body.en .profile-container .profile-form .input-field .input-wrapper .input-icon {
+  right: auto;
+  left: 10px;
+}
+body.en .profile-container .profile-form .input-field .input-wrapper input.form-control {
+  padding-left: 40px;
+}
+body.en input[type=email] {
+  text-align: left;
+}
+body input[type=email] {
+  text-align: right;
 }/*# sourceMappingURL=style.css.map */
