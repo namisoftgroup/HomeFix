@@ -908,7 +908,7 @@ label {
   width: 100%;
   max-width: 350px;
   background: #f5f5f5;
-  padding: 10px;
+  padding: 10px 32px;
   border-radius: 10px;
 
   .play-audio-btn {
@@ -939,4 +939,16 @@ label {
       color: darkred;
     }
   }
+}
+
+.form-check .form-check-input {
+  float: unset !important;
+  margin-left: unset !important;
+  margin: unset;
+  box-shadow: none !important;
+}
+
+.modal-footer {
+  padding-top: 0 !important;
+  border: 0 !important;
 }

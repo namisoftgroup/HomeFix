@@ -58,6 +58,7 @@
     .label-container {
       display: flex;
       align-items: center;
+      width: 100%;
       gap: 8px;
       font-weight: bold;
     }
@@ -246,11 +247,9 @@
   .form-check {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    flex-direction: row-reverse;
+    gap: 12px;
 
     .form-check-input {
-      order: 2;
       border-color: var(--second);
       background-color: transparent;
       width: 20px;
@@ -264,10 +263,6 @@
     }
 
     .form-check-label {
-      margin-top: 5px;
-      order: 1;
-      margin-right: 26px;
-
       &:lang(ar) {
         margin-left: 15px;
         margin-right: 0;

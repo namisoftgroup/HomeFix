@@ -9,24 +9,25 @@ import { useTranslation } from "react-i18next";
 
 export default function MapSection({ formData, setFormData }) {
   const { t } = useTranslation();
+  const searchBox = useRef(null);
+
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCE46OXa1TZgWdjl5gGvV-Vap-ONwdQN1s",
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries: ["places"],
   });
 
+  const [searchInput, setSearchInput] = useState("");
+
   const [markerPosition, setMarkerPosition] = useState({
-    lat: Number(formData?.lat) || 30.0444,
-    lng: Number(formData?.lng) || 31.2357,
+    lat: Number(formData.latitude),
+    lng: Number(formData.longitude),
   });
 
-  const [searchInput, setSearchInput] = useState("");
-  const searchBox = useRef(null);
-
   useEffect(() => {
-    if (formData?.lat && formData?.lng) {
+    if (formData?.longitude && formData?.longitude) {
       const position = {
-        lat: Number(formData.lat),
-        lng: Number(formData.lng),
+        lat: Number(formData.latitude),
+        lng: Number(formData.longitude),
       };
       setMarkerPosition(position);
       reverseGeocodeMarkerPosition(position);
@@ -42,8 +43,9 @@ export default function MapSection({ formData, setFormData }) {
     setMarkerPosition(newPos);
     setFormData({
       ...formData,
-      lat: newPos.lat.toFixed(6),
-      lng: newPos.lng.toFixed(6),
+      latitude: newPos.lat.toFixed(6),
+      longitude: newPos.lng.toFixed(6),
+      address: searchInput,
     });
 
     reverseGeocodeMarkerPosition(newPos);
@@ -68,6 +70,7 @@ export default function MapSection({ formData, setFormData }) {
     const places = searchBox.current.getPlaces();
     if (places && places.length > 0) {
       const selectedPlace = places[0];
+
       const position = {
         lat: selectedPlace.geometry.location.lat(),
         lng: selectedPlace.geometry.location.lng(),
@@ -76,8 +79,9 @@ export default function MapSection({ formData, setFormData }) {
       setMarkerPosition(position);
       setFormData({
         ...formData,
-        lat: position.lat.toFixed(6),
-        lng: position.lng.toFixed(6),
+        latitude: position.lat.toFixed(6),
+        longitude: position.lng.toFixed(6),
+        address: selectedPlace.formatted_address || selectedPlace.name,
       });
 
       setSearchInput(selectedPlace.formatted_address || selectedPlace.name);

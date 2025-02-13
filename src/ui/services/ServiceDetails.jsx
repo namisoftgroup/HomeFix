@@ -1,54 +1,60 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import AudioRecorder from "../../ui/form-elements/Record";
 import ConfirmationModal from "../modals/ConfirmationModal";
 import useGetServices from "../../hooks/home/useGetServices";
 import SubmitButton from "../form-elements/SubmitButton";
 import MapSection from "./MapSection";
+import axiosInstance from "../../utils/axiosInstance";
 
 export default function ServiceDetails() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { data: services } = useGetServices();
-  const [service, setService] = useState();
+
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
-  const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    images: [],
-    description: "",
-    isScheduled: false,
-    selectedTime: "",
-    selectedDate: "",
-    isAgreed: false,
-    lat: 23.0,
-    lng: 46.0,
-  });
-
+  const [loading, setLoading] = useState(false);
+  const [isAgree, setIsAgree] = useState(false);
+  const [service, setService] = useState();
   const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    service_id: +id,
+    address: "",
+    latitude: 31.9632,
+    longitude: 35.9304,
+    description: "",
+    images_list: [],
+    voice: null,
+    is_schedule: 0,
+    schedule_date: "",
+    schedule_time: "",
+  });
 
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
-    const newImages = files.map((file) => URL.createObjectURL(file));
     setFormData((prev) => ({
       ...prev,
-      images: [...prev.images, ...newImages],
+      images_list: [...prev.images_list, ...files],
     }));
   };
 
   const removeImage = (index) => {
     setFormData((prev) => ({
       ...prev,
-      images: prev.images.filter((_, i) => i !== index),
+      images_list: prev.images_list.filter((_, i) => i !== index),
     }));
   };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? (checked ? 1 : 0) : value,
     }));
   };
 
@@ -62,10 +68,34 @@ export default function ServiceDetails() {
     }
   }, [id, navigate, services]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
+
+  const handleConfirm = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post("/homefix/orders-client", formData);
+      if (res.data.code === 200) {
+        toast.success(res.data.message);
+        navigate("/my-orders");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (err) {
+      toast.error(err?.response?.data?.message || t("someThingWentWrong"));
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="service-details">
       <div className="container">
-        <form className="row justify-content-center">
+        <form className="row justify-content-center" onSubmit={handleSubmit}>
+          {/* service card */}
           <div className="col-lg-10 p-2 mb-3">
             <div className="service_details_card">
               <div className="img">
@@ -86,6 +116,7 @@ export default function ServiceDetails() {
             </div>
           </div>
 
+          {/* images field */}
           <div className="col-lg-10 p-2 mb-3">
             <div className="section">
               <label className="label-container">
@@ -108,9 +139,12 @@ export default function ServiceDetails() {
                   />
                 </label>
 
-                {formData.images.map((img, index) => (
+                {formData.images_list.map((img, index) => (
                   <div key={index} className="image-preview">
-                    <img src={img} alt={`upload-${index}`} />
+                    <img
+                      src={URL.createObjectURL(img)}
+                      alt={`upload-${index}`}
+                    />
                     <button
                       className="remove-btn"
                       onClick={() => removeImage(index)}
@@ -125,6 +159,7 @@ export default function ServiceDetails() {
             </div>
           </div>
 
+          {/* description field */}
           <div className="col-lg-10 p-2 mb-3">
             <div className="section">
               <label className="label-container">
@@ -140,24 +175,25 @@ export default function ServiceDetails() {
             </div>
           </div>
 
+          {/* map field */}
           <div className="col-lg-10 p-2 mb-3">
-            <MapSection />
+            <MapSection formData={formData} setFormData={setFormData} />
           </div>
 
+          {/* audio field */}
           <div className="col-lg-10 p-2 mb-3">
-            <div className="section">
-              <AudioRecorder />
-            </div>
+            <AudioRecorder setFormData={setFormData} />
           </div>
 
+          {/* schedule field */}
           <div className="col-lg-10 p-2">
             <div className="section flex-row justify-content-between">
               <label>{t("Services.requestScheduledAppointment")}</label>
               <label className="toggle-switch">
                 <input
                   type="checkbox"
-                  name="isScheduled"
-                  checked={formData.isScheduled}
+                  name="is_schedule"
+                  checked={formData.is_schedule === 1}
                   onChange={handleChange}
                 />
                 <span className="slider"></span>
@@ -165,26 +201,28 @@ export default function ServiceDetails() {
             </div>
           </div>
 
-          {formData.isScheduled && (
+          {formData.is_schedule ? (
             <div className="col-lg-10 p-2 mb-2">
               <div className="date-time-container">
                 <input
                   type="time"
-                  name="selectedTime"
+                  name="schedule_time"
+                  required
                   className="date-time-input"
-                  value={formData.selectedTime}
+                  value={formData.schedule_time}
                   onChange={handleChange}
                 />
                 <input
                   type="date"
-                  name="selectedDate"
+                  name="schedule_date"
+                  required
                   className="date-time-input"
-                  value={formData.selectedDate}
+                  value={formData.schedule_date}
                   onChange={handleChange}
                 />
               </div>
             </div>
-          )}
+          ) : null}
 
           <div className="col-lg-10 p-2">
             <SubmitButton
@@ -198,11 +236,10 @@ export default function ServiceDetails() {
       <ConfirmationModal
         open={showModal}
         onClose={() => setShowModal(false)}
-        onConfirm={() => setShowModal(false)}
-        isAgreed={formData.isAgreed}
-        setIsAgreed={(value) =>
-          setFormData((prev) => ({ ...prev, isAgreed: value }))
-        }
+        isAgreed={isAgree}
+        loading={loading}
+        setIsAgreed={setIsAgree}
+        handleConfirm={handleConfirm}
       />
     </div>
   );

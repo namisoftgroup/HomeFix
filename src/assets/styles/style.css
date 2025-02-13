@@ -71,12 +71,20 @@
   margin-bottom: 0;
 }
 
+ol {
+  padding: unset;
+}
+
+li[data-sonner-toast=""] {
+  padding: 12px;
+}
+
 .confirm-btn {
   width: 100%;
   background: var(--second);
   color: var(--white);
   border: none;
-  padding: 16px;
+  padding: 14px;
   border-radius: 12px;
   font-size: 16px;
   cursor: pointer;
@@ -653,6 +661,9 @@ header nav .actions .rounded_btn {
   color: var(--main);
   border: 0;
   font-size: 18px;
+}
+header nav .actions .rounded_btn img {
+  height: 100%;
 }
 header nav .actions .rounded_btn:active {
   background: var(--btn-bg);
@@ -1689,7 +1700,7 @@ label div {
   width: 100%;
   max-width: 350px;
   background: #f5f5f5;
-  padding: 10px;
+  padding: 10px 32px;
   border-radius: 10px;
 }
 .audio-preview .play-audio-btn {
@@ -1715,6 +1726,18 @@ label div {
 }
 .audio-preview .remove-audio-btn:hover {
   color: darkred;
+}
+
+.form-check .form-check-input {
+  float: unset !important;
+  margin-left: unset !important;
+  margin: unset;
+  box-shadow: none !important;
+}
+
+.modal-footer {
+  padding-top: 0 !important;
+  border: 0 !important;
 }
 
 .work-card {
@@ -2387,6 +2410,7 @@ body .service-details .section {
 body .service-details .section .label-container {
   display: flex;
   align-items: center;
+  width: 100%;
   gap: 8px;
   font-weight: bold;
 }
@@ -2553,11 +2577,9 @@ body .confirm-delete .modal-body p {
 body .confirm-delete .form-check {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  flex-direction: row-reverse;
+  gap: 12px;
 }
 body .confirm-delete .form-check .form-check-input {
-  order: 2;
   border-color: var(--second);
   background-color: transparent;
   width: 20px;
@@ -2567,11 +2589,6 @@ body .confirm-delete .form-check .form-check-input {
 body .confirm-delete .form-check .form-check-input:checked {
   background-color: var(--second);
   border-color: var(--second);
-}
-body .confirm-delete .form-check .form-check-label {
-  margin-top: 5px;
-  order: 1;
-  margin-right: 26px;
 }
 body .confirm-delete .form-check .form-check-label:lang(ar) {
   margin-left: 15px;

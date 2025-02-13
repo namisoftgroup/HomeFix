@@ -96,13 +96,21 @@
   }
 }
 
+ol {
+  padding: unset;
+}
+
+li[data-sonner-toast=""] {
+  padding: 12px;
+}
+
 // confirmation and success modal
 .confirm-btn {
   width: 100%;
   background: var(--second);
   color: var(--white);
   border: none;
-  padding: 16px;
+  padding: 14px;
   border-radius: 12px;
   font-size: 16px;
   cursor: pointer;
@@ -582,7 +590,6 @@ input[type="email"] {
     }
   }
 }
-
 
 .mapSearchInput {
   position: absolute;

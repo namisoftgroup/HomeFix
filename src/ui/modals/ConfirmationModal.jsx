@@ -1,26 +1,16 @@
-import { useState } from "react";
-import { Modal, Form, Image } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Modal, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import SubmitButton from "../form-elements/SubmitButton";
 
 export default function ConfirmationModal({
   open,
   onClose,
   isAgreed,
   setIsAgreed,
+  handleConfirm,
+  loading,
 }) {
   const { t } = useTranslation();
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const navigate = useNavigate();
-
-  const handleConfirm = () => {
-    onClose();
-    setShowSuccessModal(true);
-  };
-
-  const handleSuccessConfirm = () => {
-    navigate("/Orders");
-  };
 
   return (
     <>
@@ -30,6 +20,7 @@ export default function ConfirmationModal({
         </Modal.Header>
         <Modal.Body className="modal-body">
           <p>{t("termsText")}</p>
+
           <Form.Check
             type="checkbox"
             label={t("agreeToTerms")}
@@ -39,29 +30,13 @@ export default function ConfirmationModal({
           />
         </Modal.Body>
         <Modal.Footer>
-          <button
+          <SubmitButton
             className="confirm-btn"
+            name={t("Services.confirm")}
             disabled={!isAgreed}
             onClick={handleConfirm}
-          >
-            {t("Services.confirm")}
-          </button>
-        </Modal.Footer>
-      </Modal>
-      {/* SuccessModal */}
-      <Modal show={showSuccessModal} centered className="success-modal">
-        <Modal.Body className="text-center">
-          <Image
-            src="/images/confirm.gif"
-            alt="Success"
-            className="success-img"
+            loading={loading}
           />
-          <p className="success-text">{t("requestSuccess")}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <button className="confirm-btn" onClick={handleSuccessConfirm}>
-            {t("Services.confirm")}
-          </button>
         </Modal.Footer>
       </Modal>
     </>
