@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import useGetCategories from "./../../hooks/home/useGetCategories";
+import useGetCategories from "../../hooks/home/useGetServices";
 
 export default function Services() {
   const { t } = useTranslation();
@@ -16,7 +16,7 @@ export default function Services() {
           </div>
           {services?.map((service) => (
             <div key={service.id} className="col-lg-3 col-md-6 col-12 p-2">
-              <Link to={`/services/${service.id}`}>
+              <Link to={`/order-service?id=${service.id}`}>
                 <div className="service-card">
                   <div className="service-image">
                     <img src={service?.image} alt={service?.title} />
