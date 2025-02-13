@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AudioRecorder from "../../ui/form-elements/Record";
 import ConfirmationModal from "../modals/ConfirmationModal";
-import MapSection from "../form-elements/Map";
+// import MapSection from "../form-elements/Map";
 
 export default function ServiceDetails() {
   const { t } = useTranslation();
@@ -17,8 +17,8 @@ export default function ServiceDetails() {
     selectedTime: "",
     selectedDate: "",
     isAgreed: false,
-    lat: "23.0000",
-    lng: "46.0000",
+    lat: 23.0000,
+    lng: 46.0000,
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -72,7 +72,7 @@ export default function ServiceDetails() {
   };
 
   return (
-    <div className="service-details">
+    <div className="service-details container">
       <h2>{t("Services.serviceDetails")}</h2>
       <p>{service.title}</p>
 
@@ -132,9 +132,9 @@ export default function ServiceDetails() {
         </label>
       </div>
 
-      <div className="section">
+      {/* <div className="section">
         <MapSection formData={formData} setFormData={setFormData} />
-      </div>
+      </div> */}
 
       {formData.isScheduled && (
         <div className="date-time-container">

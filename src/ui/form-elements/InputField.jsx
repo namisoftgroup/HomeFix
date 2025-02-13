@@ -1,20 +1,25 @@
 import { Form } from "react-bootstrap";
 
-export default function InputField({ label, hint, pattern, as, ...props }) {
+export default function InputField({ label, icon, hint, pattern, type = "text", ...props }) {
   return (
     <div className="input-field">
       {label && (
-        <label htmlFor={props?.id} style={{ flexWrap: "nowrap" }}>
+        <label htmlFor={props?.id} className="input-label">
           {label} {hint && <span className="hint">{hint}</span>}
         </label>
       )}
 
-      <Form.Control
-        as={as}
-        className="form-control"
-        {...props}
-        pattern={pattern}
-      />
+      <div className="input-wrapper">
+        {icon && <img src={icon} alt="input icon" className="input-icon" />}
+        
+        <Form.Control
+          className="form-control"
+          as={type === "textarea" ? "textarea" : "input"}
+          type={type !== "textarea" ? type : undefined}
+          pattern={pattern}
+          {...props}
+        />
+      </div>
     </div>
   );
 }

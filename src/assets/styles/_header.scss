@@ -1,75 +1,74 @@
 header {
-    padding: 16px 0;
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    background-color: var(--white);
-    border-bottom: 1px solid var(--light-gray);
-  
-    nav {
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--light-gray);
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .logo {
+      flex: 1;
+      img {
+        height: 40px;
+      }
+    }
+
+    .nav_links {
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
-  
-      .logo {
-        flex: 1;
-        img {
-          height: 40px;
-        }
-      }
-  
-      .nav_links {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex: 2;
-        gap: 42px;
-        a {
-          font-size: 16px;
-          color: var(--main);
-          &.active {
-            color: var(--second);
-          }
-          @media screen and (min-width: 992px) {
-            display: block;
-          }
-          @media screen and (max-width: 992px) {
-            display: none;
-          }
-        }
-       
-      }
-  
-      .actions {
-        gap: 16px;
-        display: flex;
-        flex: 1;
-        justify-content: flex-end;
-        align-items: center;
-  
-        .rounded_btn {
-          width: 40px;
-          height: 40px;
-          display: flex;
-          background: var(--btn-bg);
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          color: var(--main);
-          border: 0;
-          &:active {
-            background: var(--btn-bg);
-            color: var(--main);
-          }
-          &.show {
-            background: var(--btn-bg);
-          }
-          .fa-globe{
+      flex: 2;
+      gap: 52px;
+      a {
+        font-size: 16px;
+        color: var(--main);
+        &.active {
           color: var(--second);
-          }
+        }
+        @media screen and (min-width: 992px) {
+          display: block;
+        }
+        @media screen and (max-width: 992px) {
+          display: none;
+        }
+      }
+    }
+
+    .actions {
+      gap: 16px;
+      display: flex;
+      flex: 1;
+      justify-content: flex-end;
+      align-items: center;
+
+      .rounded_btn {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        background: var(--btn-bg);
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: var(--main);
+        border: 0;
+        font-size: 18px;
+        &:active {
+          background: var(--btn-bg);
+          color: var(--main);
+        }
+        &.show {
+          background: var(--btn-bg);
+        }
+        .fa-globe {
+          color: var(--second);
         }
       }
     }
   }
-  
+}

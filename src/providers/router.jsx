@@ -4,6 +4,16 @@ import Home from "../routes/Home";
 import PageNotFound from "../routes/PageNotFound";
 import ServiceDetails from "../ui/services/ServiceDetails";
 import Orders from "../routes/Orders";
+import AboutUs from "../routes/AboutUs";
+import Settings from "../routes/Settings";
+import Terms from "../routes/Terms";
+import FAQs from "../routes/FAQs";
+import UserProfile from "../routes/UserProfile";
+import Contact from "../routes/Contact";
+import Notification from "../routes/Notification";
+import PageLoader from "../ui/loaders/PageLoader";
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -22,7 +32,39 @@ export const router = createBrowserRouter([
         path: "Orders",
         element: <Orders />,
       },
-      
+      {
+        path: "aboutus",
+        element: <AboutUs />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
+      },
+      {
+        path: "terms-and-conditions",
+        element: <Terms />,
+      },
+      {
+        path: "faq",
+        element: < FAQs />,
+      },
+      {
+        path: "profile",
+        element: < UserProfile />,
+      },
+      {
+        path: "contactus",
+        element: < Contact />,
+      },
+      {
+        path: "notifications",
+        element: <Notification />,
+      },
+      {
+        path: "loading",
+        element: <PageLoader />,
+      },
+     
     ],
   },
 ]);

@@ -6,7 +6,7 @@ const Orders = () => {
   const [activeTab, setActiveTab] = useState("current"); 
 
   return (
-    <div className="orders-container">
+    <div className="orders-container container">
       <div className="tabs">
         <button
           className={activeTab === "current" ? "active" : ""}

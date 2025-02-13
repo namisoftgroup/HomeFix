@@ -17,8 +17,6 @@ export default function useAuth() {
     if (!token) return { decodedToken: null, isExpired: true };
 
     try {
-      console.log(token.substring(7));
-      
       const decoded = jwtDecode(token.substring(7));
 
       const currentTime = Date.now() / 1000;

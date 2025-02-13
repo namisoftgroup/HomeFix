@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { setShowAuthModal } from "../../redux/slices/showAuthModal";
 import Login from "../auth/Login";
-import ChooseRegisterType from "../auth/ChooseRegisterType";
 import UserRegister from "../auth/UserRegister";
 import RegisterTechnical from "../auth/RegisterTechnical";
 import ForgetPassword from "../auth/ForgetPassword";
@@ -11,7 +10,10 @@ import ForgetPassword from "../auth/ForgetPassword";
 export default function AuthModal() {
   const { show } = useSelector((state) => state.showAuthModal);
   const dispatch = useDispatch();
+
   const [formType, setFormType] = useState("login");
+  const [userType, setUserType] = useState("client");
+
   const [forgetFormData, setForgetFormData] = useState({
     phone: "",
     country_code: "962",
@@ -41,8 +43,6 @@ export default function AuthModal() {
     fcm_token: "eyJ0eXAiOiJKV1QiLCJhbGciOi",
   });
 
-  const [userType, setUserType] = useState("client");
-
   return (
     <Modal
       centered
@@ -60,6 +60,7 @@ export default function AuthModal() {
         >
           <i className="fa-regular fa-x"></i>
         </button>
+
         <section className="auth_section">
           <div className={`img_wrapper ${formType}`}>
             <img
@@ -78,9 +79,7 @@ export default function AuthModal() {
                 setUserType={setUserType}
               />
             )}
-            {formType === "register-type" && (
-              <ChooseRegisterType setFormType={setFormType} />
-            )}
+
             {formType === "register" && (
               <UserRegister
                 setShow={() => dispatch(setShowAuthModal(false))}
@@ -89,6 +88,7 @@ export default function AuthModal() {
                 setFormData={setRegisterFormData}
               />
             )}
+
             {formType === "register-technical" && (
               <RegisterTechnical
                 setShow={() => dispatch(setShowAuthModal(false))}
@@ -98,16 +98,12 @@ export default function AuthModal() {
               />
             )}
 
-            {/* forget password process */}
-
             {formType === "forget" && (
               <ForgetPassword
                 setShow={() => dispatch(setShowAuthModal(false))}
                 setFormType={setFormType}
-                // setOtpCode={setOtpCode}
                 formData={forgetFormData}
                 setFormData={setForgetFormData}
-                // userState={userState}
               />
             )}
           </div>

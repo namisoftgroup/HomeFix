@@ -1,23 +1,29 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
-const ImageUploadBox = ({ title, subtitle}) => {
+const ImageUploadBox = ({ title, subtitle }) => {
   const inputRef = useRef(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const handleImageUpload = (e) => {
-    if (e.target.files[0]) {
-      console.log("img is uploading:", e.target.files[0].name);
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setImagePreview(imageUrl);
     }
   };
 
   return (
     <div className="image-container">
-
       <div className="upload-box" onClick={() => inputRef.current.click()}>
-        <div className="upload-content">
-          <i className="fa-solid fa-image"></i>
-          <p className="title">{title}</p>
-          <p className="subtitle">{subtitle}</p>
-        </div>
+        {imagePreview ? (
+          <img src={imagePreview} alt="Uploaded" className="uploaded-image" />
+        ) : (
+          <div className="upload-content">
+            <i className="fa-solid fa-image"></i>
+            <p className="title">{title}</p>
+            <p className="subtitle">{subtitle}</p>
+          </div>
+        )}
         <input
           type="file"
           accept="image/*"

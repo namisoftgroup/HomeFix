@@ -1,11 +1,6 @@
 import { Form } from "react-bootstrap";
 
-export default function PhoneInput({
-  label,
-  countryCode,
-  disableSelect,
-  ...props
-}) {
+export default function PhoneInput({ label, countryCode, ...props }) {
   return (
     <div className="phone_field">
       <div className="input-field">
@@ -14,17 +9,14 @@ export default function PhoneInput({
       </div>
 
       <div className="dropdown">
-        <button
-          aria-label="Country code"
-          type="button"
-          disabled={disableSelect}
-        >
-          {countryCode && (
-            <>
-              <span>{countryCode}</span>
-            </>
-          )}
-        </button>
+        {countryCode && (
+          <div className="button">
+            <div className="img">
+              <img src="/images/Flag_of_Jordan.svg" alt="jordan" />
+            </div>
+            <span>{countryCode}</span>
+          </div>
+        )}
       </div>
     </div>
   );

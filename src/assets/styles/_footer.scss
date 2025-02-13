@@ -1,5 +1,14 @@
 footer {
   border-top: 1px solid var(--input-stroke);
+  padding-top: 40px;
+
+  p {
+    padding-inline-end: 42px;
+    @media screen and (max-width: 576px) {
+      padding-inline-end: 0;
+    }
+  }
+
   .col {
     display: flex;
     flex-direction: column;
@@ -19,8 +28,10 @@ footer {
         color: var(--main);
       }
     }
+
     h5 {
-      font-size: 16px;
+      font-size: 22px;
+      font-weight: 600;
       color: var(--dray-light);
       line-height: 1.3;
     }
@@ -54,7 +65,7 @@ footer {
   }
 
   .copy_rights {
-    padding: 28px 0 20px;
+    padding: 20px 0;
     margin-top: 16px;
     border-top: 1px solid var(--input-stroke);
     display: flex;

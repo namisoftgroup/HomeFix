@@ -8,16 +8,16 @@ export default function Footer() {
     <footer>
       <div className="container">
         <div className="row">
-          <div className="col-lg-3 col-md-6 col-12 p-2">
+          <div className="col-lg-5 col-md-6 col-12 p-2">
             <div className="col">
               <Link className="logo">
                 <img src={"/images/logo.svg"} alt="logo" />
               </Link>
-              <h5>{t("footerTitle")}</h5>
+              <p>{t("footerTitle")}</p>
             </div>
           </div>
 
-          <div className="col-lg-3 col-md-6 col-12 p-2">
+          <div className="col-lg-2 col-md-6 col-12 p-2">
             <div className="col">
               <h5>{t("support")}</h5>
               <div className="links">
@@ -29,7 +29,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="col-lg-3 col-md-6 col-12 p-2">
+          <div className="col-lg-2 col-md-6 col-12 p-2">
             <div className="col">
               <h5>{t("quickLinks")}</h5>
               <div className="links">
@@ -43,6 +43,7 @@ export default function Footer() {
           <div className="col-lg-3 col-md-6 col-12 p-2">
             <div className="col">
               <h5>{t("downloadApp")}</h5>
+
               <div className="btns">
                 <Link
                   aria-label="Apple App"
@@ -68,6 +69,7 @@ export default function Footer() {
                 &copy; {new Date().getFullYear()} {t("copyright")}
                 <Link to="/"> {t("HomeFix")} </Link>
               </p>
+
               <div className="follow">
                 <div className="social_media">
                   <Link to="https://www.facebook.com">

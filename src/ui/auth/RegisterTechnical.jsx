@@ -76,11 +76,8 @@ export default function RegisterTechnical({
             formData={formData}
             setFormData={setFormData}
           />
-        
         </div>
-        <p className="upload-hint">
-           {t("auth.UploadHint")}
-          </p>
+        <p className="upload-hint">{t("auth.UploadHint")}</p>
         <div className="form_group">
           <PhoneInput
             label={t("auth.phone")}
@@ -181,10 +178,7 @@ export default function RegisterTechnical({
         </span>
 
         <div className="d-flex gap-2">
-          <button
-            className="back_btn"
-            onClick={() => setFormType("register-type")}
-          >
+          <button className="back_btn" onClick={() => setFormType("login")}>
             <i className="fal fa-arrow-right"></i>
           </button>
           <SubmitButton name={t("auth.register")} loading={loading} />

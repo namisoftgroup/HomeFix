@@ -21,7 +21,7 @@ export default function Header() {
               <NavLink to="/">{t("home")}</NavLink>
               <NavLink to="/aboutus">{t("aboutus")}</NavLink>
               <NavLink to="/service">{t("services")}</NavLink>
-              <NavLink to="/contact">{t("contactus")}</NavLink>
+              <NavLink to="/contactus">{t("contactus")}</NavLink>
             </>
 
         </div>

@@ -13,7 +13,9 @@ import PhoneInput from "../../ui/form-elements/PhoneInput";
 function Login({ setFormType, userType, setUserType }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
   const [, setCookie] = useCookies(["token", "id"]);
+
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     phone: "",
@@ -27,16 +29,15 @@ function Login({ setFormType, userType, setUserType }) {
     try {
       const res = await axiosInstance.post("/auth/login", {
         ...formData,
-        type: userType
+        type: userType,
       });
 
       if (res.data.code === 200) {
-
         const res = await axiosInstance.post("/auth/login", {
           ...formData,
-          type: userType
+          type: userType,
         });
-        
+
         setCookie("token", res.data?.data?.token, {
           path: "/",
           secure: true,
@@ -111,7 +112,6 @@ function Login({ setFormType, userType, setUserType }) {
           value={formData.phone}
           countryCode={formData.country_code}
           onChange={(e) => handleChange(e, setFormData)}
-     
         />
         <PasswordField
           label={t("auth.password")}
@@ -129,17 +129,20 @@ function Login({ setFormType, userType, setUserType }) {
         >
           {t("auth.forgetPassword")}
         </span>
+
         <SubmitButton name={t("auth.login")} loading={loading} />
-        <span className="noAccount text-center">
-          {t("auth.noAccount")}{" "}
-          <button
-            className="btn-register mt-2"
-            type="button"
-            onClick={() => setFormType("register-type")}
+        <p className="noAccount">
+          {t("auth.dontHaveAccount")}{" "}
+          <span
+            onClick={() =>
+              setFormType(
+                userType === "client" ? "register" : "register-technical"
+              )
+            }
           >
-            {t("auth.register")}
-          </button>
-        </span>
+            {t("auth.createAccount")}
+          </span>
+        </p>
       </form>
     </>
   );
