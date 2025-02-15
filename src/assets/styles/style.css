@@ -663,9 +663,6 @@ header nav .actions .rounded_btn {
   border: 0;
   font-size: 18px;
 }
-header nav .actions .rounded_btn img {
-  height: 100%;
-}
 header nav .actions .rounded_btn:active {
   background: var(--btn-bg);
   color: var(--main);
