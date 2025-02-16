@@ -197,53 +197,6 @@
     }
   }
 
-  .question {
-    padding: 0 0 30px;
-    width: 100%;
-    @include space-between();
-    .quest {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--main);
-    }
-    .vendorInput {
-      appearance: none;
-      position: relative;
-      cursor: pointer;
-      &::after {
-        display: block;
-        width: 48px;
-        height: 24px;
-        border-radius: 16px;
-        content: "";
-        background-color: var(--second);
-        transition: var(--transition);
-      }
-      &::before {
-        transition: var(--transition);
-        display: block;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        position: absolute;
-        top: 4px;
-        right: 4px;
-        content: "";
-        background-color: var(--white);
-      }
-      &:checked {
-        &::after {
-          background-color: var(--second);
-        }
-        &::before {
-          right: initial;
-          left: 4px;
-        }
-      }
-    }
-  }
-
   .auth_social_btn {
     @include clearInput();
     @include centerFlex();
@@ -748,7 +701,7 @@
       .uploaded-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;       
+        object-fit: cover;
       }
       .upload-content {
         text-align: center;
@@ -805,34 +758,6 @@
   font-size: 15px;
   color: var(--main) !important;
 }
-
-// .stars {
-//   display: flex;
-//   gap: 4px;
-//   li {
-//     color: $lightGray;
-//     &.star {
-//       color: $starColor;
-//     }
-//   }
-// }
-
-// .star-rating-service {
-//   display: flex;
-//   flex-direction: row-reverse;
-//   gap: 12px;
-//   label {
-//     cursor: pointer;
-//     color: $lightGray;
-//     &.active {
-//       color: $starColor;
-//     }
-//   }
-//   input {
-//     appearance: none;
-//     display: none;
-//   }
-// }
 
 .otp-container {
   display: flex;
@@ -970,4 +895,55 @@ label {
 .modal-footer {
   padding-top: 0 !important;
   border: 0 !important;
+}
+
+.question {
+  padding: 0 0 30px;
+  width: 100%;
+  @include space-between();
+  .quest {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--main);
+  }
+  .vendorInput {
+    appearance: none;
+    position: relative;
+    cursor: pointer;
+    &::after {
+      display: block;
+      width: 48px;
+      height: 24px;
+      border-radius: 16px;
+      content: "";
+      background-color: var(--second);
+      transition: var(--transition);
+    }
+    &::before {
+      transition: var(--transition);
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      content: "";
+      background-color: var(--white);
+    }
+    &:checked {
+      &::after {
+        background-color: var(--second);
+      }
+      &::before {
+        right: initial;
+        left: 4px;
+      }
+    }
+  }
+}
+
+.form-check-input {
+  box-shadow: none !important;
 }

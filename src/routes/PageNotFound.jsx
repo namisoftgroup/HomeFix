@@ -72,7 +72,9 @@ export default function PageNotFound() {
       </div>
       <h1 className="second-four">4</h1>
       <p className="wrong-para">{t("page_not_found.description")} </p>
-      <Link to="/" className="back-home-link">{t("page_not_found.button")}</Link>
+      <Link to="/" className="back-home-link">
+        {t("page_not_found.button")}
+      </Link>
     </div>
   );
 }

@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Poppins", sans-serif;
+
   position: relative;
   text-align: center;
   direction: rtl;
@@ -21,6 +21,9 @@
   .cog-wheel1,
   .cog-wheel2 {
     transform: scale(0.7);
+    @media screen and (max-width: 576px) {
+      transform: scale(0.6);
+    }
   }
 
   h1 {
@@ -31,6 +34,7 @@
     position: relative;
     right: -16vmin;
     font-size: 40vmin;
+    font-family: "Poppins", sans-serif;
   }
 
   .second-four {
@@ -38,6 +42,14 @@
     left: -18vmin;
     z-index: -1;
     font-size: 40vmin;
+    font-family: "Poppins", sans-serif;
+  }
+
+  @media screen and (max-width: 576px) {
+    .first-four,
+    .second-four {
+      font-size: 35vmin;
+    }
   }
 
   [dir="ltr"] .first-four {
@@ -51,12 +63,14 @@
   }
 
   .wrong-para {
-    font-family: "Montserrat", sans-serif;
     position: absolute;
     bottom: 15vmin;
-    padding: 3vmin 0vmin 3vmin 6vmin;
+    padding: 3vmin 0vmin;
     font-weight: 600;
     color: #092532;
+    @media screen and (max-width: 576px) {
+      bottom: 40vmin;
+    }
   }
 
   .back-home-link {
@@ -64,15 +78,16 @@
     font-size: 16px;
     color: var(--white);
     background-color: var(--second);
-    padding: 1vmin 3vmin;
-    border-radius: 12px;
+    padding: 8px 32px;
+    border-radius: 50px;
     font-weight: 500;
     position: absolute;
     bottom: 10vmin;
-    right: 48%;
-    transform: translateX(48%);
     text-align: center;
     text-decoration: none;
+    @media screen and (max-width: 576px) {
+      bottom: 30vmin;
+    }
   }
 
   [dir="ltr"] .back-home-link {

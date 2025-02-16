@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+import { updateClientData } from "../redux/slices/clientData";
 import InputField from "../ui/form-elements/InputField";
-import { updateClientData } from "../redux/slices/clientData"; 
 
 const UserProfile = ({ defaultValues }) => {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { client } = useSelector((state) => state.clientData);
 
   const fields = [
@@ -34,7 +34,7 @@ const UserProfile = ({ defaultValues }) => {
         name: client?.name || "",
         email: client?.email || "",
         phone: client?.phone || "",
-        city: client?.city.name || "", 
+        city: client?.city.name || "",
         password: "",
         confirmPassword: "",
       });
@@ -76,56 +76,73 @@ const UserProfile = ({ defaultValues }) => {
   };
 
   return (
-    <div className="profile-container container">
-      <h2 className="profile-title">حسابي</h2>
-      <Form className="profile-form" onSubmit={handleSubmit}>
-        {fields.map((field, index) => (
-          <InputField
-            key={index}
-            label={field.label}
-            name={field.name}
-            type={field.type}
-            value={formData[field.name] || ""}
-            onChange={handleChange}
-            icon={`/icons/${field.icon}.svg`}
-          />
-        ))}
+    <div className="profile-container">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-10 col-12 p-2">
+            <h2 className="profile-title">
+              <div className="icon">
+                <i className="fa-regular fa-angle-right"></i>
+              </div>
+              {t("editProfile")}
+            </h2>
 
-        {!showPasswordFields && (
-          <button
-            type="button"
-            className="change-password-btn"
-            onClick={() => setShowPasswordFields(true)}
-          >
-          {t("auth.doYouWantChangePassword")}
-          </button>
-        )}
+            <Form className="profile-form" onSubmit={handleSubmit}>
+              {fields.map((field, index) => (
+                <InputField
+                  key={index}
+                  label={field.label}
+                  name={field.name}
+                  type={field.type}
+                  value={formData[field.name] || ""}
+                  onChange={handleChange}
+                  icon={`/icons/${field.icon}.svg`}
+                />
+              ))}
 
-        {showPasswordFields && (
-          <>
-            <InputField
-              label="كلمة المرور"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              icon="/icons/password.svg"
-            />
-            <InputField
-              label="تأكيد كلمة المرور"
-              name="confirmPassword"
-              type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              icon="/icons/password.svg"
-            />
-          </>
-        )}
+              <div className="question p-0 pt-2">
+                <label
+                  htmlFor="wantChangePassword"
+                  className="change-password-btn"
+                >
+                  {t("auth.doYouWantChangePassword")}
+                </label>
+                <Form.Switch
+                  id="wantChangePassword"
+                  name="wantChangePassword"
+                  checked={showPasswordFields}
+                  onChange={() => setShowPasswordFields(!showPasswordFields)}
+                />
+              </div>
 
-        <button type="submit" className="confirm-btn">
-          {t("Services.confirm")}
-        </button>
-      </Form>
+              {showPasswordFields && (
+                <>
+                  <InputField
+                    label="كلمة المرور"
+                    name="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    icon="/icons/password.svg"
+                  />
+                  <InputField
+                    label="تأكيد كلمة المرور"
+                    name="confirmPassword"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    icon="/icons/password.svg"
+                  />
+                </>
+              )}
+
+              <button type="submit" className="confirm-btn">
+                {t("Services.confirm")}
+              </button>
+            </Form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
