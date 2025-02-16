@@ -11,6 +11,7 @@ import FAQs from "../routes/FAQs";
 import UserProfile from "../routes/UserProfile";
 import Contact from "../routes/Contact";
 import Notification from "../routes/Notification";
+import OrderDetails from "../routes/OrderDetails";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
         path: "notifications",
         element: <Notification />,
       },
+      {
+        path: "order-details",
+        element: <OrderDetails />,
+      }
     ],
   },
 ]);

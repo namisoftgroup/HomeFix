@@ -19,7 +19,7 @@ function ResponsiveNav() {
     <Link
       aria-label="List"
       to="/Orders"
-      className={`menu_item ${location.pathname === "/Orders" ? "active" : ""}`}
+      className={`menu_item ${location.pathname === "/my-orders" ? "active" : ""}`}
     >
       <i className="fa-solid fa-list-check"></i>
       <span>{t("header.list")}</span>
