@@ -1,0 +1,53 @@
+.orderDetails {
+  margin: auto;
+  padding: 20px;
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .driversList{
+    background-color: var(--third);
+   border-radius: var(--border-radius);
+  }
+  .orderDetails{
+    background-color: var(--light-gray);
+    border-radius: var(--border-radius);
+    margin-top: 20px;
+  }
+  @keyframes loadingGradient {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
+
+  .searchButton {
+    width: 100%;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #1d483f, #479991, #198754);
+    background-size: 200% 100%;
+    animation: loadingGradient 2s linear infinite;
+    border: none;
+  }
+
+  .cancelButton {
+    width: 100%;
+    background: var(--main);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  .cancelButton:hover {
+   opacity: 0.9;
+  }
+}
