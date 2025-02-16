@@ -3,15 +3,15 @@ import axiosInstance from "../../utils/axiosInstance";
 
 export default function useGet(enabled) {
   const { isLoading, data, error, refetch, isFetched } = useQuery({
-    queryKey: ["cities"],
+    queryKey: ["profile"],
     queryFn: async () => {
       try {
-        const res = await axiosInstance.get("/homefix/cities");
+        const res = await axiosInstance.get("/auth/profile");
         if (res.status === 200) {
           return res.data.data || {};
         }
       } catch (error) {
-        console.error("Error fetching cities:", error.message);
+        console.error("Error fetching profile:", error.message);
         throw error;
       }
     },

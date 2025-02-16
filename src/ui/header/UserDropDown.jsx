@@ -11,6 +11,13 @@ export default function UserDropDown() {
   const { client } = useSelector((state) => state.clientData);
   const dispatch = useDispatch();
 
+  const handleShow = (e) => {
+    if (!isAuthed) {
+      e.preventDefault();
+      dispatch(setShowAuthModal(true));
+    }
+  };
+
   return (
     <Dropdown>
       <Dropdown.Toggle className="rounded_btn">
@@ -18,33 +25,23 @@ export default function UserDropDown() {
           className={client?.image ? "h-100" : ""}
           src={client?.image ? client?.image : "/icons/user.svg"}
           alt="user_alt"
+          onClick={handleShow}
         />
       </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        {isAuthed ? (
-          <>
-            <Dropdown.Item as={Link} to={"/edit-profile"}>
-              {t("editProfile")}
-            </Dropdown.Item>
+      {isAuthed && (
+        <Dropdown.Menu>
+          <Dropdown.Item as={Link} to={"/edit-profile"}>
+            {t("editProfile")}
+          </Dropdown.Item>
 
-            <Dropdown.Item as={Link} to={"/my-orders"}>
-              {t("myOrders")}
-            </Dropdown.Item>
+          <Dropdown.Item as={Link} to={"/my-orders"}>
+            {t("myOrders")}
+          </Dropdown.Item>
 
-            <Dropdown.Item>{t("logout")}</Dropdown.Item>
-          </>
-        ) : (
-          <>
-            <Dropdown.Item onClick={() => dispatch(setShowAuthModal(true))}>
-              {t("login")}
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => dispatch(setShowAuthModal(true))}>
-              {t("createAccount")}
-            </Dropdown.Item>
-          </>
-        )}
-      </Dropdown.Menu>
+          <Dropdown.Item>{t("logout")}</Dropdown.Item>
+        </Dropdown.Menu>
+      )}
     </Dropdown>
   );
 }

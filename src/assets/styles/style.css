@@ -2570,10 +2570,7 @@ body .service-details .toggle-switch input:checked + .slider:before {
 }
 @media (max-width: 768px) {
   body .service-details {
-    padding: 15px;
-  }
-  body .service-details .image-upload {
-    justify-content: center;
+    padding: 16px;
   }
 }
 body .date-time-container {

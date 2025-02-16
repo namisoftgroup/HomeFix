@@ -76,8 +76,15 @@ export default function ServiceDetails() {
   const handleConfirm = async (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log(formData.images_list);
+
     try {
-      const res = await axiosInstance.post("/homefix/orders-client", formData);
+      const res = await axiosInstance.post("/homefix/orders-client", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       if (res.data.code === 200) {
         toast.success(res.data.message);
         navigate("/my-orders");
@@ -145,14 +152,14 @@ export default function ServiceDetails() {
                       src={URL.createObjectURL(img)}
                       alt={`upload-${index}`}
                     />
-                    <button
+                    <div
                       className="remove-btn"
                       onClick={() => removeImage(index)}
                     >
                       <span>
                         <i className="fa-solid fa-xmark"></i>
                       </span>
-                    </button>
+                    </div>
                   </div>
                 ))}
               </div>
