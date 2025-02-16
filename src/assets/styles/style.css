@@ -127,8 +127,7 @@ button {
 }
 
 input[type=number] {
-  -webkit-appearance: textfield;
-          appearance: textfield;
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 input[type=number]::-webkit-outer-spin-button {
@@ -538,14 +537,10 @@ input[type=email] {
 .preloader .preloaderImg {
   width: 100px;
   height: 100px;
-  -webkit-mask-image: url("/images/fav.svg");
-          mask-image: url("/images/fav.svg");
-  -webkit-mask-size: contain;
-          mask-size: contain;
-  -webkit-mask-position: center;
-          mask-position: center;
-  -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
+  mask-image: url("/images/fav.svg");
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
   position: relative;
 }
 .preloader .preloaderImg::after {
@@ -592,9 +587,6 @@ input[type=email] {
   border-radius: 12px;
   outline: none;
   color: var(--main);
-}
-.mapSearchInput::-moz-placeholder {
-  color: var(--gray);
 }
 .mapSearchInput::placeholder {
   color: var(--gray);
@@ -952,9 +944,6 @@ footer .copy_rights .social_media a:hover {
   font-size: 14px;
   box-shadow: none !important;
 }
-.form .input-field input::-moz-placeholder, .form .input-field textarea::-moz-placeholder, .form .input-field select::-moz-placeholder {
-  font-size: 14px;
-}
 .form .input-field input::placeholder,
 .form .input-field textarea::placeholder,
 .form .input-field select::placeholder {
@@ -1008,7 +997,6 @@ footer .copy_rights .social_media a:hover {
   pointer-events: none;
 }
 .form button.fit {
-  width: -moz-fit-content;
   width: fit-content;
   padding: 0 52px;
 }
@@ -1031,9 +1019,7 @@ footer .copy_rights .social_media a:hover {
   color: var(--main);
 }
 .form .question .vendorInput {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   position: relative;
   cursor: pointer;
 }
@@ -1178,14 +1164,12 @@ footer .copy_rights .social_media a:hover {
 }
 .form .image-change-wrapper .img-wrap .img-box img {
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .form .image-change-wrapper .img-wrap .img-box img.icon {
   width: 50%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .form .image-change-wrapper .upload input {
   display: none;
@@ -1293,8 +1277,7 @@ footer .copy_rights .social_media a:hover {
 }
 .form .image_field .imagewrap .img img {
   height: 100%;
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+  object-fit: scale-down;
 }
 .form .advice {
   width: 100%;
@@ -1333,7 +1316,6 @@ footer .copy_rights .social_media a:hover {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .form .advice ul li {
@@ -1509,8 +1491,7 @@ footer .copy_rights .social_media a:hover {
 .image-upload-wrapper .image-container img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
 }
 .image-upload-wrapper .image-container .upload-button {
@@ -1572,8 +1553,7 @@ footer .copy_rights .social_media a:hover {
 .form_group .image-container .upload-box .uploaded-image {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .form_group .image-container .upload-box .upload-content {
   text-align: center;
@@ -1608,8 +1588,7 @@ footer .copy_rights .social_media a:hover {
 .uploaded-image {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {
@@ -1776,8 +1755,7 @@ label div {
 .work-card__image {
   width: 100%;
   height: 180px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   display: block;
 }
 .work-card__content {
@@ -1835,8 +1813,7 @@ label div {
 .order-card .order-header .service-icon img {
   width: 24px;
   height: 24px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .order-card .order-content {
   display: flex;
@@ -1898,8 +1875,7 @@ label div {
 .service-card .service-image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   transition: 0.3s ease-in-out;
 }
 .service-card .service-title {
@@ -2128,8 +2104,7 @@ body .hero-section .img {
 body .hero-section .img img {
   width: 100%;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 body .why-us {
   padding: 32px 0;
@@ -2370,8 +2345,7 @@ body .auth_section .img_wrapper.register, body .auth_section .img_wrapper.regist
 }
 body .auth_section .img_wrapper .bg-img {
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 body .auth_section .small-screen-img {
   display: none;
@@ -2380,8 +2354,7 @@ body .auth_section .small-screen-img {
   body .auth_section .small-screen-img {
     display: block;
     height: 240px;
-    -o-object-fit: contain;
-       object-fit: contain;
+    object-fit: contain;
   }
 }
 body .authModal .modal-header {
@@ -2486,8 +2459,7 @@ body .service-details .image-upload .image-preview img {
   width: 100%;
   height: 100%;
   border-radius: 12px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 body .service-details .image-upload .image-preview .remove-btn {
   position: absolute;
@@ -3067,4 +3039,6 @@ body.en input[type=email] {
 }
 body input[type=email] {
   text-align: right;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
