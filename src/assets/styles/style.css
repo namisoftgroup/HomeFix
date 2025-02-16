@@ -655,9 +655,6 @@ header nav .actions .rounded_btn {
   border: 0;
   font-size: 18px;
 }
-header nav .actions .rounded_btn img {
-  height: 100%;
-}
 header nav .actions .rounded_btn:active {
   background: var(--btn-bg);
   color: var(--main);
@@ -2681,10 +2678,7 @@ body .service-details .toggle-switch input:checked + .slider:before {
 }
 @media (max-width: 768px) {
   body .service-details {
-    padding: 15px;
-  }
-  body .service-details .image-upload {
-    justify-content: center;
+    padding: 16px;
   }
 }
 body .date-time-container {
@@ -3148,11 +3142,10 @@ body .about-us .text-content ul li::before {
 body .about-us .image-content {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 body .about-us .image-content img {
-  max-width: 100%;
-  height: 70%;
+  max-width: 60%;
+  object-fit: contain;
 }
 @media (max-width: 768px) {
   body .about-us .text-content {
