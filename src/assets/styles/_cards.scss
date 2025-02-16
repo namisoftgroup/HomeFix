@@ -167,3 +167,162 @@
     color: var(--grey);
   }
 }
+// OffersCard
+.driverCard {
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+
+  .driverInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .driverImage {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+  }
+
+  .driverName {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+
+  .rating {
+    font-size: 1rem;
+
+    i {
+      margin-right: 3px;
+      font-size: 1rem;
+    }
+
+    .unfilled {
+      color: #ccc;
+    }
+
+    .filled {
+      color: #ffc107;
+    }
+  }
+
+  .price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .buttonGroup {
+    display: flex;
+    gap: 8px;
+    margin-top: 5px;
+    justify-content: space-between;
+
+    .acceptBtn,
+    .rejectBtn {
+      flex: 1;
+      padding: 8px 0;
+      text-align: center;
+    }
+
+    .acceptBtn {
+      background: #3b9586;
+      color: white;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .rejectBtn {
+      border: 1px solid #000;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      background: white;
+      color: black;
+    }
+  }
+}
+//orderinfo
+.orderInfo {
+  background: transparent;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: none;
+
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .order-category {
+      background: #e4e6e8;
+      color: var(--gray-light);
+      padding: 5px 10px;
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .category-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .order-id {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      p {
+        font-weight: bold;
+        color: var(--main);
+        margin: 0;
+      }
+    }
+  }
+
+  .order-location {
+    display: flex;
+    align-items: center;
+    color: var(--main);
+    margin: 8px 0px;
+  }
+
+  .mapPlaceholder {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .imagesRow {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    .orderImage {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+
+  .order-description {
+    font-size: 14px;
+    margin: 8px 0px;
+  }
+
+  .audioSection {
+    display: flex;
+    align-items: center;
+  }
+}
