@@ -36,9 +36,10 @@ export default function ServiceDetails() {
 
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
+    const objects = files.map((file) => ({ file: file }));
     setFormData((prev) => ({
       ...prev,
-      images_list: [...prev.images_list, ...files],
+      images_list: [...prev.images_list, ...objects],
     }));
   };
 
@@ -76,8 +77,30 @@ export default function ServiceDetails() {
   const handleConfirm = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const payload = {
+      service_id: formData.service_id,
+      address: formData.address,
+      latitude: formData.latitude,
+      longitude: formData.longitude,
+      description: formData.description,
+      images_list: formData.images_list,
+      voice: formData.voice,
+      is_schedule: formData.is_schedule,
+    };
+
+    if (formData.is_schedule === 1) {
+      payload.schedule_date = formData.schedule_date;
+      payload.schedule_time = formData.schedule_time;
+    }
+
     try {
-      const res = await axiosInstance.post("/homefix/orders-client", formData);
+      const res = await axiosInstance.post("/homefix/orders-client", payload, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       if (res.data.code === 200) {
         toast.success(res.data.message);
         navigate("/my-orders");
@@ -139,20 +162,20 @@ export default function ServiceDetails() {
                   />
                 </label>
 
-                {formData.images_list.map((img, index) => (
+                {formData.images_list.map((obj, index) => (
                   <div key={index} className="image-preview">
                     <img
-                      src={URL.createObjectURL(img)}
+                      src={URL.createObjectURL(obj.file)}
                       alt={`upload-${index}`}
                     />
-                    <button
+                    <div
                       className="remove-btn"
                       onClick={() => removeImage(index)}
                     >
                       <span>
                         <i className="fa-solid fa-xmark"></i>
                       </span>
-                    </button>
+                    </div>
                   </div>
                 ))}
               </div>

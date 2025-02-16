@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
+import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import InputField from ".././form-elements/InputField";
 import SubmitButton from ".././form-elements/SubmitButton";
-import { toast } from "sonner";
 import axiosInstance from "../../utils/axiosInstance";
 
 const ContactForm = ({ image = "/images/contactform.png" }) => {

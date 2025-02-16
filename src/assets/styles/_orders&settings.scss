@@ -1,129 +1,123 @@
 .orders-container {
-    text-align: center;
-    padding: 20px;
-  
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      padding:0px  20px;
+  text-align: center;
+  padding: 20px;
 
-  
-      button {
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        background: var(--btn-bg);
-        color: var(--gray-light);
-        border: 1px solid var(--border);
-        border-radius: 5px;
-        font-size: 16px;
-        transition: background 0.3s ease;
-  
-        &.active {
-          background: var(--second);
-          color: var(--white);
-        }
-  
-    
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 0px 20px;
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      background: var(--btn-bg);
+      color: var(--gray-light);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background 0.3s ease;
+
+      &.active {
+        background: var(--second);
+        color: var(--white);
       }
-    }
-  
-    .orders-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-  
-   
     }
   }
-  // settings
-  .settings {
-    width: 100%;
-    margin: auto;
-    padding: 20px;
-  
-    &-title {
-      color: var(--main);
-      font-weight: bold;
-      font-size: 18px;
-      margin-top: 20px;
-    }
-  
-    &-list {
-      width: 100%;
-  
-      .settings-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px;
-        font-size: 18px;
-        cursor: pointer;
-        border-bottom: 1px solid var(--border);
-        transition: 0.3s ease;
-        background-color: var(--white);
-  
-        &:hover {
-          background-color: #f9f9f9;
-        }
-  
-        .content {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          flex-grow: 1;
-  
-          .icon-img {
-            width: 24px;
-            height: 24px;
-          }
-  
-          .text {
-            flex-grow: 1;
-            white-space: nowrap;
-            overflow: hidden;
-          }
-        }
-  
-        .arrow {
-          color: var(--gray);
-          font-size: 16px;
 
-        }
-   
-        &.delete {
-          color: red;
-        }
-      }
-    }
-  
-    .logout {
-      width: 100%;
-      margin-top: 20px;
-      padding: 12px;
-      background-color: var(--white);
-      border: 1px solid var(--border);
-      font-size: 18px;
-      color: var(--gray);
+  .orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+// settings
+.settings {
+  width: 100%;
+  margin: auto;
+  padding: 20px;
+
+  &-title {
+    color: var(--main);
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+
+  &-list {
+    width: 100%;
+
+    .settings-item {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      padding: 15px;
+      font-size: 18px;
       cursor: pointer;
+      border-bottom: 1px solid var(--border);
       transition: 0.3s ease;
-   img{
-    width: 24px;
-    height: 24px; 
-    margin: 5px;
-   }
+      background-color: var(--white);
+
       &:hover {
-        background-color: #f5f5f5;
+        background-color: #f9f9f9;
+      }
+
+      .content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-grow: 1;
+
+        .icon-img {
+          width: 24px;
+          height: 24px;
+        }
+
+        .text {
+          flex-grow: 1;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+
+      .arrow {
+        color: var(--gray);
+        font-size: 16px;
+      }
+
+      &.delete {
+        color: red;
       }
     }
   }
-  //Terms
+
+  .logout {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    font-size: 18px;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+    img {
+      width: 24px;
+      height: 24px;
+      margin: 5px;
+    }
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+}
+//Terms
 .terms_container {
   width: 100%;
   margin: auto;
@@ -132,7 +126,7 @@
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-    
+
     h2 {
       color: var(--main);
       font-weight: bold;
@@ -159,7 +153,6 @@
     font-weight: bold;
     font-size: 18px;
     margin-top: 20px;
-
   }
 
   &-list {
@@ -167,10 +160,9 @@
       border-radius: 8px;
       overflow: hidden;
       margin-bottom: 10px;
-      border: 1px solid  var(--btn-bg);
+      border: 1px solid var(--btn-bg);
       background: var(--btn-bg);
       transition: background 0.3s ease-in-out;
-      
 
       .faq-header {
         padding: 15px;
@@ -221,7 +213,7 @@
     color: var(--main);
     font-weight: bold;
     font-size: 18px;
-    margin: 10px 20px ;
+    margin: 10px 20px;
   }
 
   .profile-form {
@@ -229,7 +221,6 @@
     flex-direction: column;
     gap: 15px;
     padding: 15px;
-
 
     .input-field {
       display: flex;
@@ -260,7 +251,6 @@
           transition: all 0.3s ease;
           left: auto;
           right: 10px;
-   
         }
 
         input.form-control {
@@ -270,7 +260,6 @@
           border: 1px solid #ccc;
           transition: border-color 0.3s ease;
           padding-right: 40px;
-         
 
           &:focus {
             border-color: var(--second);
@@ -281,19 +270,19 @@
     }
   }
 }
-//contact  
+//contact
 .contact-container {
   width: 100%;
   padding: 20px;
   margin: auto;
   .contact-image {
-    display: block;  
-    margin: 0 auto;  
-    max-width: 100%;  
-    height: auto;  
-    width: 250px; 
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    width: 250px;
   }
-  
+
   .contact-title {
     color: var(--main);
     font-weight: bold;
@@ -323,7 +312,6 @@
           right: 10px;
           top: 10px;
           transition: all 0.3s ease;
-          
         }
 
         input.form-control,
@@ -347,15 +335,13 @@
         }
       }
     }
-
-   
   }
 }
-//notifications 
+//notifications
 .notifications-container {
   width: 100%;
   padding: 10px;
-margin: auto;
+  margin: auto;
   .notifications-title {
     color: var(--main);
     font-weight: bold;
@@ -410,7 +396,7 @@ margin: auto;
   }
 }
 
-//aboutus 
+//aboutus
 .about-us {
   padding: 50px 20px;
   color: var(--main);
@@ -445,10 +431,10 @@ margin: auto;
         margin-bottom: 10px;
 
         &::before {
-          content: "✔"; 
+          content: "✔";
           color: var(--second);
           font-weight: bold;
-          margin: 0px 10px ;
+          margin: 0px 10px;
         }
       }
     }
@@ -457,12 +443,10 @@ margin: auto;
   .image-content {
     display: flex;
     justify-content: center;
-    align-items: center;
 
     img {
-   max-width: 100%; 
-    height: 70%;
-     
+      max-width: 60%;
+      object-fit: contain;
     }
   }
 

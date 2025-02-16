@@ -97,7 +97,7 @@ export default function MapSection({ formData, setFormData }) {
             height: "350px",
             borderRadius: "12px",
           }}
-          zoom={10}
+          zoom={15}
           center={markerPosition}
         >
           <Marker

@@ -23,11 +23,11 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/order-service",
+        path: "order-service",
         element: <ServiceDetails />,
       },
       {
-        path: "Orders",
+        path: "my-orders",
         element: <Orders />,
       },
       {
