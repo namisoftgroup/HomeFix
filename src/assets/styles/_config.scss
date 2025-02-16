@@ -552,7 +552,7 @@ input[type="email"] {
   .preloaderImg {
     width: 100px;
     height: 100px;
-    mask-image: url("/images/fav.svg");
+    mask-image: url("/images/loader.webp");
     mask-size: contain;
     mask-position: center;
     mask-repeat: no-repeat;
@@ -574,7 +574,7 @@ input[type="email"] {
       display: block;
       width: 100px;
       height: 100px;
-      background-image: url("/images/fav.svg");
+      background-image: url("/images/loader.webp");
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
