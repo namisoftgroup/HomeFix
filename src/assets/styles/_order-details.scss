@@ -1,19 +1,35 @@
 .orderDetails {
   margin: auto;
-  padding: 20px;
+  padding: 24px 0;
 
   h2 {
     font-size: 1.2rem;
     font-weight: bold;
   }
-  .driversList{
+  .driversList {
     background-color: var(--third);
-   border-radius: var(--border-radius);
-  }
-  .orderDetails{
-    background-color: var(--light-gray);
     border-radius: var(--border-radius);
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .details {
+    background-color: #f5f5f5;
+    border-radius: var(--border-radius);
+
+    audio {
+      display: block;
+      border: 2px solid #ffffff;
+      width: 100%;
+      background: #f1f3f4;
+      border-radius: 12px;
+      padding: 4px;
+      outline: none;
+      @media screen and (max-width: 576px) {
+        width: 250px;
+        padding: 0;
+      }
+    }
   }
   @keyframes loadingGradient {
     0% {
@@ -43,11 +59,11 @@
     width: 100%;
     background: var(--main);
     color: white;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 20px;
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 18px;
   }
   .cancelButton:hover {
-   opacity: 0.9;
+    opacity: 0.9;
   }
 }

@@ -1,32 +1,41 @@
-import { Container } from "react-bootstrap";
-import DriverCard from "../ui/cards/OffersCard"; 
+import { Col, Container, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import OrderInfo from "../ui/cards/OrderInfoCard";
+import useGetOrder from "../hooks/orders/useGetOrder";
+import OfferCard from "../ui/cards/OfferCard";
 
 export default function OrderDetails() {
-  const drivers = [
-    { name: "عماد مجدي", rating: 5, cost: 15, image: "/icons/avatar.svg" },
-    { name: "عماد مجدي", rating: 2, cost: 15, image: "/icons/avatar.svg" }
-  ];
+  const { t } = useTranslation();
+  const { data: orderDetails } = useGetOrder();
 
   return (
-    <Container className="orderDetails">
-      <h2>بيانات الطلب</h2>
+    <section className="orderDetails">
+      <Container>
+        <Row>
+          <Col lg={12} className="p-2">
+            <h2>{t("orderDetails")}</h2>
+          </Col>
 
-      <button className="searchButton" disabled>
-        جاري تلقي العروض
-      </button>
+          <Col lg={12} className="p-2">
+            <button className="searchButton" disabled>
+              جاري تلقي العروض
+            </button>
+          </Col>
 
-      <div className="driversList p-3">
-        {drivers.map((driver, index) => (
-          <DriverCard key={index} {...driver} />
-        ))}
-      </div>
+          <Col lg={4} className="p-2">
+            <div className="driversList p-3">
+              {orderDetails?.offers?.map((offer) => (
+                <OfferCard key={offer?.id} offer={offer} />
+              ))}
+            </div>
+          </Col>
 
-      <div className="orderDetails p-3">
-          <OrderInfo />
-      </div>
-
-      <button className="cancelButton">إلغاء الطلب</button>
-    </Container>
+          <Col lg={8} className="p-2">
+            <OrderInfo orderDetails={orderDetails} />
+            <button className="cancelButton">إلغاء الطلب</button>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 }

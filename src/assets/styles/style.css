@@ -1824,7 +1824,7 @@ label div {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 8px;
+  gap: 12px;
   margin-top: 12px;
 }
 .order-card .order-content .order-info p {
@@ -1893,11 +1893,10 @@ label div {
 
 .driverCard {
   background: #fff;
-  padding: 12px;
+  padding: 16px;
+  gap: 16px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-  border: 1px solid #eee;
+  border: 0;
 }
 .driverCard .driverInfo {
   display: flex;
@@ -1938,8 +1937,7 @@ label div {
 }
 .driverCard .buttonGroup {
   display: flex;
-  gap: 8px;
-  margin-top: 5px;
+  gap: 12px;
   justify-content: space-between;
 }
 .driverCard .buttonGroup .acceptBtn,
@@ -1964,8 +1962,6 @@ label div {
 
 .orderInfo {
   background: transparent;
-  padding: 12px;
-  margin-bottom: 10px;
   border: none;
 }
 .orderInfo .order-header {
@@ -2004,6 +2000,7 @@ label div {
 }
 .orderInfo .mapPlaceholder {
   width: 100%;
+  height: 300px;
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 10px;
@@ -2016,12 +2013,14 @@ label div {
 .orderInfo .imagesRow .orderImage {
   width: 120px;
   height: 120px;
+  background: #fff;
+  padding: 4px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 8px;
 }
 .orderInfo .order-description {
-  font-size: 14px;
+  font-size: 16px;
   margin: 8px 0px;
 }
 .orderInfo .audioSection {
@@ -2789,7 +2788,7 @@ body .success-modal .success-text {
 }
 body .orders-container {
   text-align: center;
-  padding: 60px 0;
+  padding: 24px 0;
 }
 body .orders-container .tabs {
   display: flex;
@@ -2800,6 +2799,7 @@ body .orders-container .tabs {
   background: var(--btn-bg);
   border-radius: 100px;
   padding: 4px;
+  margin-bottom: 16px;
 }
 body .orders-container .tabs button {
   padding: 10px 20px;
@@ -3208,7 +3208,7 @@ body .about-us .image-content img {
 }
 body .orderDetails {
   margin: auto;
-  padding: 20px;
+  padding: 24px 0;
 }
 body .orderDetails h2 {
   font-size: 1.2rem;
@@ -3217,11 +3217,28 @@ body .orderDetails h2 {
 body .orderDetails .driversList {
   background-color: var(--third);
   border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-body .orderDetails .orderDetails {
-  background-color: var(--light-gray);
+body .orderDetails .details {
+  background-color: #f5f5f5;
   border-radius: var(--border-radius);
-  margin-top: 20px;
+}
+body .orderDetails .details audio {
+  display: block;
+  border: 2px solid #ffffff;
+  width: 100%;
+  background: #f1f3f4;
+  border-radius: 12px;
+  padding: 4px;
+  outline: none;
+}
+@media screen and (max-width: 576px) {
+  body .orderDetails .details audio {
+    width: 250px;
+    padding: 0;
+  }
 }
 @keyframes loadingGradient {
   0% {
@@ -3249,9 +3266,9 @@ body .orderDetails .cancelButton {
   width: 100%;
   background: var(--main);
   color: white;
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 20px;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 18px;
 }
 body .orderDetails .cancelButton:hover {
   opacity: 0.9;

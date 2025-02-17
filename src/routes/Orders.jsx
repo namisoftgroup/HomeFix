@@ -1,51 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
 import OrderCard from "./../ui/cards/OrderCard";
+import useGetOrders from "../hooks/orders/useGetOrders";
 
 const Orders = () => {
+  const { t } = useTranslation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState("current");
-  const orders = [
-    {
-      id: 1,
-      service: "الكهرباء",
-      time: "03:23 م",
-      date: "11/11/2025",
-      location: "عمان شارع جامعة الدول",
-      icon: "/images/service3.svg",
-      isPrevious: false,
-    },
-    {
-      id: 2,
-      service: "الصيانة",
-      time: "03:23 م",
-      date: "07/10/2025",
-      location: "عمان شارع جامعة الدول",
-      icon: "/images/service1.svg",
-      isPrevious: true,
-    },
-  ];
+  const { data: orders } = useGetOrders();
+
+  useEffect(() => {
+    setActiveTab(searchParams.get("type") || "current");
+  }, [searchParams]);
 
   return (
     <div className="orders-container">
       <div className="container">
         <div className="row">
-          <div className="col-12 p-2 mb-3">
+          <div className="col-12 p-2">
             <div className="tabs">
               <button
                 className={activeTab === "current" ? "active" : ""}
-                onClick={() => setActiveTab("current")}
+                onClick={() => setSearchParams({ type: "current" })}
               >
-                الحالية
+                {t("current")}
               </button>
               <button
                 className={activeTab === "previous" ? "active" : ""}
-                onClick={() => setActiveTab("previous")}
+                onClick={() => setSearchParams({ type: "previous" })}
               >
-                السابقة
+                {t("previous")}
               </button>
             </div>
           </div>
-          {orders.map((order) => (
-            <div className="col-lg-6 col-12 p-2" key={order.id}>
+
+          {orders?.map((order) => (
+            <div className="col-lg-6 col-12 p-2" key={order?.id}>
               <OrderCard order={order} />
             </div>
           ))}

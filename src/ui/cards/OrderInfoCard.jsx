@@ -1,42 +1,88 @@
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import { Card } from "react-bootstrap";
 
-export default function OrderInfo() {
+export default function OrderInfo({ orderDetails }) {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+  });
+
   return (
-    <Card className="orderInfo">
-      <div className="order-header">
-      <span className="order-category">
-  <img src="/images/service1.svg" alt="Electricity Icon" className="category-icon" />
-  الكهرباء
-</span>
-<div className="order-id">
-  <p>#555489</p>
-  <img src="/icons/code.svg" alt="Order Icon" className="order-icon" />
- 
-</div>
+    <div className="details p-3">
+      <Card className="orderInfo">
+        <div className="order-header">
+          <span className="order-category">
+            <img
+              src={orderDetails?.service?.image}
+              alt={orderDetails?.service?.title}
+              className="category-icon"
+            />
+            {orderDetails?.service?.title}
+          </span>
+          <div className="order-id">
+            <p>#{orderDetails?.code}</p>
+            <img
+              src="/icons/code.svg"
+              alt="Order Icon"
+              className="order-icon"
+            />
+          </div>
+        </div>
 
-      </div>
+        <p className="order-location">
+          <i className="fa-solid fa-location-dot mx-1"></i>
+          {orderDetails?.address}
+        </p>
 
-      <p className="order-location">
-      <i className="fa-solid fa-location-dot mx-1"></i>
-        عمان شارع جامعة الدول
+        <div className="mapPlaceholder">
+          {isLoaded ? (
+            <GoogleMap
+              options={{
+                streetViewControl: false,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                disableDefaultUI: true,
+                clickableIcons: false,
+                gestureHandling: "greedy",
+              }}
+              zoom={16}
+              center={{
+                lat: orderDetails?.latitude,
+                lng: orderDetails?.longitude,
+              }}
+              mapContainerStyle={{ width: "100%", height: "100%" }}
+            >
+              <Marker
+                icon="/public/images/map-pin.svg"
+                position={{
+                  lat: orderDetails?.latitude,
+                  lng: orderDetails?.longitude,
+                }}
+              />
+            </GoogleMap>
+          ) : (
+            <div className="map_loader">
+              <i className="fa-regular fa-spinner fa-spin"></i>
+            </div>
+          )}
+        </div>
 
-      </p>
+        <div className="imagesRow">
+          {orderDetails?.order_files?.map((file) => (
+            <img
+              src={file?.file}
+              alt={file?.id}
+              className="orderImage"
+              key={file?.id}
+            />
+          ))}
+        </div>
 
-      <div className="mapPlaceholder">
-        {/* <MapSection /> */}
-      </div>
+        <p className="order-description">{orderDetails?.description}</p>
 
-      <div className="imagesRow">
-        <img src="" className="orderImage" />
-      </div>
-
-      <p className="order-description">
-        يوجد عطل مفاجئ في الكهرباء والإضاءة لا تعمل في الليل بالكامل.
-      </p>
-
-      <div className="audioSection">
-      
-      </div>
-    </Card>
+        <div className="audioSection">
+          {orderDetails?.voice && <audio src={orderDetails?.voice} controls></audio>}
+        </div>
+      </Card>
+    </div>
   );
 }

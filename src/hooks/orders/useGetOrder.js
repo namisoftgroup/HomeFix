@@ -1,25 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 
-export default function useGetOffers(enabled) {
-  const { isLoading, data, error, refetch, isFetched } = useQuery({
-    queryKey: ["offers"],
+export default function useGetOrder() {
+  const { id } = useParams();
+
+  const { isLoading, data, error } = useQuery({
+    queryKey: ["order-details", id],
+
     queryFn: async () => {
       try {
-        const res = await axiosInstance.get("/homefix/orders-client/1");
+        const res = await axiosInstance.get(`/homefix/orders-client/${id}`);
         if (res.status === 200) {
           return res.data.data || {};
         }
       } catch (error) {
-        console.error("Error fetching offers:", error.message);
+        console.error("Error fetching order:", error.message);
         throw error;
       }
     },
-    enabled,
+
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
   });
-  return { isLoading, data, error, refetch, isFetched };
+  return { isLoading, data, error };
 }
