@@ -1,51 +1,45 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import PhoneInput from "../../ui/form-elements/PhoneInput";
-import SubmitButton from "../../ui/form-elements/SubmitButton";
+import ForgetStepOne from "./ForgetStepOne";
+import ForgetStepTwo from "./ForgetStepTwo";
+import ForgetStepThree from "./ForgetStepThree";
 
-function ForgetPassword({ setFormType, formData, setFormData }) {
-  const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
+function ForgetPassword({ setFormType }) {
+  const [formData, setFormData] = useState({
+    phone: "",
+    type: "reset",
+    country_code: "+962",
+    new_password: "",
+    confirm_password: "",
+  });
+  const [step, setStep] = useState(1);
 
   return (
-    <form className="form">
-      <div className="mb-4">
-        <h2 className="head">{t("auth.resetPasswordTitle")} </h2>
-        <p className="sub-head">{t("auth.resetPasswordSubtitle")}</p>
-      </div>
+    <>
+      {step === 1 && (
+        <ForgetStepOne
+          setStep={setStep}
+          formData={formData}
+          setFormType={setFormType}
+          setFormData={setFormData}
+        />
+      )}
 
-      <PhoneInput
-        label={t("auth.phone")}
-        required
-        type="number"
-        id="phone"
-        name="phone"
-        placeholder={t("auth.phone")}
-        value={formData.phone}
-        countryCode={formData.country_code}
-        onChange={(e) =>
-          setFormData((prev) => ({ ...prev, phone: e.target.value }))
-        }
-        onSelect={(code, setShow) => {
-          setFormData((prev) => ({ ...prev, country_code: code }));
-          setShow(false);
-        }}
-      />
+      {step === 2 && (
+        <ForgetStepTwo
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      )}
 
-      <div className="d-flex align-items-center gap-2">
-        <button
-          aria-label="Back"
-          className="back_btn"
-          onClick={(e) => {
-            e.preventDefault();
-            setFormType("login");
-          }}
-        >
-          <i className="fal fa-arrow-right"></i>
-        </button>
-        <SubmitButton name={t("auth.send")} loading={loading} />
-      </div>
-    </form>
+      {step === 3 && (
+        <ForgetStepThree
+          setFormType={setFormType}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      )}
+    </>
   );
 }
 

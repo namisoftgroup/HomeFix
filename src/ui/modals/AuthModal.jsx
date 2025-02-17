@@ -6,6 +6,7 @@ import Login from "../auth/Login";
 import UserRegister from "../auth/UserRegister";
 import RegisterTechnical from "../auth/RegisterTechnical";
 import ForgetPassword from "../auth/ForgetPassword";
+import ConfirmRegister from "../auth/ConfirmRegister";
 
 export default function AuthModal() {
   const { show } = useSelector((state) => state.showAuthModal);
@@ -14,33 +15,28 @@ export default function AuthModal() {
   const [formType, setFormType] = useState("login");
   const [userType, setUserType] = useState("client");
 
-  const [forgetFormData, setForgetFormData] = useState({
-    phone: "",
-    country_code: "962",
-  });
-
-  const [registerFormData, setRegisterFormData] = useState({
+  const [userRegisterData, setUserRegisterData] = useState({
     name: "",
-    username: "",
-    country_code: "962",
     phone: "",
     email: "",
     password: "",
-    password_confirmation: "",
     city_id: "",
-    fcm_token: "eyJ0eXAiOiJKV1QiLCJhbGciOi",
+    country_code: "+962",
+    type: userType,
   });
 
-  const [FormData, setFormData] = useState({
-    username: "",
+  const [technicalData, setTechnicalData] = useState({
+    name: "",
     phone: "",
     email: "",
-    city_id: "",
-    category_id: "",
-    country_code: "962",
     password: "",
-    password_confirmation: "",
-    fcm_token: "eyJ0eXAiOiJKV1QiLCJhbGciOi",
+    city_id: "",
+    country_code: "+962",
+    specialty_id: "",
+    image: null,
+    front_national_image: null,
+    back_national_image: null,
+    type: userType === "technical" ? "provider" : "client",
   });
 
   return (
@@ -49,7 +45,6 @@ export default function AuthModal() {
       show={show}
       className="authModal"
       backdrop="static"
-      size="xl"
       onHide={() => dispatch(setShowAuthModal(false))}
     >
       <Modal.Body>
@@ -62,49 +57,49 @@ export default function AuthModal() {
         </button>
 
         <section className="auth_section">
-          <div className={`img_wrapper ${formType}`}>
-            <img
-              loading="lazy"
-              className="bg-img"
-              alt="auth-banner"
-              src="/images/auth.gif"
-            />
-          </div>
-
           <div className={`form_wrapper ${formType}`}>
             {formType === "login" && (
               <Login
-                setFormType={setFormType}
                 userType={userType}
+                setFormType={setFormType}
                 setUserType={setUserType}
               />
             )}
 
             {formType === "register" && (
               <UserRegister
-                setShow={() => dispatch(setShowAuthModal(false))}
                 setFormType={setFormType}
-                formData={registerFormData}
-                setFormData={setRegisterFormData}
+                setShow={() => dispatch(setShowAuthModal(false))}
+                setFormData={setUserRegisterData}
+                formData={userRegisterData}
               />
             )}
 
             {formType === "register-technical" && (
               <RegisterTechnical
-                setShow={() => dispatch(setShowAuthModal(false))}
                 setFormType={setFormType}
-                formData={FormData}
-                setFormData={setFormData}
+                formData={technicalData}
+                setFormData={setTechnicalData}
+              />
+            )}
+
+            {formType === "confirm-register" && (
+              <ConfirmRegister
+                formData={
+                  userType === "technical" ? technicalData : userRegisterData
+                }
+                setFormData={
+                  userType === "technical"
+                    ? setTechnicalData
+                    : setUserRegisterData
+                }
+                userType={userType}
+                setFormType={setFormType}
               />
             )}
 
             {formType === "forget" && (
-              <ForgetPassword
-                setShow={() => dispatch(setShowAuthModal(false))}
-                setFormType={setFormType}
-                formData={forgetFormData}
-                setFormData={setForgetFormData}
-              />
+              <ForgetPassword setFormType={setFormType} />
             )}
           </div>
         </section>

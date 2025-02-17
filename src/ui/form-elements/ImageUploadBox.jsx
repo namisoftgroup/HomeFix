@@ -1,15 +1,18 @@
 import { useRef, useState } from "react";
 
-const ImageUploadBox = ({ title, subtitle }) => {
+const ImageUploadBox = ({ title, subtitle, onChange }) => {
   const inputRef = useRef(null);
   const [imagePreview, setImagePreview] = useState(null);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
+
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setImagePreview(imageUrl);
     }
+
+    onChange(e);
   };
 
   return (
@@ -28,6 +31,7 @@ const ImageUploadBox = ({ title, subtitle }) => {
           type="file"
           accept="image/*"
           onChange={handleImageUpload}
+          name={name}
           ref={inputRef}
           style={{ display: "none" }}
         />

@@ -18,7 +18,7 @@ export default function App() {
 
   return (
     <>
-      <Toaster expand={false} duration={2000} position="bottom-right" />
+      <Toaster expand={false} duration={2000} richColors position="bottom-right" />
       <RouterProvider router={router} />
     </>
   );

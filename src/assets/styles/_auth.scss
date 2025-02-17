@@ -7,10 +7,10 @@
   }
   .form_wrapper {
     display: flex;
-    width: 50%;
     flex-direction: column;
     justify-content: center;
-    padding: 32px 24px 12px;
+    padding: 42px 12px 12px;
+    width: 100%;
     &.register,
     &.register-technical {
       width: 100%;
