@@ -1,4 +1,5 @@
 import { Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { setShowAuthModal } from "../../redux/slices/showAuthModal";
@@ -11,6 +12,7 @@ import ConfirmRegister from "../auth/ConfirmRegister";
 export default function AuthModal() {
   const { show } = useSelector((state) => state.showAuthModal);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formType, setFormType] = useState("login");
   const [userType, setUserType] = useState("client");
@@ -40,18 +42,15 @@ export default function AuthModal() {
   });
 
   return (
-    <Modal
-      centered
-      show={show}
-      className="authModal"
-      backdrop="static"
-      onHide={() => dispatch(setShowAuthModal(false))}
-    >
+    <Modal centered show={show} className="authModal" backdrop="static">
       <Modal.Body>
         <button
           aria-label="Close modal"
           className="closeModal"
-          onClick={() => dispatch(setShowAuthModal(false))}
+          onClick={() => {
+            dispatch(setShowAuthModal(false));
+            navigate("/");
+          }}
         >
           <i className="fa-regular fa-x"></i>
         </button>
