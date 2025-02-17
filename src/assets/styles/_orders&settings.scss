@@ -1,25 +1,27 @@
 .orders-container {
   text-align: center;
-  padding: 20px;
+  padding: 60px 0;
 
   .tabs {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    padding: 0px 20px;
+    gap: 8px;
+    max-width: 400px;
+    margin: 0 auto;
+    background: var(--btn-bg);
+    border-radius: 100px;
+    padding: 4px;
 
     button {
       padding: 10px 20px;
       border: none;
       cursor: pointer;
       width: 100%;
-      background: var(--btn-bg);
+      background: var(--white);
       color: var(--gray-light);
-      border: 1px solid var(--border);
-      border-radius: 5px;
+      border-radius: 70px;
+      height: 52px;
       font-size: 16px;
-      transition: background 0.3s ease;
 
       &.active {
         background: var(--second);
@@ -416,7 +418,6 @@
     margin-top: 10px;
   }
 }
-
 //aboutus
 .about-us {
   padding: 50px 20px;

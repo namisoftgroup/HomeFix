@@ -15,13 +15,13 @@ const OrderCard = ({ order, isPrevious }) => {
       <div className="order-content">
         <div className="order-info">
           <p>
-            <i className="fa-solid fa-location-dot"></i> {order.location}
-          </p>
-          <p>
             <i className="fa-regular fa-calendar"></i> {order.date}
           </p>
           <p>
             <i className="fa-regular fa-clock"></i> {order.time}
+          </p>
+          <p className="w-100">
+            <i className="fa-solid fa-location-dot"></i> {order.location}
           </p>
         </div>
       </div>

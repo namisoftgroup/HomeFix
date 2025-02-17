@@ -12,6 +12,7 @@ import UserProfile from "../routes/UserProfile";
 import Contact from "../routes/Contact";
 import Notification from "../routes/Notification";
 import OrderDetails from "../routes/OrderDetails";
+import ProtectionProvider from "./ProtectionProvider";
 
 export const router = createBrowserRouter([
   {
@@ -25,11 +26,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "order-service",
-        element: <ServiceDetails />,
+        element: (
+          <ProtectionProvider>
+            <ServiceDetails />
+          </ProtectionProvider>
+        ),
       },
       {
         path: "my-orders",
-        element: <Orders />,
+        element: (
+          <ProtectionProvider>
+            <Orders />
+          </ProtectionProvider>
+        ),
       },
       {
         path: "aboutus",
@@ -49,7 +58,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "edit-profile",
-        element: <UserProfile />,
+        element: (
+          <ProtectionProvider>
+            <UserProfile />
+          </ProtectionProvider>
+        ),
       },
       {
         path: "contactus",
@@ -62,7 +75,7 @@ export const router = createBrowserRouter([
       {
         path: "order-details",
         element: <OrderDetails />,
-      }
+      },
     ],
   },
 ]);
