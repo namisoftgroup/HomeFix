@@ -7,11 +7,11 @@ const ImageUpload = ({ formData, setFormData }) => {
   useEffect(() => {
     imgView.current.src = formData?.image
       ? URL.createObjectURL(formData.image)
-      : "/icons/avatar.svg"; 
+      : "/icons/avatar.svg";
   }, [formData?.image]);
 
   const handleImageUpload = (e) => {
-    if (e.target.files[0] && e.target.files[0].type.startsWith("image")) {
+    if (e.target.files[0]) {
       setFormData({ ...formData, image: e.target.files[0] });
     }
   };

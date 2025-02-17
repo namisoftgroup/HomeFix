@@ -150,9 +150,14 @@
     "client": "Client",
     "send": "send",
     "createAccount": "create account",
-    "subject":" Subject messsage",
-    "message":"Message"
-   
+    "subject": " Subject messsage",
+    "message": "Message",
+    "fullName": "Full Name",
+    "next": "Next",
+    "check": "Confirm",
+    "resetPasswordDesc": "Please enter the verification code sent to your phone number",
+    "new_password": "New Password",
+    "confirm_password": "Confirm Password"
   },
   "header": {
     "list": "Orders",
@@ -170,13 +175,11 @@
   "aboutUs": {
     "title": "What is HomeFix?",
     "description": "HomeFix is a comprehensive app that connects customers with professional home maintenance technicians, providing a seamless and secure experience to complete maintenance tasks effortlessly. Through the app, any technician can register and offer their services, while customers can request home maintenance services such as plumbing, electricity, air conditioning, carpentry, cleaning, and more.",
-
     "howItWorksTitle": "How the App Works:",
     "step1": "The customer submits a maintenance request specifying the issue and location.",
     "step2": "Nearby technicians receive the request and can offer price estimates.",
     "step3": "The customer selects the best offer based on price, ratings, and estimated time.",
     "step4": "The service is completed with secure payment options via the app, either electronically or in cash.",
-
     "featuresTitle": "HomeFix Features:",
     "feature1": " Easy to Use - A simple and fast interface for booking services anytime.",
     "feature2": " Certified Technicians - Ensures high-quality work through customer ratings and reviews.",

@@ -21,23 +21,17 @@ function Login({ setFormType, userType, setUserType }) {
     phone: "",
     password: "",
     country_code: "+962",
+    type: userType,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      const res = await axiosInstance.post("/auth/login", {
-        ...formData,
-        type: userType,
-      });
+      const res = await axiosInstance.post("/auth/login", formData);
 
       if (res.data.code === 200) {
-        const res = await axiosInstance.post("/auth/login", {
-          ...formData,
-          type: userType,
-        });
-
         setCookie("token", res.data?.data?.token, {
           path: "/",
           secure: true,
@@ -50,13 +44,15 @@ function Login({ setFormType, userType, setUserType }) {
           sameSite: "Strict",
         });
 
-        toast.success("Login successful!");
+        toast.success(res.data.message);
         dispatch(setShowAuthModal(false));
         localStorage.setItem("userType", userType);
+      } else {
+        toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Login failed!");
+      toast.error("Some thing went wrong, please try again or contact us.");
     } finally {
       setLoading(false);
     }
@@ -70,6 +66,7 @@ function Login({ setFormType, userType, setUserType }) {
         </h2>
         <p className="sub-head">{t("auth.loginSubtitle")}</p>
       </div>
+
       <div className="input-field mb-4">
         <div className="radios">
           <label htmlFor="client">
@@ -101,6 +98,7 @@ function Login({ setFormType, userType, setUserType }) {
           </label>
         </div>
       </div>
+
       <form className="form" onSubmit={handleSubmit}>
         <PhoneInput
           label={t("auth.phone")}
@@ -113,6 +111,7 @@ function Login({ setFormType, userType, setUserType }) {
           countryCode={formData.country_code}
           onChange={(e) => handleChange(e, setFormData)}
         />
+
         <PasswordField
           label={t("auth.password")}
           placeholder={t("auth.password")}
@@ -122,6 +121,7 @@ function Login({ setFormType, userType, setUserType }) {
           value={formData.password}
           onChange={(e) => handleChange(e, setFormData)}
         />
+
         <span
           className="forgetpass"
           style={{ cursor: "pointer" }}
@@ -131,6 +131,7 @@ function Login({ setFormType, userType, setUserType }) {
         </span>
 
         <SubmitButton name={t("auth.login")} loading={loading} />
+
         <p className="noAccount">
           {t("auth.dontHaveAccount")}{" "}
           <span

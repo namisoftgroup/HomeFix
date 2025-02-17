@@ -232,45 +232,6 @@ input[type="number"] {
   }
 }
 
-.modal .modal-xl {
-  max-width: unset;
-  width: min(100% - 24px, 1140px);
-  margin: 20px auto;
-  justify-content: center;
-}
-
-// Select customization
-
-.css-t3ipsp-control {
-  border-color: var(--light-gray) !important;
-  box-shadow: none !important;
-  &:hover {
-    background-color: var(--white) !important;
-  }
-}
-
-.css-13cymwt-control {
-  border-color: var(--light-gray) !important;
-}
-
-.select__indicator-separator {
-  display: none !important;
-}
-
-.select__menu {
-  z-index: 999999 !important;
-}
-
-.css-mohuvp-dummyInput-DummyInput {
-  left: 0 !important;
-}
-
-.css-1hac4vs-dummyInput {
-  width: 0 !important;
-}
-
-// Placeholders & Loaders
-
 .data-loader {
   flex: 1;
   @include centerFlex();
@@ -606,4 +567,8 @@ input[type="email"] {
   &::placeholder {
     color: var(--gray);
   }
+}
+
+.modal-content {
+  border-radius: 28px;
 }

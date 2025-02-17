@@ -1,75 +1,48 @@
 import { useEffect, useState } from "react";
 
 const OtpContainer = ({ formData, setFormData }) => {
-  const [otpValue, setOtpValue] = useState("");
+  const [otpValue, setOtpValue] = useState(Array(5).fill(""));
 
   useEffect(() => {
-    const firstInput = document.getElementById("input1");
+    const firstInput = document.getElementById("input0");
     if (firstInput) {
       firstInput.focus();
     }
   }, []);
 
   const handleInput = (index, event) => {
-    const currentInput = event.target;
-    const maxLength = parseInt(currentInput.getAttribute("maxlength"), 10);
+    const value = event.target.value;
+    if (!/^\d?$/.test(value)) return;
 
-    if (otpValue.length >= 4) {
-      return;
-    }
+    const newOtpValue = [...otpValue];
+    newOtpValue[index] = value;
+    setOtpValue(newOtpValue);
+    setFormData({ ...formData, code: newOtpValue.join("") });
 
-    if (currentInput.value.length >= maxLength) {
-      const nextInput = document.getElementById(`input${index + 1}`);
-      if (nextInput) {
-        nextInput.focus();
-      }
-    }
-
-    const newOtpValue =
-      otpValue.substring(0, index - 1) +
-      currentInput.value +
-      otpValue.substring(index);
-
-    if (newOtpValue.length <= 6) {
-      setOtpValue(newOtpValue);
-      setFormData({ ...formData, code: newOtpValue });
+    if (value && index < 4) {
+      document.getElementById(`input${index + 1}`)?.focus();
     }
   };
 
   const handleKeyDown = (index, event) => {
-    const currentInput = event.target;
-    const previousInput = document.getElementById(`input${index - 1}`);
-
-    if (
-      event.key === "Backspace" &&
-      currentInput.value.length === 0 &&
-      previousInput
-    ) {
-      previousInput.focus();
-    }
-
-    if (event.key === "Backspace") {
-      const newOtpValue =
-        otpValue.substring(0, index - 1) + otpValue.substring(index);
-
-      setOtpValue(newOtpValue);
-      setFormData({ ...formData, code: newOtpValue });
+    if (event.key === "Backspace" && !otpValue[index] && index > 0) {
+      document.getElementById(`input${index - 1}`)?.focus();
     }
   };
 
   return (
     <div className="otp-container">
-      {[1, 2, 3, 4].map((index) => (
+      {Array.from({ length: 5 }).map((_, index) => (
         <input
           key={index}
           id={`input${index}`}
           className="otp-input"
-          type="number"
+          type="text"
           maxLength="1"
           inputMode="numeric"
           pattern="[0-9]"
           required
-          value={otpValue[index - 1] || ""}
+          value={otpValue[index] || ""}
           onChange={(e) => handleInput(index, e)}
           onKeyDown={(e) => handleKeyDown(index, e)}
         />
