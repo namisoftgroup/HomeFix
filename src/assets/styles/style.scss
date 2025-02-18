@@ -22,23 +22,29 @@ body {
   &.en {
     direction: ltr;
     font-family: "Outfit", sans-serif;
-    .settings-list .settings-item .arrow{
+    .settings-list .settings-item .arrow {
       transform: scaleX(-1);
     }
-    .profile-container .profile-form .input-field .input-wrapper .input-icon  {
+    .profile-container .profile-form .input-field .input-wrapper .input-icon {
       right: auto;
       left: 10px;
     }
-    .profile-container .profile-form .input-field .input-wrapper  input.form-control {
+    .profile-container
+      .profile-form
+      .input-field
+      .input-wrapper
+      input.form-control {
       padding-left: 40px;
     }
     input[type="email"] {
       text-align: left;
     }
+    .orderStatus .progress_indicator {
+      right: initial;
+      left: 0;
+    }
   }
   input[type="email"] {
     text-align: right;
   }
-  
 }
-

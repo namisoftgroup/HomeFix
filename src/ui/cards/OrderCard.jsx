@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const OrderCard = ({ order, isPrevious }) => {
+const OrderCard = ({ order }) => {
   const { t } = useTranslation();
   return (
     <div className="order-card">
@@ -27,7 +27,12 @@ const OrderCard = ({ order, isPrevious }) => {
           </p>
         </div>
       </div>
-      {isPrevious && <button className="cancel-btn">طلب ملغي</button>}
+      {order?.status === "complete" && (
+        <div className="complete">{t("completedOrder")}</div>
+      )}
+      {order?.status === "canceled" && (
+        <div className="canceled">{t("canceledOrder")}</div>
+      )}
     </div>
   );
 };

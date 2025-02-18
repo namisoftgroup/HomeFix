@@ -38,6 +38,20 @@
   "previous": "Previous",
   "details": "Details",
   "orderDetails": "Order Details",
+  "noOffers": "No offers yet",
+  "cancelOrder": "Cancel Order",
+  "Download": "Download",
+  "App From Your Gadget.": "App From Your Gadget.",
+  "Download the app to explore deals and ease of booking.": "Download the app to explore deals and ease of booking.",
+  "Google Play": "Google Play",
+  "App Store": "App Store",
+  "refuse": "Refuse",
+  "accept": "Accept",
+  "dinar": "JOD",
+  "cancelReason": "Cancel Reason",
+  "canceledByClient": "Order cancelled by customer",
+  "completedOrder": "completed order",
+  "canceledOrder": "canceled order",
   "features": {
     "whyTitle": "Why Choose Us?",
     "whyDesc": "The perfect solution for service providers to manage their business effectively and meet customer requests efficiently. HomeFix allows you to add your services, such as property painting, carpentry, electrical work, and other specialties you offer. You can manage your appointments flexibly, accept or reject requests, and track their status with ease.",
@@ -171,11 +185,6 @@
     "description": "Uh Oh! Page not found!",
     "button": "Back to Home"
   },
-  "Download": "Download",
-  "App From Your Gadget.": "App From Your Gadget.",
-  "Download the app to explore deals and ease of booking.": "Download the app to explore deals and ease of booking.",
-  "Google Play": "Google Play",
-  "App Store": "App Store",
   "aboutUs": {
     "title": "What is HomeFix?",
     "description": "HomeFix is a comprehensive app that connects customers with professional home maintenance technicians, providing a seamless and secure experience to complete maintenance tasks effortlessly. Through the app, any technician can register and offer their services, while customers can request home maintenance services such as plumbing, electricity, air conditioning, carpentry, cleaning, and more.",
@@ -191,5 +200,14 @@
     "feature4": " Secure Payment - Provides convenient electronic payment options via trusted gateways.",
     "feature5": " Fast Support - A dedicated support team to resolve any issues for customers and technicians.",
     "finalMessage": "HomeFix is the smart solution to keep your home in perfect condition!"
+  },
+  "orderStatus": {
+    "new": "Receiving offers",
+    "accept": "Agreement reached, waiting for arrival",
+    "arrivedAndInspected": "Arrived and under inspection",
+    "finalCostReachedBeingDetermined": "Final cost is being determined",
+    "inProgress": "In progress",
+    "completedWaitingPayment": "Completed, waiting for payment",
+    "done": "Completed"
   }
 }

@@ -13,10 +13,10 @@ export default function SubmitButton({
       disabled={disabled || loading}
       type="submit"
       className={`log ${className || ""}`}
-      onClick={onClick? onClick : undefined}
+      onClick={onClick ? onClick : undefined}
     >
       {name}{" "}
-      <i className={loading ? "fa-solid fa-spinner fa-pulse fa-spin" : ""} />
+      <i className={loading ? "fa-regular fa-circle-notch fa-spin" : ""} />
     </button>
   );
 }
