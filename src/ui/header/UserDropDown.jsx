@@ -39,7 +39,7 @@ export default function UserDropDown() {
         dispatch(logout());
 
         queryClient.clear();
-        
+
         localStorage.setItem("userType", "client");
 
         toast.success(deleteToken.data.message);
@@ -67,9 +67,11 @@ export default function UserDropDown() {
             {t("editProfile")}
           </Dropdown.Item>
 
-          <Dropdown.Item as={Link} to={"/my-orders"}>
-            {t("myOrders")}
-          </Dropdown.Item>
+          {localStorage.getItem("userType") === "client" && (
+            <Dropdown.Item as={Link} to={"/my-orders"}>
+              {t("myOrders")}
+            </Dropdown.Item>
+          )}
 
           <Dropdown.Item onClick={performLogout}>{t("logout")}</Dropdown.Item>
         </Dropdown.Menu>

@@ -2,16 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 
-export default function useGetOrders() {
+export default function useGetProviderOrders() {
   const [search] = useSearchParams();
-  const type = search.get("type") || "current";
+  const type = search.get("type") || "new";
 
   const { isLoading, data, error } = useQuery({
-    queryKey: ["orders", type],
+    queryKey: ["provider-orders", type],
 
     queryFn: async () => {
       try {
-        const res = await axiosInstance.get(`/homefix/orders-client`, {
+        const res = await axiosInstance.get(`/homefix/orders-provider`, {
           params: {
             type,
           },
