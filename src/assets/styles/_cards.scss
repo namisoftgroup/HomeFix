@@ -232,20 +232,20 @@
     .acceptBtn,
     .rejectBtn {
       flex: 1;
-      padding: 8px 0;
+      padding: 12px 0;
       text-align: center;
     }
 
     .acceptBtn {
       background: #3b9586;
       color: white;
-      border-radius: 6px;
+      border-radius: 12px;
       font-size: 0.9rem;
     }
 
     .rejectBtn {
       border: 1px solid #000;
-      border-radius: 6px;
+      border-radius: 12px;
       font-size: 0.9rem;
       background: white;
       color: black;

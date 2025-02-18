@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layout/RootLayout";
-import Home from "../routes/Home";
 import PageNotFound from "../routes/PageNotFound";
 import ServiceDetails from "../ui/services/ServiceDetails";
 import Orders from "../routes/Orders";
@@ -13,6 +12,7 @@ import Contact from "../routes/Contact";
 import Notification from "../routes/Notification";
 import OrderDetails from "../routes/OrderDetails";
 import ProtectionProvider from "./ProtectionProvider";
+import RoleProvider from "./RoleProvider";
 
 export const router = createBrowserRouter([
   {
@@ -22,8 +22,9 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <RoleProvider />,
       },
+
       {
         path: "order-service",
         element: (
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
           </ProtectionProvider>
         ),
       },
+
       {
         path: "my-orders",
         children: [
@@ -43,6 +45,7 @@ export const router = createBrowserRouter([
               </ProtectionProvider>
             ),
           },
+          
           {
             path: ":id",
             element: (

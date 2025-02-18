@@ -3,26 +3,29 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { Col, Container, Row } from "react-bootstrap";
 import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import OrderInfo from "../ui/cards/OrderInfoCard";
 import useGetOrder from "../hooks/orders/useGetOrder";
 import OfferCard from "../ui/cards/OfferCard";
 import CancelOrder from "../ui/modals/CancelOrder";
 import useChangeOrderStatus from "../hooks/orders/useChangeOrderStatus";
 import OrderStatus from "../ui/cards/OrderStatus";
+import DataLoader from "../ui/loaders/DataLoader";
 
 export default function OrderDetails() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const [showModal, setShowModal] = useState(false);
   const [cancelReason, setCancelReason] = useState("");
 
-  const { data: orderDetails } = useGetOrder();
-  const { changeStatus, isPending } = useChangeOrderStatus();
+  const { data: orderDetails, isLoading } = useGetOrder();
+  const { changeOrderStatus, isPending } = useChangeOrderStatus();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    changeStatus(
+    changeOrderStatus(
       {
         orderId: orderDetails?.id,
         request: {
@@ -49,12 +52,19 @@ export default function OrderDetails() {
     );
   };
 
-  return (
+  return isLoading ? (
+    <DataLoader />
+  ) : (
     <section className="orderDetails">
       <Container>
         <Row>
           <Col lg={12} className="p-2">
-            <h2>{t("orderDetails")}</h2>
+            <h2 className="orderDetails-title">
+              <button onClick={() => navigate(-1)}>
+                <i className="fa-regular fa-angle-right"></i>
+              </button>{" "}
+              {t("orderDetails")}
+            </h2>
           </Col>
 
           <Col lg={12} className="p-2">
@@ -70,7 +80,11 @@ export default function OrderDetails() {
                 )}
 
                 {orderDetails?.offers?.map((offer) => (
-                  <OfferCard key={offer.id} offer={offer} />
+                  <OfferCard
+                    key={offer.id}
+                    orderId={orderDetails?.id}
+                    offer={offer}
+                  />
                 ))}
               </div>
             </Col>

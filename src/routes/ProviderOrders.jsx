@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import OrderCard from "./../ui/cards/OrderCard";
-import useGetOrders from "../hooks/orders/useGetOrders";
 import DataLoader from "../ui/loaders/DataLoader";
+import useGetProviderOrders from "../hooks/orders/useGetProviderOrders";
 
-const Orders = () => {
+const ProviderOrders = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [activeTab, setActiveTab] = useState("current");
-  const { data: orders, isLoading } = useGetOrders();
+  const [activeTab, setActiveTab] = useState("new");
+  const { data: orders, isLoading } = useGetProviderOrders();
 
   useEffect(() => {
-    setActiveTab(searchParams.get("type") || "current");
+    setActiveTab(searchParams.get("type") || "new");
   }, [searchParams]);
 
   return isLoading ? (
@@ -23,6 +23,13 @@ const Orders = () => {
         <div className="row">
           <div className="col-12 p-2">
             <div className="tabs">
+              <button
+                className={activeTab === "new" ? "active" : ""}
+                onClick={() => setSearchParams({ type: "new" })}
+              >
+                {t("new")}
+              </button>
+
               <button
                 className={activeTab === "current" ? "active" : ""}
                 onClick={() => setSearchParams({ type: "current" })}
@@ -49,4 +56,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default ProviderOrders;

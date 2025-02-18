@@ -33,6 +33,11 @@ const OrderCard = ({ order }) => {
       {order?.status === "canceled" && (
         <div className="canceled">{t("canceledOrder")}</div>
       )}
+      {
+        order?.status === "client_refuse_cost" && (
+          <div className="canceled">{t("clientRefusedCost")}</div>
+        )
+      }
     </div>
   );
 };

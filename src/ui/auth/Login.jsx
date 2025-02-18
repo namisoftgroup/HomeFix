@@ -21,7 +21,7 @@ function Login({ setFormType, userType, setUserType }) {
     phone: "",
     password: "",
     country_code: "+962",
-    type: userType,
+    type: userType === "technical" ? "provider" : "client",
   });
 
   const handleSubmit = async (e) => {
