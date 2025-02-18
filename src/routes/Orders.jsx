@@ -3,18 +3,21 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import OrderCard from "./../ui/cards/OrderCard";
 import useGetOrders from "../hooks/orders/useGetOrders";
+import DataLoader from "../ui/loaders/DataLoader";
 
 const Orders = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState("current");
-  const { data: orders } = useGetOrders();
+  const { data: orders, isLoading } = useGetOrders();
 
   useEffect(() => {
     setActiveTab(searchParams.get("type") || "current");
   }, [searchParams]);
 
-  return (
+  return isLoading ? (
+    <DataLoader />
+  ) : (
     <div className="orders-container">
       <div className="container">
         <div className="row">

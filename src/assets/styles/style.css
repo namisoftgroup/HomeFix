@@ -569,6 +569,22 @@ input[type=email] {
   border-radius: 28px;
 }
 
+.tableLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 548px;
+  min-width: 100%;
+  max-height: 100%;
+}
+.tableLoader .loader--style8 {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 header {
   padding: 16px 0;
   position: sticky;
@@ -3327,6 +3343,21 @@ body .canceled_order p {
 body .canceled_order p span {
   margin-inline-start: 12px;
   color: #000;
+}
+body .orderDetails-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+body .orderDetails-title button {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
 }
 body.en {
   direction: ltr;
