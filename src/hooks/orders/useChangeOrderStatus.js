@@ -2,14 +2,14 @@ import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../../utils/axiosInstance";
 
 export default function useChangeOrderStatus() {
-  const { mutate: changeStatus, isPending } = useMutation({
-    mutationFn: ({ request, orderId }) => cancelFn(request, orderId),
+  const { mutate: changeOrderStatus, isPending } = useMutation({
+    mutationFn: ({ request, orderId }) => changeStatus(request, orderId),
   });
 
-  return { changeStatus, isPending };
+  return { changeOrderStatus, isPending };
 }
 
-async function cancelFn(request, orderId) {
+async function changeStatus(request, orderId) {
   try {
     const response = await axiosInstance.put(
       `/homefix/orders-client/${orderId}`,

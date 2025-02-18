@@ -52,7 +52,7 @@ export default function OrderInfo({ orderDetails }) {
               mapContainerStyle={{ width: "100%", height: "100%" }}
             >
               <Marker
-                icon="/public/images/map-pin.svg"
+                icon="/images/map-pin.svg"
                 position={{
                   lat: orderDetails?.latitude,
                   lng: orderDetails?.longitude,

@@ -18,11 +18,11 @@ export default function OrderDetails() {
   const [cancelReason, setCancelReason] = useState("");
 
   const { data: orderDetails } = useGetOrder();
-  const { changeStatus, isPending } = useChangeOrderStatus();
+  const { changeOrderStatus, isPending } = useChangeOrderStatus();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    changeStatus(
+    changeOrderStatus(
       {
         orderId: orderDetails?.id,
         request: {
@@ -70,7 +70,7 @@ export default function OrderDetails() {
                 )}
 
                 {orderDetails?.offers?.map((offer) => (
-                  <OfferCard key={offer.id} offer={offer} />
+                  <OfferCard key={offer.id}  orderId={orderDetails?.id} offer={offer} />
                 ))}
               </div>
             </Col>
