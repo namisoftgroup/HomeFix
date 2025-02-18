@@ -125,6 +125,7 @@ const UserProfile = ({ defaultValues }) => {
                     onChange={handleChange}
                     icon="/icons/password.svg"
                   />
+
                   <InputField
                     label="تأكيد كلمة المرور"
                     name="confirmPassword"

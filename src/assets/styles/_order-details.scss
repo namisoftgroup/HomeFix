@@ -1,19 +1,43 @@
 .orderDetails {
   margin: auto;
-  padding: 20px;
+  padding: 24px 0;
 
   h2 {
     font-size: 1.2rem;
     font-weight: bold;
   }
-  .driversList{
+  .driversList {
     background-color: var(--third);
-   border-radius: var(--border-radius);
-  }
-  .orderDetails{
-    background-color: var(--light-gray);
     border-radius: var(--border-radius);
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .noOffers {
+      color: #1d483f;
+      font-weight: 600;
+      margin: 16px 0;
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+  .details {
+    background-color: #f5f5f5;
+    border-radius: var(--border-radius);
+
+    audio {
+      display: block;
+      border: 2px solid #ffffff;
+      width: 100%;
+      background: #f1f3f4;
+      border-radius: 12px;
+      padding: 4px;
+      outline: none;
+      @media screen and (max-width: 576px) {
+        width: 250px;
+        padding: 0;
+      }
+    }
   }
   @keyframes loadingGradient {
     0% {
@@ -38,16 +62,63 @@
     animation: loadingGradient 2s linear infinite;
     border: none;
   }
+}
 
-  .cancelButton {
-    width: 100%;
-    background: var(--main);
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 20px;
+.cancelButton {
+  width: 100%;
+  background: var(--main);
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 18px;
+  &:hover {
+    opacity: 0.9;
   }
-  .cancelButton:hover {
-   opacity: 0.9;
+}
+
+.orderStatus {
+  width: 100%;
+  background: #1d483f;
+  height: 56px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  border-radius: 12px;
+  isolation: isolate;
+  position: relative;
+
+  .step_indicator {
+    display: flex;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+  }
+
+  .progress_indicator {
+    background: #479991;
+    position: absolute;
+    right: 0;
+    z-index: 0;
+    height: 56px;
+    border-radius: 12px;
+  }
+}
+
+.canceled_order {
+  width: 100%;
+  background: #ffe1e1;
+  padding: 12px 16px;
+  border-radius: 16px;
+  h6 {
+    color: #de0000;
+  }
+  p {
+    color: #777777;
+    margin: 0;
+    span {
+      margin-inline-start: 12px;
+      color: #000;
+    }
   }
 }

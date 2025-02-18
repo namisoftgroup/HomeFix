@@ -1,6 +1,13 @@
 import { Form } from "react-bootstrap";
 
-export default function InputField({ label, icon, hint, pattern, type = "text", ...props }) {
+export default function InputField({
+  label,
+  icon,
+  hint,
+  type = "text",
+  as = "input",
+  ...props
+}) {
   return (
     <div className="input-field">
       {label && (
@@ -11,14 +18,8 @@ export default function InputField({ label, icon, hint, pattern, type = "text", 
 
       <div className="input-wrapper">
         {icon && <img src={icon} alt="input icon" className="input-icon" />}
-        
-        <Form.Control
-          className="form-control"
-          as={type === "textarea" ? "textarea" : "input"}
-          type={type !== "textarea" ? type : undefined}
-          pattern={pattern}
-          {...props}
-        />
+
+        <Form.Control as={as} type={type} {...props} />
       </div>
     </div>
   );

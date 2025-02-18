@@ -34,11 +34,24 @@ export const router = createBrowserRouter([
       },
       {
         path: "my-orders",
-        element: (
-          <ProtectionProvider>
-            <Orders />
-          </ProtectionProvider>
-        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <ProtectionProvider>
+                <Orders />
+              </ProtectionProvider>
+            ),
+          },
+          {
+            path: ":id",
+            element: (
+              <ProtectionProvider>
+                <OrderDetails />
+              </ProtectionProvider>
+            ),
+          },
+        ],
       },
       {
         path: "aboutus",
@@ -71,10 +84,6 @@ export const router = createBrowserRouter([
       {
         path: "notifications",
         element: <Notification />,
-      },
-      {
-        path: "order-details",
-        element: <OrderDetails />,
       },
     ],
   },

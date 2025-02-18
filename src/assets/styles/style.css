@@ -919,7 +919,7 @@ footer .copy_rights .social_media a:hover {
   border-radius: 12px;
   background: var(--input-bg);
   border: 1px solid var(--border);
-  font-size: 14px;
+  font-size: 16px;
   box-shadow: none !important;
 }
 .form .input-field input::-moz-placeholder, .form .input-field textarea::-moz-placeholder, .form .input-field select::-moz-placeholder {
@@ -1824,7 +1824,7 @@ label div {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 8px;
+  gap: 12px;
   margin-top: 12px;
 }
 .order-card .order-content .order-info p {
@@ -1839,18 +1839,22 @@ label div {
 .order-card .order-content .order-info p i {
   color: var(--main);
 }
-.order-card .cancel-btn {
+.order-card .canceled,
+.order-card .complete {
   background-color: #f8d7da;
   color: #d9534f;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 8px 16px;
+  border-radius: 50px;
   font-size: 14px;
   font-weight: bold;
-  text-align: center;
   width: 100%;
   margin-top: 10px;
-  cursor: not-allowed;
+  text-align: start;
+}
+.order-card .complete {
+  background: #effaff;
+  color: #479991;
 }
 
 .service-card {
@@ -1893,11 +1897,10 @@ label div {
 
 .driverCard {
   background: #fff;
-  padding: 12px;
+  padding: 16px;
+  gap: 16px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-  border: 1px solid #eee;
+  border: 0;
 }
 .driverCard .driverInfo {
   display: flex;
@@ -1938,8 +1941,7 @@ label div {
 }
 .driverCard .buttonGroup {
   display: flex;
-  gap: 8px;
-  margin-top: 5px;
+  gap: 12px;
   justify-content: space-between;
 }
 .driverCard .buttonGroup .acceptBtn,
@@ -1964,8 +1966,6 @@ label div {
 
 .orderInfo {
   background: transparent;
-  padding: 12px;
-  margin-bottom: 10px;
   border: none;
 }
 .orderInfo .order-header {
@@ -2004,9 +2004,11 @@ label div {
 }
 .orderInfo .mapPlaceholder {
   width: 100%;
+  height: 300px;
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 10px;
+  border: 1px solid var(--white);
 }
 .orderInfo .imagesRow {
   display: flex;
@@ -2016,12 +2018,14 @@ label div {
 .orderInfo .imagesRow .orderImage {
   width: 120px;
   height: 120px;
+  background: #fff;
+  padding: 4px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 8px;
 }
 .orderInfo .order-description {
-  font-size: 14px;
+  font-size: 16px;
   margin: 8px 0px;
 }
 .orderInfo .audioSection {
@@ -2789,7 +2793,7 @@ body .success-modal .success-text {
 }
 body .orders-container {
   text-align: center;
-  padding: 60px 0;
+  padding: 24px 0;
 }
 body .orders-container .tabs {
   display: flex;
@@ -2800,6 +2804,7 @@ body .orders-container .tabs {
   background: var(--btn-bg);
   border-radius: 100px;
   padding: 4px;
+  margin-bottom: 16px;
 }
 body .orders-container .tabs button {
   padding: 10px 20px;
@@ -3208,7 +3213,7 @@ body .about-us .image-content img {
 }
 body .orderDetails {
   margin: auto;
-  padding: 20px;
+  padding: 24px 0;
 }
 body .orderDetails h2 {
   font-size: 1.2rem;
@@ -3217,11 +3222,35 @@ body .orderDetails h2 {
 body .orderDetails .driversList {
   background-color: var(--third);
   border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-body .orderDetails .orderDetails {
-  background-color: var(--light-gray);
+body .orderDetails .driversList .noOffers {
+  color: #1d483f;
+  font-weight: 600;
+  margin: 16px 0;
+  font-size: 18px;
+  text-align: center;
+}
+body .orderDetails .details {
+  background-color: #f5f5f5;
   border-radius: var(--border-radius);
-  margin-top: 20px;
+}
+body .orderDetails .details audio {
+  display: block;
+  border: 2px solid #ffffff;
+  width: 100%;
+  background: #f1f3f4;
+  border-radius: 12px;
+  padding: 4px;
+  outline: none;
+}
+@media screen and (max-width: 576px) {
+  body .orderDetails .details audio {
+    width: 250px;
+    padding: 0;
+  }
 }
 @keyframes loadingGradient {
   0% {
@@ -3245,16 +3274,59 @@ body .orderDetails .searchButton {
   animation: loadingGradient 2s linear infinite;
   border: none;
 }
-body .orderDetails .cancelButton {
+body .cancelButton {
   width: 100%;
   background: var(--main);
   color: white;
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 20px;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 18px;
 }
-body .orderDetails .cancelButton:hover {
+body .cancelButton:hover {
   opacity: 0.9;
+}
+body .orderStatus {
+  width: 100%;
+  background: #1d483f;
+  height: 56px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  border-radius: 12px;
+  isolation: isolate;
+  position: relative;
+}
+body .orderStatus .step_indicator {
+  display: flex;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+}
+body .orderStatus .progress_indicator {
+  background: #479991;
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  height: 56px;
+  border-radius: 12px;
+}
+body .canceled_order {
+  width: 100%;
+  background: #ffe1e1;
+  padding: 12px 16px;
+  border-radius: 16px;
+}
+body .canceled_order h6 {
+  color: #de0000;
+}
+body .canceled_order p {
+  color: #777777;
+  margin: 0;
+}
+body .canceled_order p span {
+  margin-inline-start: 12px;
+  color: #000;
 }
 body.en {
   direction: ltr;
@@ -3272,6 +3344,10 @@ body.en .profile-container .profile-form .input-field .input-wrapper input.form-
 }
 body.en input[type=email] {
   text-align: left;
+}
+body.en .orderStatus .progress_indicator {
+  right: initial;
+  left: 0;
 }
 body input[type=email] {
   text-align: right;
