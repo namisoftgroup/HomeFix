@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import DataLoader from "../ui/loaders/DataLoader";
 import useGetOrder from "../hooks/orders/useGetOrder";
@@ -8,14 +9,29 @@ import AddOfferForm from "../ui/orders/AddOfferForm";
 import OrderTimeLine from "../ui/orders/OrderTimeLine";
 
 export default function TechnicalOrder() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { id } = useParams();
 
   const { data: orderDetails, isLoading } = useGetOrder();
 
-  return isLoading ? (
-    <DataLoader />
-  ) : (
+  useEffect(() => {
+    if (!id || isNaN(Number(id))) {
+      navigate("/");
+      return;
+    }
+
+    if (
+      !isLoading &&
+      (!orderDetails || Object.keys(orderDetails).length === 0)
+    ) {
+      navigate("/");
+    }
+  }, [id, isLoading, navigate, orderDetails]);
+
+  if (isLoading) return <DataLoader />;
+
+  return (
     <section className="orderDetails">
       <Container>
         <Row>
