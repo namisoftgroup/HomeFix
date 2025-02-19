@@ -5,6 +5,7 @@ import DataLoader from "../ui/loaders/DataLoader";
 import useGetOrder from "../hooks/orders/useGetOrder";
 import OrderInfoCard from "../ui/orders/OrderInfoCard";
 import AddOfferForm from "../ui/orders/AddOfferForm";
+import OrderTimeLine from "../ui/orders/OrderTimeLine";
 
 export default function TechnicalOrder() {
   const { t } = useTranslation();
@@ -29,9 +30,11 @@ export default function TechnicalOrder() {
 
           <Col lg={5} md={6} className="p-2">
             {orderDetails?.status === "new" &&
-              orderDetails?.offers?.status !== "set_price" && (
-                <AddOfferForm orderDetails={orderDetails} />
-              )}
+            orderDetails?.offers?.status !== "set_price" ? (
+              <AddOfferForm orderDetails={orderDetails} />
+            ) : (
+              <OrderTimeLine orderDetails={orderDetails} />
+            )}
           </Col>
 
           <Col lg={7} md={6} className="p-2">
