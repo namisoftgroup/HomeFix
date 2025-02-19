@@ -146,7 +146,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 2px 12px 0px #0000001A;
+  box-shadow: 0px 2px 12px 0px #0000001a;
   .technical {
     display: flex;
     align-items: center;
@@ -186,6 +186,30 @@
     justify-content: center;
     img {
       height: 24px;
+    }
+  }
+}
+
+.addOfferForm {
+  background: var(--input-bg);
+  padding: 16px;
+  border-radius: 16px;
+  input {
+    background: var(--white) !important;
+  }
+  .btns {
+    display: flex;
+    gap: 12px;
+    .unInterested {
+      width: fit-content !important;
+      border: 1px solid var(--main) !important;
+      color: var(--main) !important;
+      background: transparent !important;
+      text-wrap: nowrap;
+      border-radius: 12px;
+      cursor: pointer;
+      @include centerFlex();
+      padding: 0 24px !important;
     }
   }
 }

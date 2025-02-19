@@ -13,8 +13,10 @@ export default function OfferCard({ offer, orderId }) {
   const handleChange = (status) => {
     changeOfferStatus(
       {
-        offerId: offer?.id,
-        status: status,
+        payload: {
+          status,
+          offer_id: offer?.id,
+        },
         orderId: orderId,
       },
       {
