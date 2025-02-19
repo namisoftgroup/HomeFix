@@ -50,6 +50,12 @@ const ProviderOrders = () => {
               <OrderCard order={order} />
             </div>
           ))}
+
+          {orders?.length === 0 && activeTab === "new" && (
+            <div className="col-12 p-2">
+              <div className="no-data">{t("noNewOrdersAvailable")}</div>
+            </div>
+          )}
         </div>
       </div>
     </div>

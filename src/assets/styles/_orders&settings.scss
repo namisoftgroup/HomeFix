@@ -6,16 +6,12 @@
     display: flex;
     justify-content: center;
     gap: 8px;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     background: var(--btn-bg);
     border-radius: 100px;
     padding: 4px;
     margin-bottom: 16px;
-    // position: fixed;
-    // bottom: 62px;
-    // left: 50%;
-    // transform: translateX(-50%);
 
     button {
       padding: 10px 20px;

@@ -290,6 +290,22 @@
     }
   }
 
+  &.technical .order-header {
+    width: 100%;
+    .order-info {
+      gap: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    p {
+      margin: 0;
+    }
+    .order-info img {
+      filter: brightness(0) invert(0);
+    }
+  }
+
   .order-location {
     display: flex;
     align-items: center;
