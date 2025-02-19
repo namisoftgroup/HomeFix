@@ -13,6 +13,7 @@ import Notification from "../routes/Notification";
 import OrderDetails from "../routes/OrderDetails";
 import ProtectionProvider from "./ProtectionProvider";
 import RoleProvider from "./RoleProvider";
+import TechnicalOrder from "../routes/TechnicalOrder";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +25,10 @@ export const router = createBrowserRouter([
         index: true,
         element: <RoleProvider />,
       },
-
+      {
+        path: ":id",
+        element: <TechnicalOrder />,
+      },
       {
         path: "order-service",
         element: (
@@ -45,7 +49,7 @@ export const router = createBrowserRouter([
               </ProtectionProvider>
             ),
           },
-          
+
           {
             path: ":id",
             element: (

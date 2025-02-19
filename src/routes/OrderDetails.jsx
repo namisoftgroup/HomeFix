@@ -3,20 +3,21 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { Col, Container, Row } from "react-bootstrap";
 import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import OrderInfo from "../ui/cards/OrderInfoCard";
 import useGetOrder from "../hooks/orders/useGetOrder";
-import OfferCard from "../ui/cards/OfferCard";
 import CancelOrder from "../ui/modals/CancelOrder";
 import useChangeOrderStatus from "../hooks/orders/useChangeOrderStatus";
 import OrderStatus from "../ui/cards/OrderStatus";
 import DataLoader from "../ui/loaders/DataLoader";
+import OffersSide from "../ui/orders/OffersSide";
 
 export default function OrderDetails() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  const [search] = useSearchParams();
   const [showModal, setShowModal] = useState(false);
   const [cancelReason, setCancelReason] = useState("");
 
@@ -39,7 +40,8 @@ export default function OrderDetails() {
             toast.success(res?.message);
             setCancelReason("");
             setShowModal(false);
-            queryClient.invalidateQueries(["orders", "order-details"]);
+            queryClient.invalidateQueries(["orders", search.get("type")]);
+            queryClient.invalidateQueries(["order-details"]);
           } else {
             toast.error(res?.message);
           }
@@ -72,22 +74,7 @@ export default function OrderDetails() {
           </Col>
 
           {orderDetails?.status !== "canceled" && (
-            <Col lg={4} className="p-2">
-              <div className="driversList p-3">
-                {(!orderDetails?.offers ||
-                  orderDetails?.offers.length === 0) && (
-                  <h6 className="noOffers">{t("noOffers")}</h6>
-                )}
-
-                {orderDetails?.offers?.map((offer) => (
-                  <OfferCard
-                    key={offer.id}
-                    orderId={orderDetails?.id}
-                    offer={offer}
-                  />
-                ))}
-              </div>
-            </Col>
+            <OffersSide orderDetails={orderDetails} />
           )}
 
           <Col

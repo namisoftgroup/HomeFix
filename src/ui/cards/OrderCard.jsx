@@ -1,8 +1,14 @@
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const OrderCard = ({ order }) => {
   const { t } = useTranslation();
+  const { client } = useSelector((state) => state.clientData);
+
+  const link =
+    client?.type === "provider" ? `/${order.id}` : `/my-orders/${order.id}`;
+
   return (
     <div className="order-card">
       <div className="order-header">
@@ -10,7 +16,7 @@ const OrderCard = ({ order }) => {
           <img src={order?.service?.image} alt={order.service} />
           <span>{order?.service?.title}</span>
         </div>
-        <Link to={`/my-orders/${order.id}`} className="details">
+        <Link to={link} className="details">
           {t("details")}
         </Link>
       </div>
@@ -33,11 +39,9 @@ const OrderCard = ({ order }) => {
       {order?.status === "canceled" && (
         <div className="canceled">{t("canceledOrder")}</div>
       )}
-      {
-        order?.status === "client_refuse_cost" && (
-          <div className="canceled">{t("clientRefusedCost")}</div>
-        )
-      }
+      {order?.status === "client_refuse_cost" && (
+        <div className="canceled">{t("clientRefusedCost")}</div>
+      )}
     </div>
   );
 };
