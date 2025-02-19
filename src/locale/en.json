@@ -56,6 +56,9 @@
   "new": "new",
   "clientRefusedCost": "Client refused cost",
   "noNewOrdersAvailable": "No new orders available yet",
+  "addPriceOffer": "Add Price Offer",
+  "addOffer": "Add Offer",
+  "unInterested": "Uninterested",
   "features": {
     "whyTitle": "Why Choose Us?",
     "whyDesc": "The perfect solution for service providers to manage their business effectively and meet customer requests efficiently. HomeFix allows you to add your services, such as property painting, carpentry, electrical work, and other specialties you offer. You can manage your appointments flexibly, accept or reject requests, and track their status with ease.",

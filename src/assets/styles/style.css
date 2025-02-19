@@ -3436,6 +3436,32 @@ body .technical_card a {
 body .technical_card a img {
   height: 24px;
 }
+body .addOfferForm {
+  background: var(--input-bg);
+  padding: 16px;
+  border-radius: 16px;
+}
+body .addOfferForm input {
+  background: var(--white) !important;
+}
+body .addOfferForm .btns {
+  display: flex;
+  gap: 12px;
+}
+body .addOfferForm .btns .unInterested {
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  border: 1px solid var(--main) !important;
+  color: var(--main) !important;
+  background: transparent !important;
+  text-wrap: nowrap;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px !important;
+}
 body.en {
   direction: ltr;
   font-family: "Outfit", sans-serif;
