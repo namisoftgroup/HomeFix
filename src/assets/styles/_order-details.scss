@@ -316,3 +316,143 @@
     }
   }
 }
+
+.item_row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .actions button {
+    background: none;
+    padding: 0 12px;
+  }
+}
+
+.add_products_btn {
+  width: 100%;
+  color: var(--second);
+  padding: 12px;
+  border-radius: 12px;
+  @include centerFlex();
+  border: 1px dashed var(--second);
+  cursor: pointer;
+}
+
+.product_list {
+  padding: 16px;
+  background: var(--white);
+  border-radius: 12px;
+  h6 {
+    color: var(--gray);
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  li {
+    margin-bottom: 12px;
+    @include space-between();
+    h6 {
+      font-size: 16px;
+      color: var(--main);
+      margin: 0;
+    }
+    p {
+      color: var(--main);
+      font-size: 16px;
+    }
+  }
+  .price_actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .line {
+    height: 1px;
+    width: 100%;
+    background: var(--third);
+  }
+}
+
+.user_receipt {
+  padding: 16px;
+  background: var(--input-bg);
+  border-radius: 12px;
+  margin-top: 20px;
+  h5 {
+    color: var(--second);
+    font-size: 16px;
+  }
+  .product_list {
+    p {
+      margin: 0;
+    }
+  }
+  h6 {
+    color: var(--gray);
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  li {
+    margin-bottom: 12px;
+    @include space-between();
+    h6 {
+      font-size: 16px;
+      color: var(--main);
+      margin: 0;
+    }
+    p {
+      color: var(--main);
+      font-size: 16px;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .price_actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .line {
+    height: 1px;
+    width: 100%;
+    background: var(--third);
+  }
+  .total_cost_list {
+    margin-top: 16px;
+    p {
+      margin: 0;
+    }
+    li {
+      margin: 0;
+      &.line {
+        margin: 12px 0;
+        width: 100%;
+        height: 1px;
+        background: var(--border);
+      }
+    }
+  }
+  .btns {
+    width: 100%;
+    margin-top: 24px;
+    .button {
+      width: 100%;
+      height: 52px;
+      gap: 6px;
+      border-radius: 12px;
+      @include centerFlex();
+      @include clearInput();
+      color: #fff;
+      background: var(--second);
+      &.disabled {
+        opacity: 0.7;
+        pointer-events: none;
+      }
+      &.dark {
+        background: var(--main);
+      }
+    }
+  }
+}

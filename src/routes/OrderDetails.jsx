@@ -24,6 +24,15 @@ export default function OrderDetails() {
   const { data: orderDetails, isLoading } = useGetOrder();
   const { changeOrderStatus, isPending } = useChangeOrderStatus();
 
+  const viewCancelButton = () => {
+    if (orderDetails?.status === "canceled") return false;
+    if (orderDetails?.status === "client_accept_cost") return false;
+    if (orderDetails?.status === "start_maintenance") return false;
+    if (orderDetails?.status === "end_maintenance") return false;
+
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     changeOrderStatus(
@@ -82,7 +91,7 @@ export default function OrderDetails() {
             className="p-2"
           >
             <OrderInfo orderDetails={orderDetails} />
-            {orderDetails?.status !== "canceled" && (
+            {viewCancelButton() && (
               <button
                 className="cancelButton"
                 onClick={() => setShowModal(true)}

@@ -197,6 +197,14 @@
       color: var(--second);
       border: 1px solid var(--second);
     }
+    &.finish {
+      background: var(--white);
+      color: var(--second);
+      border: 1px solid var(--border);
+      i {
+        color: var(--second);
+      }
+    }
   }
 
   .auth_social_btn {
