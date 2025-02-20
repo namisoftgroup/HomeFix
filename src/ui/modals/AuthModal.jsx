@@ -38,7 +38,7 @@ export default function AuthModal() {
     image: null,
     front_national_image: null,
     back_national_image: null,
-    type: userType === "technical" ? "provider" : "client",
+    type: userType,
   });
 
   return (

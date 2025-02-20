@@ -60,6 +60,8 @@
   "addOffer": "Add Offer",
   "unInterested": "Uninterested",
   "client": "Client",
+  "priceOffer": "A quote has been submitted.",
+  "waitingClient": "Waiting for customer acceptance",
   "features": {
     "whyTitle": "Why Choose Us?",
     "whyDesc": "The perfect solution for service providers to manage their business effectively and meet customer requests efficiently. HomeFix allows you to add your services, such as property painting, carpentry, electrical work, and other specialties you offer. You can manage your appointments flexibly, accept or reject requests, and track their status with ease.",
@@ -217,5 +219,17 @@
     "inProgress": "In progress",
     "completedWaitingPayment": "Completed, waiting for payment",
     "done": "Completed"
+  },
+  "orderHistoryStatus": {
+    "accept": "Order accepted",
+    "confirm_arrival": "Go to the site",
+    "confirm_items": "Do you need products or materials?",
+    "set_maintenance_cost": "Set the final maintenance cost",
+    "client_accept_cost": "Waiting for client approval of the cost",
+    "start_maintenance": "Start maintenance",
+    "end_maintenance": "End maintenance",
+    "confirm_collection": "Payment and collection",
+    "set_images": "Attach work images",
+    "complete": "Completed"
   }
 }

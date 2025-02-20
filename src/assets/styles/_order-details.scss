@@ -248,42 +248,66 @@
         border-right: 1px dashed var(--gray);
       }
     }
-    .content{
+    .content {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       flex: 1;
-      .title{
+      padding-bottom: 20px;
+      .title {
         font-weight: bold;
         margin-bottom: 0;
-        .price{
+        color: #9c9c9c;
+        height: 40px;
+        gap: 4px;
+        display: flex;
+        align-items: center;
+        .price {
           color: var(--second);
           font-size: 120%;
-          small{
+          small {
             font-size: 80%;
             color: gray;
             font-weight: normal;
           }
         }
       }
-      .dateTime{
+      p {
+        margin: 0;
+      }
+      .waitingClient {
+        padding: 8px;
+        border: 1px dashed var(--gray);
+        color: var(--gray);
+        border-radius: 12px;
+        text-align: center;
+        font-size: 14px;
+      }
+      .dateTime {
         color: var(--gray);
         font-size: 13px;
       }
     }
 
     &.done {
+      .content .title {
+        color: var(--main);
+      }
       .statusLine {
         .icon {
           border: 1px solid var(--second);
           background: var(--second);
         }
         &::after {
-          border-right: 1px dashed var(--second);
+          border-right: 2px dashed var(--second);
         }
       }
     }
 
     &:last-child {
+      .content {
+        padding: 0 !important;
+      }
       .statusLine {
         &::after {
           display: none;

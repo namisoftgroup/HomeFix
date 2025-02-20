@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { handleChange } from "../../utils/helper";
 import { useCookies } from "react-cookie";
@@ -21,8 +21,12 @@ function Login({ setFormType, userType, setUserType }) {
     phone: "",
     password: "",
     country_code: "+962",
-    type: userType === "technical" ? "provider" : "client",
+    type: userType,
   });
+
+  useEffect(() => {
+    setFormData({ ...formData, type: userType });
+  }, [formData, userType]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,16 +87,16 @@ function Login({ setFormType, userType, setUserType }) {
             </span>
           </label>
 
-          <label htmlFor="technical">
+          <label htmlFor="provider">
             <input
               type="radio"
               name="userState"
-              id="technical"
-              value="technical"
-              checked={userType === "technical"}
+              id="provider"
+              value="provider"
+              checked={userType === "provider"}
               onChange={(e) => setUserType(e.target.value)}
             />
-            <span className={`${userType === "technical" ? "active" : ""}`}>
+            <span className={`${userType === "provider" ? "active" : ""}`}>
               {t("auth.technical")}
             </span>
           </label>
