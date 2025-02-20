@@ -2,6 +2,7 @@ import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import OfferCard from "../cards/OfferCard";
+import UserReceipt from "./UserReceipt";
 
 export default function OffersSide({ orderDetails }) {
   const { t } = useTranslation();
@@ -55,6 +56,10 @@ export default function OffersSide({ orderDetails }) {
             </>
           )}
         </div>
+      )}
+
+      {orderDetails?.status === "set_maintenance_cost" && (
+        <UserReceipt orderDetails={orderDetails} />
       )}
     </Col>
   );

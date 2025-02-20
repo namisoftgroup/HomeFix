@@ -201,6 +201,9 @@
       background: var(--white);
       color: var(--second);
       border: 1px solid var(--border);
+      i {
+        color: var(--second);
+      }
     }
   }
 

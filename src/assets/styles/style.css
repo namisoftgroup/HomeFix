@@ -598,6 +598,10 @@ input[type=email] {
   margin: 0 auto;
 }
 
+.modal-title {
+  font-size: 16px;
+}
+
 header {
   padding: 16px 0;
   position: sticky;
@@ -1021,6 +1025,9 @@ footer .copy_rights .social_media a:hover {
   background: var(--white);
   color: var(--second);
   border: 1px solid var(--border);
+}
+.form button.finish i {
+  color: var(--second);
 }
 .form .auth_social_btn {
   border: none;
@@ -3559,6 +3566,124 @@ body .providerTimeLine .step:last-child .content {
 }
 body .providerTimeLine .step:last-child .statusLine::after {
   display: none;
+}
+body .item_row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+body .item_row .actions button {
+  background: none;
+  padding: 0 12px;
+}
+body .add_products_btn {
+  width: 100%;
+  color: var(--second);
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--second);
+  cursor: pointer;
+}
+body .product_list {
+  padding: 16px;
+  background: var(--white);
+  border-radius: 12px;
+}
+body .product_list h6 {
+  color: var(--gray);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+body .product_list li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body .product_list li h6 {
+  font-size: 16px;
+  color: var(--main);
+  margin: 0;
+}
+body .product_list li p {
+  color: var(--main);
+  font-size: 16px;
+}
+body .product_list .price_actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+body .product_list .line {
+  height: 1px;
+  width: 100%;
+  background: var(--third);
+}
+body .user_receipt {
+  padding: 16px;
+  background: var(--input-bg);
+  border-radius: 12px;
+  margin-top: 20px;
+}
+body .user_receipt h5 {
+  color: var(--second);
+  font-size: 16px;
+}
+body .user_receipt .product_list p {
+  margin: 0;
+}
+body .user_receipt h6 {
+  color: var(--gray);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+body .user_receipt li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body .user_receipt li h6 {
+  font-size: 16px;
+  color: var(--main);
+  margin: 0;
+}
+body .user_receipt li p {
+  color: var(--main);
+  font-size: 16px;
+}
+body .user_receipt li:last-child {
+  margin-bottom: 0;
+}
+body .user_receipt .price_actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+body .user_receipt .line {
+  height: 1px;
+  width: 100%;
+  background: var(--third);
+}
+body .user_receipt .total_cost_list {
+  margin-top: 16px;
+}
+body .user_receipt .total_cost_list p {
+  margin: 0;
+}
+body .user_receipt .total_cost_list li {
+  margin: 0;
+}
+body .user_receipt .total_cost_list li.line {
+  margin: 12px 0;
+  width: 100%;
+  height: 1px;
+  background: var(--border);
 }
 body.en {
   direction: ltr;
