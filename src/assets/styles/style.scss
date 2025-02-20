@@ -7,10 +7,11 @@
 
 body {
   direction: rtl;
-  font-family: "IBM Plex Sans Arabic", serif;
+  font-family: "Zain", serif;
   background-color: var(--white);
+
   main {
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 72.8px);
   }
 
   @import "./home";

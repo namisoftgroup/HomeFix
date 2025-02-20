@@ -1,6 +1,6 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
 @keyframes rotate {
@@ -2033,6 +2033,7 @@ label div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 24px;
 }
 .orderInfo.technical .order-header p {
   margin: 0;
@@ -2296,11 +2297,11 @@ label div {
 
 body {
   direction: rtl;
-  font-family: "IBM Plex Sans Arabic", serif;
+  font-family: "Zain", serif;
   background-color: var(--white);
 }
 body main {
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 72.8px);
 }
 body .hero-section {
   padding: 32px 0;
@@ -3501,11 +3502,18 @@ body .providerTimeLine .step .statusLine::after {
 body .providerTimeLine .step .content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   flex: 1;
+  padding-bottom: 20px;
 }
 body .providerTimeLine .step .content .title {
   font-weight: bold;
   margin-bottom: 0;
+  color: #9c9c9c;
+  height: 40px;
+  gap: 4px;
+  display: flex;
+  align-items: center;
 }
 body .providerTimeLine .step .content .title .price {
   color: var(--second);
@@ -3516,16 +3524,33 @@ body .providerTimeLine .step .content .title .price small {
   color: gray;
   font-weight: normal;
 }
+body .providerTimeLine .step .content p {
+  margin: 0;
+}
+body .providerTimeLine .step .content .waitingClient {
+  padding: 8px;
+  border: 1px dashed var(--gray);
+  color: var(--gray);
+  border-radius: 12px;
+  text-align: center;
+  font-size: 14px;
+}
 body .providerTimeLine .step .content .dateTime {
   color: var(--gray);
   font-size: 13px;
+}
+body .providerTimeLine .step.done .content .title {
+  color: var(--main);
 }
 body .providerTimeLine .step.done .statusLine .icon {
   border: 1px solid var(--second);
   background: var(--second);
 }
 body .providerTimeLine .step.done .statusLine::after {
-  border-right: 1px dashed var(--second);
+  border-right: 2px dashed var(--second);
+}
+body .providerTimeLine .step:last-child .content {
+  padding: 0 !important;
 }
 body .providerTimeLine .step:last-child .statusLine::after {
   display: none;

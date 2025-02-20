@@ -3,6 +3,21 @@ import { Link } from "react-router-dom";
 
 export default function OrderTimeLine({ orderDetails }) {
   const { t } = useTranslation();
+
+  const historyStatus = [
+    "new",
+    "accept",
+    "confirm_arrival",
+    "confirm_items",
+    "set_maintenance_cost",
+    "client_accept_cost",
+    "start_maintenance",
+    "end_maintenance",
+    "confirm_collection",
+    "set_images",
+    "complete",
+  ];
+
   return (
     <>
       <div className="technical_card">
@@ -22,50 +37,52 @@ export default function OrderTimeLine({ orderDetails }) {
       </div>
 
       <div className="providerTimeLine">
-        <div className="step done">
-          <div className="statusLine">
-            <div className="icon">
-              <img src="/public/icons/check.svg" alt="" />
+        {historyStatus?.map((status, index) => (
+          <div
+            className={`step ${
+              orderDetails?.order_status_history?.[status] ? "done" : ""
+            }`}
+            key={index}
+          >
+            <div className="statusLine">
+              <div className="icon">
+                <img
+                  src={
+                    orderDetails?.order_status_history?.[status]
+                      ? "/icons/check.svg"
+                      : "/icons/wait.svg"
+                  }
+                  alt=""
+                />
+              </div>
             </div>
+            {status === "new" ? (
+              <div className="content">
+                <h6 className="title">
+                  {t("priceOffer")}
+                  <span className="price">
+                    {orderDetails?.offers?.cost} <small> {t("dinar")} </small>
+                  </span>
+                </h6>
+                <p className="dateTime">
+                  <span>{orderDetails?.order_status_history?.new}</span>
+                </p>
+                {orderDetails?.status == "new" && (
+                  <div className="waitingClient">{t("waitingClient")}</div>
+                )}
+              </div>
+            ) : (
+              <div className="content">
+                <h6 className="title">{t(`orderHistoryStatus.${status}`)}</h6>
+                {orderDetails?.order_status_history?.[status] && (
+                  <p className="dateTime">
+                    <span>{orderDetails?.order_status_history?.[status]}</span>
+                  </p>
+                )}
+              </div>
+            )}
           </div>
-          <div className="content">
-            <h6 className="title"> تم تقديم عرض سعر   <span className="price"> 500 <small> دينار </small> </span> </h6>
-            <p className="dateTime"> <span> 10:24م </span> <span> 20/01/2025 </span> </p>
-          </div>
-        </div>
-        <div className="step">
-          <div className="statusLine">
-            <div className="icon">
-              <img src="/public/icons/wait.svg" alt="" />
-            </div>
-          </div>
-          <div className="content">
-            <h6 className="title"> تم تقديم عرض سعر   <span className="price"> 500 <small> دينار </small> </span> </h6>
-            <p className="dateTime"> <span> 10:24م </span> <span> 20/01/2025 </span> </p>
-          </div>
-        </div>
-        <div className="step">
-          <div className="statusLine">
-            <div className="icon">
-              <img src="/public/icons/wait.svg" alt="" />
-            </div>
-          </div>
-          <div className="content">
-            <h6 className="title"> تم تقديم عرض سعر   <span className="price"> 500 <small> دينار </small> </span> </h6>
-            <p className="dateTime"> <span> 10:24م </span> <span> 20/01/2025 </span> </p>
-          </div>
-        </div>
-        <div className="step">
-          <div className="statusLine">
-            <div className="icon">
-              <img src="/public/icons/wait.svg" alt="" />
-            </div>
-          </div>
-          <div className="content">
-            <h6 className="title"> تم تقديم عرض سعر   <span className="price"> 500 <small> دينار </small> </span> </h6>
-            <p className="dateTime"> <span> 10:24م </span> <span> 20/01/2025 </span> </p>
-          </div>
-        </div>
+        ))}
       </div>
     </>
   );
