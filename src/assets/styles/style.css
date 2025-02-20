@@ -1017,6 +1017,11 @@ footer .copy_rights .social_media a:hover {
   color: var(--second);
   border: 1px solid var(--second);
 }
+.form button.finish {
+  background: var(--white);
+  color: var(--second);
+  border: 1px solid var(--border);
+}
 .form .auth_social_btn {
   border: none;
   background: none;
