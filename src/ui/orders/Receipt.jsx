@@ -42,7 +42,7 @@ export default function Receipt({ orderDetails }) {
         </li>
         <li className="line"></li>
         <li>
-          <h6>{t("totalCostFormClient")}</h6>
+          <h6>{t("totalCost")}</h6>
           <p>
             <b>{orderDetails?.total_cost_after}</b> {t("dinar")}
           </p>

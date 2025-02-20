@@ -282,6 +282,19 @@ export default function OrderTimeLine({ orderDetails }) {
                       />
                     </div>
                   )}
+
+                {orderDetails?.status === "end_maintenance" &&
+                  status === "confirm_collection" && (
+                    <div className="form">
+                      <Receipt orderDetails={orderDetails} />
+
+                      <SubmitButton
+                        name={t("confirmCollection")}
+                        disabled={isPending}
+                        onClick={() => setShowModal(true)}
+                      />
+                    </div>
+                  )}
               </div>
             )}
           </div>
