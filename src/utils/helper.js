@@ -6,39 +6,55 @@ export const handleChange = (e, setFormData) => {
 };
 
 export const getStatusValue = (order) => {
-  if (order?.status === "new") return 1;
-  if (order?.status === "accept") return 2;
-  if (order?.status === "confirm_arrival") return 3;
-  if (["set_maintenance_cost", "confirm_items"].includes(order?.status))
-    return 4;
-  if (["start_maintenance", "client_accept_cost"].includes(order?.status))
-    return 5;
-  if (
-    ["end_maintenance", "confirm_collection", "set_images"].includes(
-      order?.status
-    ) &&
-    !order?.isPaid
-  )
-    return 6;
-  if (order?.status === "complete" || order?.isPaid) return 7;
+  if (order?.is_paid) return 7;
+
+  switch (order?.status) {
+    case "new":
+      return 1;
+    case "accept":
+      return 2;
+    case "confirm_arrival":
+      return 3;
+    case "set_maintenance_cost":
+    case "confirm_items":
+      return 4;
+    case "start_maintenance":
+    case "client_accept_cost":
+      return 5;
+    case "end_maintenance":
+    case "confirm_collection":
+    case "set_images":
+      return 6;
+    case "complete":
+      return 7;
+    default:
+      return 0;
+  }
 };
 
 export const getStatusText = (order, t) => {
-  if (order?.status === "new") return t("orderStatus.new");
-  if (order?.status === "accept") return t("orderStatus.accept");
-  if (order?.status === "confirm_arrival")
-    return t("orderStatus.arrivedAndInspected");
-  if (["set_maintenance_cost", "confirm_items"].includes(order?.status))
-    return t("orderStatus.finalCostReachedBeingDetermined");
-  if (["start_maintenance", "client_accept_cost"].includes(order?.status))
-    return t("orderStatus.inProgress");
-  if (
-    ["end_maintenance", "confirm_collection", "set_images"].includes(
-      order?.status
-    ) &&
-    !order?.isPaid
-  )
-    return t("orderStatus.completedWaitingPayment");
-  if (order?.status === "complete" || order?.isPaid)
-    return t("orderStatus.done");
+  if (order?.is_paid) return t("orderStatus.done");
+
+  switch (order?.status) {
+    case "new":
+      return t("orderStatus.new");
+    case "accept":
+      return t("orderStatus.accept");
+    case "confirm_arrival":
+      return t("orderStatus.arrivedAndInspected");
+    case "set_maintenance_cost":
+    case "confirm_items":
+      return t("orderStatus.finalCostReachedBeingDetermined");
+    case "start_maintenance":
+    case "client_accept_cost":
+      return t("orderStatus.inProgress");
+    case "end_maintenance":
+    case "confirm_collection":
+    case "set_images":
+      return t("orderStatus.completedWaitingPayment");
+    case "complete":
+      return t("orderStatus.done");
+    default:
+      return t("orderStatus.unknown");
+  }
 };

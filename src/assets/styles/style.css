@@ -2665,66 +2665,6 @@ body .service-details .section textarea {
   resize: none;
   background: #f8f8f8;
 }
-body .service-details .image-upload {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-body .service-details .image-upload .image-preview {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-body .service-details .image-upload .image-preview img {
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-body .service-details .image-upload .image-preview .remove-btn {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: var(--white);
-  border: none;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  padding: 2px;
-  cursor: pointer;
-}
-body .service-details .image-upload .image-preview .remove-btn span {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  justify-content: center;
-  background: red;
-}
-body .service-details .image-upload .image-preview .remove-btn span i {
-  color: white;
-  font-size: 12px;
-}
-body .service-details .image-upload .upload-btn {
-  width: 120px;
-  height: 120px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  background: #f8f8f8;
-  border-radius: 12px;
-  cursor: pointer;
-  border: 1px solid var(--border);
-}
-body .service-details .image-upload .upload-btn input {
-  display: none;
-}
 body .service-details .toggle-switch {
   position: relative;
   display: inline-block;
@@ -2768,6 +2708,66 @@ body .service-details .toggle-switch input:checked + .slider:before {
   body .service-details {
     padding: 16px;
   }
+}
+body .image-upload {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+body .image-upload .image-preview {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .image-upload .image-preview img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+body .image-upload .image-preview .remove-btn {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  padding: 2px;
+  cursor: pointer;
+}
+body .image-upload .image-preview .remove-btn span {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  justify-content: center;
+  background: red;
+}
+body .image-upload .image-preview .remove-btn span i {
+  color: white;
+  font-size: 12px;
+}
+body .image-upload .upload-btn {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  background: #f8f8f8;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+}
+body .image-upload .upload-btn input {
+  display: none;
 }
 body .date-time-container {
   display: flex;
@@ -3709,6 +3709,40 @@ body .user_receipt .btns .button.disabled {
 }
 body .user_receipt .btns .button.dark {
   background: var(--main);
+}
+body .pay_container {
+  padding: 16px;
+  background: #1d483f;
+  border-radius: 12px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body .pay_container button {
+  padding: 8px 16px;
+  background: var(--second);
+  color: var(--white);
+  border-radius: 8px;
+}
+body .pay_container .content h6 {
+  color: var(--white);
+}
+body .pay_container .content h5 {
+  color: var(--second);
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+body .pay_container .content h5 span {
+  color: var(--white);
+  font-weight: 400;
+  font-size: 16px;
+}
+body .image-uploader_timeline .upload-btn,
+body .image-uploader_timeline .image-preview {
+  width: 90px !important;
+  height: 90px !important;
 }
 body.en {
   direction: ltr;

@@ -7,11 +7,19 @@ export default function useChangeOrderStatus() {
 
   async function changeStatus(request, orderId) {
     try {
-      const response = await axiosInstance.put(
+      const response = await axiosInstance.post(
         `/homefix/${
           client?.type === "provider" ? "orders-provider" : "orders-client"
         }/${orderId}`,
-        request
+        {
+          ...request,
+          _method: "put",
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       return response.data;
     } catch (error) {

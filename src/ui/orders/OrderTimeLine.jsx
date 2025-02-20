@@ -18,6 +18,7 @@ export default function OrderTimeLine({ orderDetails }) {
   const [maintenanceCost, setMaintenanceCost] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [orderItems, setOrderItems] = useState([]);
+  const [imagesList, setImagesList] = useState([]);
 
   const historyStatus = [
     "new",
@@ -97,6 +98,44 @@ export default function OrderTimeLine({ orderDetails }) {
         request: {
           status: "set_maintenance_cost",
           maintenance_cost: maintenanceCost,
+        },
+      },
+      {
+        onSuccess: (res) => {
+          if (res?.code === 200) {
+            toast.success(res?.message);
+            queryClient.invalidateQueries(["orders"]);
+            queryClient.invalidateQueries(["order-details", orderDetails?.id]);
+          } else {
+            toast.error(res?.message);
+          }
+        },
+        onError: (err) => {
+          console.log(err);
+          toast.error("Some thing went wrong, please try again or contact us.");
+        },
+      }
+    );
+  };
+
+  const handleImageUpload = (event) => {
+    const files = Array.from(event.target.files);
+    const objects = files.map((file) => ({ file: file }));
+    setImagesList((prev) => [...prev, ...objects]);
+  };
+
+  const removeImage = (index) => {
+    setImagesList((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleUploadWorkImages = (e) => {
+    e.preventDefault();
+    changeOrderStatus(
+      {
+        orderId: orderDetails?.id,
+        request: {
+          status: "set_images",
+          images_list: imagesList,
         },
       },
       {
@@ -286,12 +325,68 @@ export default function OrderTimeLine({ orderDetails }) {
                 {orderDetails?.status === "end_maintenance" &&
                   status === "confirm_collection" && (
                     <div className="form">
-                      <Receipt orderDetails={orderDetails} />
+                      <Receipt
+                        orderDetails={orderDetails}
+                        showPaymentMethod={orderDetails?.is_paid}
+                      />
 
                       <SubmitButton
                         name={t("confirmCollection")}
-                        disabled={isPending}
-                        onClick={() => setShowModal(true)}
+                        disabled={!orderDetails?.is_paid}
+                        loading={isPending}
+                        onClick={() => handleChangeStatus("confirm_collection")}
+                      />
+                    </div>
+                  )}
+
+                {orderDetails?.status === "confirm_collection" &&
+                  status === "set_images" && (
+                    <form className="form">
+                      <div className="image-uploader_timeline">
+                        <div className="image-upload">
+                          <label className="upload-btn">
+                            <img src="/icons/uploadimg.svg" alt="" />
+                            <input
+                              type="file"
+                              accept="image/*"
+                              multiple
+                              onChange={handleImageUpload}
+                            />
+                          </label>
+
+                          {imagesList.map((obj, index) => (
+                            <div key={index} className="image-preview">
+                              <img
+                                src={URL.createObjectURL(obj.file)}
+                                alt={`upload-${index}`}
+                              />
+                              <div
+                                className="remove-btn"
+                                onClick={() => removeImage(index)}
+                              >
+                                <span>
+                                  <i className="fa-solid fa-xmark"></i>
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <SubmitButton
+                        name={t("confirmAndSend")}
+                        loading={isPending}
+                        onClick={handleUploadWorkImages}
+                      />
+                    </form>
+                  )}
+
+                {orderDetails?.status === "set_images" &&
+                  status === "complete" && (
+                    <div className="form">
+                      <SubmitButton
+                        name={t("finish")}
+                        loading={isPending}
+                        onClick={() => handleChangeStatus("complete")}
                       />
                     </div>
                   )}
