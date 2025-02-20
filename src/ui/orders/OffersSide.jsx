@@ -6,6 +6,16 @@ import UserReceipt from "./UserReceipt";
 
 export default function OffersSide({ orderDetails }) {
   const { t } = useTranslation();
+
+  const viewReciept = () => {
+    if (orderDetails?.status === "set_maintenance_cost") return true;
+    if (orderDetails?.status === "client_accept_cost") return true;
+    if (orderDetails?.status === "start_maintenance") return true;
+    if (orderDetails?.status === "end_maintenance") return true;
+
+    return false;
+  };
+
   return (
     <Col lg={4} className="p-2">
       {orderDetails?.offers?.filter((offer) => offer?.status === "accept")
@@ -58,9 +68,7 @@ export default function OffersSide({ orderDetails }) {
         </div>
       )}
 
-      {orderDetails?.status === "set_maintenance_cost" && (
-        <UserReceipt orderDetails={orderDetails} />
-      )}
+      {viewReciept() && <UserReceipt orderDetails={orderDetails} />}
     </Col>
   );
 }

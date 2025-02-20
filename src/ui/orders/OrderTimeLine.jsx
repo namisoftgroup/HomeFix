@@ -33,12 +33,12 @@ export default function OrderTimeLine({ orderDetails }) {
     "complete",
   ];
 
-  const handleConfirmArrival = () => {
+  const handleChangeStatus = (status) => {
     changeOrderStatus(
       {
         orderId: orderDetails?.id,
         request: {
-          status: "confirm_arrival",
+          status: status,
         },
       },
       {
@@ -184,7 +184,7 @@ export default function OrderTimeLine({ orderDetails }) {
                     <div className="form">
                       <SubmitButton
                         name={t("confirmArrival")}
-                        onClick={handleConfirmArrival}
+                        onClick={() => handleChangeStatus("confirm_arrival")}
                         loading={isPending}
                       />
                     </div>
@@ -259,6 +259,28 @@ export default function OrderTimeLine({ orderDetails }) {
                 {orderDetails?.status === "set_maintenance_cost" &&
                   status === "client_accept_cost" && (
                     <Receipt orderDetails={orderDetails} />
+                  )}
+
+                {orderDetails?.status === "client_accept_cost" &&
+                  status === "start_maintenance" && (
+                    <div className="form">
+                      <SubmitButton
+                        name={t("confirmStart")}
+                        onClick={() => handleChangeStatus("start_maintenance")}
+                        loading={isPending}
+                      />
+                    </div>
+                  )}
+
+                {orderDetails?.status === "start_maintenance" &&
+                  status === "end_maintenance" && (
+                    <div className="form">
+                      <SubmitButton
+                        name={t("endMaintenance")}
+                        onClick={() => handleChangeStatus("end_maintenance")}
+                        loading={isPending}
+                      />
+                    </div>
                   )}
               </div>
             )}
