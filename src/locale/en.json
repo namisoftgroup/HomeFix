@@ -95,6 +95,7 @@
   "passwordNotMatch": "Passwords do not match",
   "deleteAccount": "Delete Account",
   "deleteAccountDesc": "Are you sure you want to delete your account?",
+  "cancel": "Cancel",
   "myProfile": "My Profile",
   "contactTitle": "Contact Us",
   "contactText": "You can contact us through email and WhatsApp to request services or inquire about any matter",

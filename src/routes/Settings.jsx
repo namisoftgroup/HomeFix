@@ -1,44 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../redux/slices/clientData";
 import { useCookies } from "react-cookie";
+import { useState } from "react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import axiosInstance from "../utils/axiosInstance";
+import ConfirmDeleteAccount from "../ui/modals/ConfirmDeleteAccount";
 
 export default function Settings() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { client } = useSelector((state) => state.clientData);
   const [, , deleteCookie] = useCookies(["token", "id"]);
+  const [show, setShow] = useState(false);
 
   const performLogout = async () => {
     try {
       const deleteToken = await axiosInstance.post("/auth/logout");
-      if (deleteToken.data.code === 200) {
-        deleteCookie("token");
-        deleteCookie("id");
-        delete axiosInstance.defaults.headers.common["Authorization"];
-        dispatch(logout());
-        navigate("/");
-        queryClient.clear();
-        localStorage.setItem("userType", "client");
-        toast.success(deleteToken.data.message);
-      }
-    } catch (error) {
-      console.error("Error during logout:", error);
-      throw new Error(error.message);
-    }
-  };
-
-  const deleteAccount = async () => {
-    try {
-      const deleteToken = await axiosInstance.delete(
-        `/auth/users/${client.id}`
-      );
       if (deleteToken.data.code === 200) {
         deleteCookie("token");
         deleteCookie("id");
@@ -99,7 +80,7 @@ export default function Settings() {
               alt="delete account"
               className="icon-img"
             />
-            <span className="text" onClick={deleteAccount}>
+            <span className="text" onClick={() => setShow(true)}>
               {t("deleteAccount")}
             </span>
           </div>
@@ -110,6 +91,7 @@ export default function Settings() {
         <img src="/icons/logout.svg" alt="logout" className="icon-img" />
         <span className="text">{t("logout")}</span>
       </button>
+      <ConfirmDeleteAccount show={show} setShow={setShow} />
     </section>
   );
 }
