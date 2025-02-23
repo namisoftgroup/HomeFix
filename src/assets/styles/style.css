@@ -3404,6 +3404,9 @@ body .cancelButton {
 body .cancelButton:hover {
   opacity: 0.9;
 }
+body .cancelButton.danger {
+  background: #de0000;
+}
 body .orderStatus {
   width: 100%;
   background: #1d483f;
