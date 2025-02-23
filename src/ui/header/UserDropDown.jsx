@@ -2,13 +2,13 @@ import { Dropdown } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { setShowAuthModal } from "../../redux/slices/showAuthModal";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { logout } from "../../redux/slices/clientData";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import useAuth from "./../../hooks/useAuth";
 import axiosInstance from "../../utils/axiosInstance";
-import { toast } from "sonner";
 
 export default function UserDropDown() {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ export default function UserDropDown() {
   const [, , deleteCookie] = useCookies(["token", "id"]);
 
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const handleShow = (e) => {
     if (!isAuthed) {
@@ -42,6 +43,27 @@ export default function UserDropDown() {
 
         localStorage.setItem("userType", "client");
 
+        toast.success(deleteToken.data.message);
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+      throw new Error(error.message);
+    }
+  };
+
+  const deleteAccount = async () => {
+    try {
+      const deleteToken = await axiosInstance.delete(
+        `/auth/users/${client.id}`
+      );
+      if (deleteToken.data.code === 200) {
+        deleteCookie("token");
+        deleteCookie("id");
+        delete axiosInstance.defaults.headers.common["Authorization"];
+        dispatch(logout());
+        navigate("/");
+        queryClient.clear();
+        localStorage.setItem("userType", "client");
         toast.success(deleteToken.data.message);
       }
     } catch (error) {
@@ -77,7 +99,15 @@ export default function UserDropDown() {
             </Dropdown.Item>
           )}
 
+          <Dropdown.Item as={Link} to={"/notifications"}>
+            {t("notifications")}
+          </Dropdown.Item>
+
           <Dropdown.Item onClick={performLogout}>{t("logout")}</Dropdown.Item>
+
+          <Dropdown.Item onClick={deleteAccount}>
+            {t("deleteAccount")}
+          </Dropdown.Item>
         </Dropdown.Menu>
       )}
     </Dropdown>
