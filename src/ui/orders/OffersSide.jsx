@@ -8,12 +8,21 @@ import OfferCard from "../cards/OfferCard";
 import UserReceipt from "./UserReceipt";
 import PaymentModal from "../modals/PaymentModal";
 import axiosInstance from "../../utils/axiosInstance";
+import TechnicalRate from "../modals/TechnicalRate";
 
 export default function OffersSide({ orderDetails }) {
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
+  const [showRate, setShowRate] = useState(false);
   const [loading, setLoading] = useState(false);
   const [paymentType, setPaymentType] = useState("cash");
+  const [rateLoading, setRateLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    stars: 0,
+    notes: "",
+    order_id: orderDetails?.id,
+    provider_id: orderDetails?.technical?.id,
+  });
   const queryClient = useQueryClient();
 
   const viewReciept = () => {
@@ -49,6 +58,29 @@ export default function OffersSide({ orderDetails }) {
     }
   };
 
+  const handleRate = async (e) => {
+    e.preventDefault();
+    setRateLoading(true);
+
+    try {
+      const res = await axiosInstance.post(
+        "homefix/provider-reviews",
+        formData
+      );
+
+      if (res?.data?.code === 200) {
+        setShowRate(false);
+        queryClient.invalidateQueries(["order-details", orderDetails?.id]);
+        toast.success(res?.data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Some thing went wrong, please try again or contact us.");
+    } finally {
+      setRateLoading(false);
+    }
+  };
+
   return (
     <Col lg={4} className="p-2">
       {orderDetails?.offers?.filter((offer) => offer?.status === "accept")
@@ -70,13 +102,24 @@ export default function OffersSide({ orderDetails }) {
                     <p>{offer?.technical?.provide_detail?.specialty?.title}</p>
                   </div>
                 </div>
-                <Link
-                  to={`tel:${
-                    offer?.technical?.country_code + offer?.technical?.phone
-                  }`}
-                >
-                  <img src="/icons/phone-fill.svg" alt="" />
-                </Link>
+                <div className="d-flex align-items-center gap-2">
+                  <Link
+                    to={`tel:${
+                      offer?.technical?.country_code + offer?.technical?.phone
+                    }`}
+                  >
+                    <img src="/icons/phone-fill.svg" alt="" />
+                  </Link>
+                  {!orderDetails?.has_rated && (
+                    <button
+                      className="rate_btn"
+                      onClick={() => setShowRate(true)}
+                    >
+                      <img src="/icons/star.svg" alt="star" />
+                      {t("rateTechnical")}
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
         </>
@@ -122,6 +165,15 @@ export default function OffersSide({ orderDetails }) {
         loading={loading}
         handlePayment={handlePayment}
         setPaymentType={setPaymentType}
+      />
+
+      <TechnicalRate
+        show={showRate}
+        setShow={setShowRate}
+        loading={rateLoading}
+        formData={formData}
+        setFormData={setFormData}
+        handleRate={handleRate}
       />
     </Col>
   );

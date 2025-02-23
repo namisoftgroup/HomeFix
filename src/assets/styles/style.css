@@ -3449,6 +3449,19 @@ body .technical_card a {
 body .technical_card a img {
   height: 24px;
 }
+body .technical_card .rate_btn {
+  background: #ffa600;
+  color: #fff;
+  padding: 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+body .technical_card .rate_btn img {
+  filter: brightness(0) invert(1);
+}
 body .addOfferForm {
   background: var(--input-bg);
   padding: 16px;
@@ -3743,6 +3756,23 @@ body .image-uploader_timeline .upload-btn,
 body .image-uploader_timeline .image-preview {
   width: 90px !important;
   height: 90px !important;
+}
+body .star-rating-service {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+body .star-rating-service label {
+  cursor: pointer;
+  color: #e4e6e8;
+}
+body .star-rating-service label.active {
+  color: gold;
+}
+body .star-rating-service input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 body.en {
   direction: ltr;
