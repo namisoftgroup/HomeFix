@@ -3,30 +3,35 @@ import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { updateClientData } from "../redux/slices/clientData";
+import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import InputField from "../ui/form-elements/InputField";
+import useGetCities from "../hooks/user/useGetCities";
+import SelectField from "../ui/form-elements/SelectField";
+import ImageUpload from "./../ui/form-elements/ImageUpload";
+import axiosInstance from "../utils/axiosInstance";
+import SubmitButton from "./../ui/form-elements/SubmitButton";
 
-const UserProfile = ({ defaultValues }) => {
+const UserProfile = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { client } = useSelector((state) => state.clientData);
+  const { data: cities, isLoading } = useGetCities();
 
-  const fields = [
-    { name: "name", label: "الاسم بالكامل", type: "text", icon: "user" },
-    { name: "phone", label: "رقم الجوال", type: "text", icon: "phone" },
-    { name: "email", label: "البريد الإلكتروني", type: "email", icon: "email" },
-    { name: "city", label: "المدينة", type: "text", icon: "address" },
-  ];
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
+  const [showPasswordFields, setShowPasswordFields] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    city: "",
+    city_id: "",
     password: "",
-    confirmPassword: "",
+    image: null,
   });
-
-  const [showPasswordFields, setShowPasswordFields] = useState(false);
 
   useEffect(() => {
     if (client) {
@@ -34,45 +39,68 @@ const UserProfile = ({ defaultValues }) => {
         name: client?.name || "",
         email: client?.email || "",
         phone: client?.phone || "",
-        city: client?.city.name || "",
+        city_id: client?.city.id || "",
+        image: client?.image || null,
         password: "",
         confirmPassword: "",
       });
     }
   }, [client]);
 
-  useEffect(() => {
-    if (defaultValues) {
-      setFormData(defaultValues);
-    }
-  }, [defaultValues]);
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (showPasswordFields && formData.password !== formData.confirmPassword) {
-      alert("كلمة المرور غير متطابقة!");
+      toast.error(t("passwordNotMatch"));
+      setLoading(false);
       return;
     }
 
-    const updatedData = {
+    const payload = {
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
-      city: formData.city,
+      city_id: formData.city_id,
+      password: formData.password,
     };
 
-    if (showPasswordFields && formData.password) {
-      updatedData.password = formData.password;
+    if (typeof formData.image !== "string") {
+      payload.image = formData.image;
     }
 
-    dispatch(updateClientData(updatedData));
+    try {
+      const res = await axiosInstance.post(
+        `/auth/users/${client.id}`,
+        {
+          ...payload,
+          _method: "put",
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-    console.log("تم حفظ البيانات:", updatedData);
+      if (res.data.code == 200) {
+        dispatch(updateClientData(res?.data?.data));
+        navigate("/");
+        toast.success(res.data.message);
+        queryClient.invalidateQueries({ queryKey: ["profile"] });
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Some thing went wrong, please try again or contact us.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -81,24 +109,61 @@ const UserProfile = ({ defaultValues }) => {
         <div className="row justify-content-center">
           <div className="col-lg-10 col-12 p-2">
             <h2 className="profile-title">
-              <div className="icon">
+              <div className="icon" onClick={() => navigate(-1)}>
                 <i className="fa-regular fa-angle-right"></i>
               </div>
               {t("editProfile")}
             </h2>
 
             <Form className="profile-form" onSubmit={handleSubmit}>
-              {fields.map((field, index) => (
-                <InputField
-                  key={index}
-                  label={field.label}
-                  name={field.name}
-                  type={field.type}
-                  value={formData[field.name] || ""}
-                  onChange={handleChange}
-                  icon={`/icons/${field.icon}.svg`}
-                />
-              ))}
+              <ImageUpload formData={formData} setFormData={setFormData} />
+
+              <InputField
+                label={t("auth.fullName")}
+                onChange={handleChange}
+                value={formData.name}
+                name="name"
+                type="text"
+                icon="/icons/user.svg"
+              />
+
+              <InputField
+                label={t("auth.phone")}
+                onChange={handleChange}
+                value={formData.phone}
+                name="phone"
+                type="tel"
+                icon="/icons/phone.svg"
+              />
+
+              <InputField
+                label={t("auth.email")}
+                onChange={handleChange}
+                value={formData.email}
+                name="email"
+                type="email"
+                icon="/icons/email.svg"
+              />
+
+              <SelectField
+                required
+                loading={isLoading}
+                loadingText={t("isLoading")}
+                label={t("auth.city")}
+                icon="/icons/email.svg"
+                id="city_id"
+                name="city_id"
+                value={formData.city_id}
+                onChange={(e) =>
+                  setFormData({ ...formData, city_id: e.target.value })
+                }
+                options={
+                  cities?.map((city) => ({
+                    name: city.name,
+                    value: city.id,
+                  })) || []
+                }
+              />
 
               <div className="question p-0 pt-2">
                 <label
@@ -137,9 +202,11 @@ const UserProfile = ({ defaultValues }) => {
                 </>
               )}
 
-              <button type="submit" className="confirm-btn">
-                {t("Services.confirm")}
-              </button>
+              <SubmitButton
+                loading={loading}
+                name={t("Services.confirm")}
+                className="confirm-btn"
+              />
             </Form>
           </div>
         </div>

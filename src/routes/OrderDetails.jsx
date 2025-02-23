@@ -29,6 +29,7 @@ export default function OrderDetails() {
     if (orderDetails?.status === "client_accept_cost") return false;
     if (orderDetails?.status === "start_maintenance") return false;
     if (orderDetails?.status === "end_maintenance") return false;
+    if (orderDetails?.status === "confirm_collection") return false;
 
     return true;
   };

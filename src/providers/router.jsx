@@ -66,14 +66,22 @@ export const router = createBrowserRouter([
       },
       {
         path: "settings",
-        element: <Settings />,
+        element: (
+          <ProtectionProvider>
+            <Settings />
+          </ProtectionProvider>
+        ),
       },
       {
         path: "terms-and-conditions",
         element: <Terms />,
       },
       {
-        path: "faq",
+        path: "privacy",
+        element: <Terms type="privacy" />,
+      },
+      {
+        path: "fqs",
         element: <FAQs />,
       },
       {

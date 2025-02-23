@@ -73,6 +73,14 @@ footer {
     align-items: center;
     flex-wrap: wrap;
 
+    @media screen and (max-width: 576px) {
+      flex-direction: column-reverse;
+      gap: 16px;
+      &.client {
+        margin-bottom: 70px;
+      }
+    }
+
     p {
       color: var(--main);
       font-size: 14px;
@@ -113,6 +121,7 @@ footer {
     }
   }
 }
+
 .small_menu {
   position: fixed;
   bottom: 0;
@@ -132,14 +141,14 @@ footer {
     @include centerFlex();
     flex-direction: column;
     flex: 1;
-    padding: 16px 12px;
+    padding: 12px;
     gap: 8px;
     color: var(--main);
     font-size: 14px;
     text-decoration: none;
 
     i {
-      font-size: 18px;
+      font-size: 16px;
       color: var(--gray);
     }
 

@@ -26,7 +26,8 @@ function Login({ setFormType, userType, setUserType }) {
 
   useEffect(() => {
     setFormData({ ...formData, type: userType });
-  }, [formData, userType]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userType]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

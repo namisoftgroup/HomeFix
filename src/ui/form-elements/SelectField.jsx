@@ -7,6 +7,7 @@ export default function SelectField({
   options,
   loading,
   loadingText,
+  icon,
   ...props
 }) {
   const { t } = useTranslation();
@@ -16,16 +17,20 @@ export default function SelectField({
       <label htmlFor={props?.id} style={{ flexWrap: "nowrap" }}>
         {label} {hint && <span className="hint">{hint}</span>}
       </label>
-      <Form.Select {...props} disabled={loading}>
-        <option value="" disabled>
-          {loading ? loadingText : t("select")}
-        </option>
-        {options?.map((option, index) => (
-          <option key={index} value={option.value}>
-            {option.name}
+      <div className="input-wrapper">
+        {icon && <img src={icon} alt="input icon" className="input-icon" />}
+
+        <Form.Select {...props} disabled={loading}>
+          <option value="" disabled>
+            {loading ? loadingText : t("select")}
           </option>
-        ))}
-      </Form.Select>
+          {options?.map((option, index) => (
+            <option key={index} value={option.value}>
+              {option.name}
+            </option>
+          ))}
+        </Form.Select>
+      </div>
     </div>
   );
 }

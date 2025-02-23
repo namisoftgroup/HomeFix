@@ -1,5 +1,5 @@
-import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import AOS from "aos";
 import useAuth from "../hooks/useAuth";
 
@@ -61,7 +61,7 @@ export default function RootLayout() {
         <Outlet />
       </main>
       <Footer />
-      <ResponsiveNav />
+      {localStorage.getItem("userType") === "client" && <ResponsiveNav />}
       <AuthModal />
     </>
   );

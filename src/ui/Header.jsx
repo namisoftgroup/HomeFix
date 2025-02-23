@@ -21,7 +21,11 @@ export default function Header() {
                 : t("home")}
             </Link>
             <NavLink to="/aboutus">{t("aboutus")}</NavLink>
-            <Link to="/#services">{t("services")}</Link>
+
+            {localStorage.getItem("userType") === "client" && (
+              <Link to="/#services">{t("services")}</Link>
+            )}
+
             <NavLink to="/contactus">{t("contactus")}</NavLink>
           </>
         </div>

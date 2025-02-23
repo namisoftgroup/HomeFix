@@ -6,14 +6,17 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { logout } from "../../redux/slices/clientData";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { useState } from "react";
 import useAuth from "./../../hooks/useAuth";
 import axiosInstance from "../../utils/axiosInstance";
-import { toast } from "sonner";
+import ConfirmDeleteAccount from "../modals/ConfirmDeleteAccount";
 
 export default function UserDropDown() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { isAuthed } = useAuth();
+  const [show, setShow] = useState(false);
   const { client } = useSelector((state) => state.clientData);
   const [, , deleteCookie] = useCookies(["token", "id"]);
 
@@ -53,12 +56,16 @@ export default function UserDropDown() {
   return (
     <Dropdown>
       <Dropdown.Toggle className="rounded_btn">
-        <img
-          className={client?.image ? "h-100" : ""}
-          src={client?.image ? client?.image : "/icons/user.svg"}
-          alt="user_alt"
-          onClick={handleShow}
-        />
+        {client?.image ? (
+          <img
+            className="user_img"
+            src={client?.image}
+            alt="user_alt"
+            onClick={handleShow}
+          />
+        ) : (
+          <img src="/icons/user.svg" alt="user_alt" onClick={handleShow} />
+        )}
       </Dropdown.Toggle>
 
       {isAuthed && (
@@ -73,9 +80,19 @@ export default function UserDropDown() {
             </Dropdown.Item>
           )}
 
+          <Dropdown.Item as={Link} to={"/notifications"}>
+            {t("notifications")}
+          </Dropdown.Item>
+
           <Dropdown.Item onClick={performLogout}>{t("logout")}</Dropdown.Item>
+
+          <Dropdown.Item onClick={() => setShow(true)}>
+            {t("deleteAccount")}
+          </Dropdown.Item>
         </Dropdown.Menu>
       )}
+
+      <ConfirmDeleteAccount show={show} setShow={setShow} />
     </Dropdown>
   );
 }

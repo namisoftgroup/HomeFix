@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-export default function Receipt({ orderDetails }) {
+export default function Receipt({ orderDetails, showPaymentMethod = false }) {
   const { t } = useTranslation();
   return (
     <div className="product_list">
@@ -47,6 +47,12 @@ export default function Receipt({ orderDetails }) {
             <b>{orderDetails?.total_cost_after}</b> {t("dinar")}
           </p>
         </li>
+        {showPaymentMethod && (
+          <li>
+            <h6>{t("paymentMethod")}</h6>
+            <p>{t(orderDetails?.payment_type)}</p>
+          </li>
+        )}
       </ul>
     </div>
   );

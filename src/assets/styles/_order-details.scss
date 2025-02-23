@@ -188,6 +188,20 @@
       height: 24px;
     }
   }
+  .rate_btn {
+    background: #ffa600;
+    color: #fff;
+    padding: 8px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
 }
 
 .addOfferForm {
@@ -454,5 +468,60 @@
         background: var(--main);
       }
     }
+  }
+}
+
+.pay_container {
+  padding: 16px;
+  background: #1d483f;
+  border-radius: 12px;
+  margin-top: 20px;
+  @include space-between();
+  button {
+    padding: 8px 16px;
+    background: var(--second);
+    color: var(--white);
+    border-radius: 8px;
+  }
+  .content {
+    h6 {
+      color: var(--white);
+    }
+    h5 {
+      color: var(--second);
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+      span {
+        color: var(--white);
+        font-weight: 400;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.image-uploader_timeline {
+  .upload-btn,
+  .image-preview {
+    width: 90px !important;
+    height: 90px !important;
+  }
+}
+
+.star-rating-service {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+
+  label {
+    cursor: pointer;
+    color: #e4e6e8;
+    &.active {
+      color: gold;
+    }
+  }
+  input {
+    appearance: none;
   }
 }

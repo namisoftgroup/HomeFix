@@ -43,6 +43,12 @@ const Orders = () => {
               <OrderCard order={order} />
             </div>
           ))}
+
+          {orders?.length === 0 && (
+            <div className="col-12 p-2">
+              <div className="no-data">{t("noNewOrdersAvailable")}</div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -593,7 +593,7 @@ input[type="email"] {
 .no-data {
   min-height: 400px;
   @include centerFlex();
-  font-size: 42px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--input-hint);
   width: min(450px, 100%);
