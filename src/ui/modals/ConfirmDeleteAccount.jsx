@@ -45,20 +45,18 @@ export default function ConfirmDeleteAccount({ show, setShow }) {
 
   return (
     <Modal show={show} onHide={() => setShow(false)} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>{t("cancelOrder")}</Modal.Title>
-      </Modal.Header>
+      <Modal.Header closeButton>{t("deleteAccountDesc")}</Modal.Header>
       <Modal.Body className="modal-body">
-        <h6>{t("deleteAccountDesc")}</h6>
-
-        <div className="d-flex gap-3">
-          <button onClick={() => setShow(false)}>{t("cancel")}</button>
+        <div className="d-flex flex-row gap-3 form">
+          <button onClick={() => setShow(false)} className="cancelButton mt-1">
+            {t("cancel")}
+          </button>
 
           <SubmitButton
             name={t("deleteAccount")}
             loading={loading}
             onClick={deleteAccount}
-            className="cancelButton m-0"
+            className="cancelButton danger mt-1"
           />
         </div>
       </Modal.Body>

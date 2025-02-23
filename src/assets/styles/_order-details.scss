@@ -74,6 +74,9 @@
   &:hover {
     opacity: 0.9;
   }
+  &.danger {
+    background: #de0000;
+  }
 }
 
 .orderStatus {
