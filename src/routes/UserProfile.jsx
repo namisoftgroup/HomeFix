@@ -109,7 +109,7 @@ const UserProfile = () => {
         <div className="row justify-content-center">
           <div className="col-lg-10 col-12 p-2">
             <h2 className="profile-title">
-              <div className="icon">
+              <div className="icon" onClick={() => navigate(-1)}>
                 <i className="fa-regular fa-angle-right"></i>
               </div>
               {t("editProfile")}

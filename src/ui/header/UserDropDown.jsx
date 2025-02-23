@@ -53,12 +53,16 @@ export default function UserDropDown() {
   return (
     <Dropdown>
       <Dropdown.Toggle className="rounded_btn">
-        <img
-          className={client?.image ? "user_img" : ""}
-          src={client?.image ? client?.image : "/icons/user.svg"}
-          alt="user_alt"
-          onClick={handleShow}
-        />
+        {client?.image ? (
+          <img
+            className="user_img"
+            src={client?.image}
+            alt="user_alt"
+            onClick={handleShow}
+          />
+        ) : (
+          <img src="/icons/user.svg" alt="user_alt" onClick={handleShow} />
+        )}
       </Dropdown.Toggle>
 
       {isAuthed && (

@@ -3215,21 +3215,26 @@ body .contact-container .contact-form .input-field .input-wrapper textarea.form-
 }
 body .notifications-container {
   width: 100%;
-  padding: 10px;
+  padding: 32px 10px;
   margin: auto;
 }
 body .notifications-container .notifications-title {
   color: var(--main);
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 8px;
   font-weight: bold;
   font-size: 18px;
-  margin: 10px 20px;
 }
 body .notifications-container .notification-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   padding: 15px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px dashed #ddd;
+}
+body .notifications-container .notification-item:last-child {
+  border-bottom: none;
 }
 body .notifications-container .notification-item .delete-icon {
   font-size: 18px;
@@ -3254,7 +3259,7 @@ body .notifications-container .notification-item .notification-content p {
 }
 body .notifications-container .notification-item .notification-content .time {
   font-size: 12px;
-  color: teal;
+  color: #777;
 }
 body .notifications-container .no-notifications {
   text-align: center;

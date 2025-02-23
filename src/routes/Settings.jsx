@@ -59,7 +59,7 @@ export default function Settings() {
     { img: "/icons/user.svg", text: t("myProfile"), path: "/edit-profile" },
     {
       img: "/icons/notifications.svg",
-      text: "الاشعارات",
+      text: t("notifications"),
       path: "/notifications",
     },
     { img: "/icons/contactus.svg", text: t("contactus"), path: "/contactus" },
