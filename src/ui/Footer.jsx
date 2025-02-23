@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 export default function Footer() {
   const { t } = useTranslation();
+  const { client } = useSelector((state) => state.clientData);
 
   return (
     <footer>
@@ -64,7 +66,7 @@ export default function Footer() {
           </div>
 
           <div className="col-12 p-2">
-            <div className="copy_rights">
+            <div className={`copy_rights ${client?.type === "client" ? "client" : ""}`}>
               <p>
                 &copy; {new Date().getFullYear()} {t("copyright")}
                 <Link to="/"> {t("HomeFix")} </Link>

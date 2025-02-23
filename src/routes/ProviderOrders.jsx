@@ -51,7 +51,7 @@ const ProviderOrders = () => {
             </div>
           ))}
 
-          {orders?.length === 0 && activeTab === "new" && (
+          {orders?.length === 0 && (
             <div className="col-12 p-2">
               <div className="no-data">{t("noNewOrdersAvailable")}</div>
             </div>

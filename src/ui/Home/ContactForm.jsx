@@ -6,7 +6,7 @@ import InputField from ".././form-elements/InputField";
 import SubmitButton from ".././form-elements/SubmitButton";
 import axiosInstance from "../../utils/axiosInstance";
 
-const ContactForm = ({ image = "/images/contactform.png" }) => {
+const ContactForm = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
@@ -14,8 +14,19 @@ const ContactForm = ({ image = "/images/contactform.png" }) => {
     { name: "name", label: t("auth.name"), type: "text", icon: "user" },
     { name: "email", label: t("auth.email"), type: "email", icon: "email" },
     { name: "phone", label: t("auth.phone"), type: "text", icon: "phone" },
-    { name: "subject", label: t("auth.subject"), type: "text", icon: "subject" },
-    { name: "message", label: t("auth.message"), type: "textarea", icon: "message" },
+    {
+      name: "subject",
+      label: t("auth.subject"),
+      type: "text",
+      icon: "subject",
+    },
+    {
+      name: "message",
+      label: t("auth.message"),
+      type: "textarea",
+      icon: "message",
+      as: "textarea",
+    },
   ];
 
   const [formData, setFormData] = useState(
@@ -32,9 +43,11 @@ const ContactForm = ({ image = "/images/contactform.png" }) => {
 
     try {
       const res = await axiosInstance.post(`/homefix/contact-us`, formData);
-      if (res.status === 200) {
+      if (res.data.code === 200) {
         toast.success(t("messageSentSuccessfully"));
-        setFormData(fields.reduce((acc, field) => ({ ...acc, [field.name]: "" }), {}));
+        setFormData(
+          fields.reduce((acc, field) => ({ ...acc, [field.name]: "" }), {})
+        );
       } else {
         toast.error(t("someThingWentWrong"));
       }
@@ -47,10 +60,6 @@ const ContactForm = ({ image = "/images/contactform.png" }) => {
 
   return (
     <div className="contact-container">
-      <h2 className="contact-title">{t("contact.title")}</h2>
-
-      {image && <img src={image} alt="Contact Us" className="contact-image" />}
-
       <Form className="contact-form" onSubmit={handleSubmit}>
         {fields.map((field, index) => (
           <InputField
@@ -62,10 +71,15 @@ const ContactForm = ({ image = "/images/contactform.png" }) => {
             onChange={handleChange}
             icon={`/icons/${field.icon}.svg`}
             required
+            as={field?.as}
           />
         ))}
 
-        <SubmitButton loading={loading} name={t("auth.send")} className="confirm-btn" />
+        <SubmitButton
+          loading={loading}
+          name={t("auth.send")}
+          className="confirm-btn"
+        />
       </Form>
     </div>
   );

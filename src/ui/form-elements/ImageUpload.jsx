@@ -6,7 +6,9 @@ const ImageUpload = ({ formData, setFormData }) => {
 
   useEffect(() => {
     imgView.current.src = formData?.image
-      ? URL.createObjectURL(formData.image)
+      ? formData?.image?.type?.startsWith("image/")
+        ? URL.createObjectURL(formData.image)
+        : formData?.image
       : "/icons/avatar.svg";
   }, [formData?.image]);
 

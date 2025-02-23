@@ -54,7 +54,7 @@ export default function UserDropDown() {
     <Dropdown>
       <Dropdown.Toggle className="rounded_btn">
         <img
-          className={client?.image ? "h-100" : ""}
+          className={client?.image ? "user_img" : ""}
           src={client?.image ? client?.image : "/icons/user.svg"}
           alt="user_alt"
           onClick={handleShow}

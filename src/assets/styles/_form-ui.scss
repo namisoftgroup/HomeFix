@@ -627,11 +627,17 @@
     }
   }
 }
+
 .image-upload-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  flex-direction: column;
+  gap: 12px;
 
   .image-container {
     width: 120px;
