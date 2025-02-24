@@ -2,7 +2,7 @@ import { setShowAuthModal } from "../redux/slices/showAuthModal";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import useAuth from "./../hooks/useAuth";
-import AuthModal from "./../ui/modals/AuthModal";
+
 
 function ProtectionProvider({ children }) {
   const dispatch = useDispatch();
@@ -18,12 +18,7 @@ function ProtectionProvider({ children }) {
     return null;
   }
 
-  return (
-    <>
-      {isAuthed ? children : null}
-      <AuthModal />
-    </>
-  );
+  return <>{isAuthed ? children : null}</>;
 }
 
 export default ProtectionProvider;
