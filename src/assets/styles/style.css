@@ -1931,6 +1931,11 @@ label div {
   transition: 0.3s ease-in-out;
   background: var(--third);
 }
+@media screen and (max-width: 576px) {
+  .service-card {
+    padding: 16px;
+  }
+}
 .service-card:hover {
   transform: translateY(-5px);
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
@@ -1958,6 +1963,11 @@ label div {
   font-size: 1rem;
   margin-bottom: 0;
   color: var(--grey);
+}
+@media screen and (max-width: 576px) {
+  .service-card .service-subtitle {
+    font-size: 14px;
+  }
 }
 
 .driverCard {
@@ -2533,10 +2543,12 @@ body .download-app .text-content .highlight {
 }
 body .download-app .text-content .download-buttons {
   margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 body .download-app .text-content .download-buttons .store-button {
-  width: 150px;
-  margin-right: 10px;
+  height: 40px;
 }
 body .download-app .image-content {
   display: flex;

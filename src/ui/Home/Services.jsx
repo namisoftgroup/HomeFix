@@ -15,7 +15,7 @@ export default function Services() {
             <p className="subtitle">{t("Services.description")}</p>
           </div>
           {services?.map((service) => (
-            <div key={service.id} className="col-lg-3 col-md-6 col-12 p-2">
+            <div key={service.id} className="col-lg-3 col-6 p-2">
               <Link to={`/order-service?id=${service.id}`}>
                 <div className="service-card">
                   <div className="service-image">

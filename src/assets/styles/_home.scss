@@ -224,10 +224,12 @@
 
     .download-buttons {
       margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
 
       .store-button {
-        width: 150px;
-        margin-right: 10px;
+        height: 40px;
       }
     }
   }
