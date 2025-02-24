@@ -7,7 +7,8 @@ import { useSelector } from "react-redux";
 import i18n from "./utils/i18n";
 
 export default function App() {
-  const lang = useSelector((state) => state.language.lang);
+  const { lang } = useSelector((state) => state.language);
+  const { client } = useSelector((state) => state.clientData);
 
   useEffect(() => {
     localStorage.setItem("lang", lang);
@@ -16,9 +17,18 @@ export default function App() {
     i18n.changeLanguage(lang);
   }, [lang]);
 
+  useEffect(() => {
+    localStorage.setItem("userType", client?.type || "client");
+  }, [client]);
+
   return (
     <>
-      <Toaster expand={false} duration={2000} richColors position="bottom-right" />
+      <Toaster
+        expand={false}
+        duration={2000}
+        richColors
+        position="bottom-right"
+      />
       <RouterProvider router={router} />
     </>
   );

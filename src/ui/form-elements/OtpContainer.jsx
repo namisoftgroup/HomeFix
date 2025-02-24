@@ -30,8 +30,18 @@ const OtpContainer = ({ formData, setFormData }) => {
     }
   };
 
+  const handlePaste = (event) => {
+    const data = event.clipboardData.getData("Text");
+    const numbers = data.replace(/\D/g, "");
+    if (numbers.length <= 5) {
+      setOtpValue(numbers.split(""));
+      setFormData({ ...formData, code: numbers });
+    }
+    event.preventDefault();
+  };
+
   return (
-    <div className="otp-container">
+    <div className="otp-container" onPaste={handlePaste}>
       {Array.from({ length: 5 }).map((_, index) => (
         <input
           key={index}
