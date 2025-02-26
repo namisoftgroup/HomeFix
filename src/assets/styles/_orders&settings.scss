@@ -149,63 +149,67 @@
     }
   }
 }
+
 //faq
 .faqs {
   width: 100%;
-  padding: 20px;
+  padding: 40px 0;
   margin: auto;
 
   &-title {
     color: var(--main);
     font-weight: bold;
-    font-size: 18px;
-    margin-top: 20px;
+    font-size: 24px;
+    margin-bottom: 24px;
   }
 
-  &-list {
-    .faqs-item {
-      border-radius: 8px;
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .accordion-item {
+      border-radius: 16px;
       overflow: hidden;
-      margin-bottom: 10px;
-      border: 1px solid var(--btn-bg);
-      background: var(--btn-bg);
-      transition: background 0.3s ease-in-out;
-
-      .faq-header {
-        padding: 15px;
-        font-size: 16px;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: var(--btn-bg);
-        color: var(--gray);
-        border-radius: 8px;
-        transition: background 0.3s ease-in-out;
-      }
-
-      .arrow {
-        font-size: 14px;
-      }
-
-      .faq-body {
-        padding: 15px;
-        font-size: 14px;
-        line-height: 1.6;
-        color: var(--gray-dark);
-        background-color: var(--white);
-      }
-
+      border: 0;
+      backdrop-filter: blur(6px);
+      transition: 0.3s ease-in-out;
+      background: var(--white);
+      border: 1px solid var(--border);
       &.active {
-        background-color: var(--second);
-
-        .faq-header {
-          background-color: var(--second);
-          color: var(--white);
+        background: var(--second);
+        button {
+          color: var(--white) !important;
         }
-
-        .arrow {
-          color: var(--white);
+        &::after {
+          color: var(--white) !important;
+        }
+      }
+      .accordion-button {
+        box-shadow: none !important;
+        background: transparent !important;
+        color: var(--main) !important;
+        text-align: start;
+        &::after {
+          content: "\f00d";
+          font-family: "Font Awesome 6 Pro";
+          background: none;
+          @include centerFlex();
+          font-size: 16px;
+          font-weight: 400;
+          transform: rotate(135deg);
+          transform-origin: center;
+          margin-right: auto;
+          margin-left: 0;
+        }
+        &:not(.collapsed)::after {
+          transform: rotate(0deg);
+        }
+      }
+      .accordion-body {
+        background: transparent !important;
+        p {
+          color: var(--white) !important;
+          margin: 0;
         }
       }
     }

@@ -23,9 +23,11 @@ export default function Footer() {
             <div className="col">
               <h5>{t("support")}</h5>
               <div className="links">
-                <Link to="/contact">{t("contactus")}</Link>
-                <Link to="/help">{t("help")}</Link>
-                <Link to="/cancellation-policy">{t("cancellationPolicy")}</Link>
+                <Link to="/contactus">{t("contactus")}</Link>
+                <Link to="/terms-and-conditions">
+                  {t("termsAndConditions")}
+                </Link>
+                <Link to="/privacy">{t("privacyPolicy")}</Link>
                 <Link to="/faqs">{t("faqs")}</Link>
               </div>
             </div>
@@ -36,8 +38,8 @@ export default function Footer() {
               <h5>{t("quickLinks")}</h5>
               <div className="links">
                 <Link to="/">{t("home")}</Link>
-                <Link to="/about">{t("aboutus")}</Link>
-                <Link to="/services">{t("services")}</Link>
+                <Link to="/aboutus">{t("aboutus")}</Link>
+                <Link to="/#services">{t("services")}</Link>
               </div>
             </div>
           </div>
@@ -66,13 +68,17 @@ export default function Footer() {
           </div>
 
           <div className="col-12 p-2">
-            <div className={`copy_rights ${client?.type === "client" ? "client" : ""}`}>
+            <div
+              className={`copy_rights ${
+                !client?.id ? "client" : client?.type === "client" ? "client" : ""
+              }`}
+            >
               <p>
                 &copy; {new Date().getFullYear()} {t("copyright")}
                 <Link to="/"> {t("HomeFix")} </Link>
               </p>
 
-              <div className="follow">
+              {/* <div className="follow">
                 <div className="social_media">
                   <Link to="https://www.facebook.com">
                     <i className="fa-brands fa-facebook-f"></i>
@@ -87,7 +93,7 @@ export default function Footer() {
                     <i className="fa-brands fa-youtube"></i>
                   </Link>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

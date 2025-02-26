@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
         element: <Terms type="privacy" />,
       },
       {
-        path: "fqs",
+        path: "faqs",
         element: <FAQs />,
       },
       {

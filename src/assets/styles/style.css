@@ -747,7 +747,7 @@ footer .copy_rights {
   margin-top: 16px;
   border-top: 1px solid var(--input-stroke);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -2578,7 +2578,7 @@ body .contact_page .contact-text {
   color: var(--gray);
   text-align: center;
   font-size: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 body .contact_page .contact-form {
   display: flex;
@@ -3111,54 +3111,68 @@ body .terms_container .terms_content p {
 }
 body .faqs {
   width: 100%;
-  padding: 20px;
+  padding: 40px 0;
   margin: auto;
 }
 body .faqs-title {
   color: var(--main);
   font-weight: bold;
-  font-size: 18px;
-  margin-top: 20px;
+  font-size: 24px;
+  margin-bottom: 24px;
 }
-body .faqs-list .faqs-item {
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 10px;
-  border: 1px solid var(--btn-bg);
-  background: var(--btn-bg);
-  transition: background 0.3s ease-in-out;
-}
-body .faqs-list .faqs-item .faq-header {
-  padding: 15px;
-  font-size: 16px;
-  cursor: pointer;
+body .faqs .accordion {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 16px;
+}
+body .faqs .accordion .accordion-item {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 0;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  transition: 0.3s ease-in-out;
+  background: var(--white);
+  border: 1px solid var(--border);
+}
+body .faqs .accordion .accordion-item.active {
+  background: var(--second);
+}
+body .faqs .accordion .accordion-item.active button {
+  color: var(--white) !important;
+}
+body .faqs .accordion .accordion-item.active::after {
+  color: var(--white) !important;
+}
+body .faqs .accordion .accordion-item .accordion-button {
+  box-shadow: none !important;
+  background: transparent !important;
+  color: var(--main) !important;
+  text-align: start;
+}
+body .faqs .accordion .accordion-item .accordion-button::after {
+  content: "\f00d";
+  font-family: "Font Awesome 6 Pro";
+  background: none;
+  display: flex;
   align-items: center;
-  background: var(--btn-bg);
-  color: var(--gray);
-  border-radius: 8px;
-  transition: background 0.3s ease-in-out;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 400;
+  transform: rotate(135deg);
+  transform-origin: center;
+  margin-right: auto;
+  margin-left: 0;
 }
-body .faqs-list .faqs-item .arrow {
-  font-size: 14px;
+body .faqs .accordion .accordion-item .accordion-button:not(.collapsed)::after {
+  transform: rotate(0deg);
 }
-body .faqs-list .faqs-item .faq-body {
-  padding: 15px;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--gray-dark);
-  background-color: var(--white);
+body .faqs .accordion .accordion-item .accordion-body {
+  background: transparent !important;
 }
-body .faqs-list .faqs-item.active {
-  background-color: var(--second);
-}
-body .faqs-list .faqs-item.active .faq-header {
-  background-color: var(--second);
-  color: var(--white);
-}
-body .faqs-list .faqs-item.active .arrow {
-  color: var(--white);
+body .faqs .accordion .accordion-item .accordion-body p {
+  color: var(--white) !important;
+  margin: 0;
 }
 body .profile-container {
   width: 100%;
