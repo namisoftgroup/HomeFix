@@ -54,7 +54,7 @@ export default function ConfirmRegister({
           const loginPayload = {
             phone: watch("phone"),
             password: watch("password"),
-            type: watch("type"),
+            type: data?.type,
             country_code: watch("country_code"),
           };
 
@@ -156,7 +156,7 @@ export default function ConfirmRegister({
           onClick={(e) => {
             e.preventDefault();
             setFormType(
-              userType === "technical" ? "register-technical" : "register"
+              userType === "provider" ? "register-technical" : "register"
             );
           }}
         >

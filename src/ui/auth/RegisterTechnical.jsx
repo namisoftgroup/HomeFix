@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import axiosInstance from "../../utils/axiosInstance";
@@ -7,22 +6,21 @@ import TechnicalStepTwo from "./TechnicalStepTwo.jsx";
 
 export default function RegisterTechnical({
   setFormType,
-  formData,
-  setFormData,
+  watch,
+  register,
+  errors,
+  handleSubmit,
+  isSubmitting,
+  step,
+  setStep,
 }) {
   const { t } = useTranslation();
 
-  const [step, setStep] = useState(1);
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
+  const onSubmit = async () => {
     try {
       const res = await axiosInstance.post("/auth/send-code", {
-        phone: formData.phone,
-        country_code: formData.country_code,
+        phone: watch("phone"),
+        country_code: watch("country_code"),
         type: "register",
       });
 
@@ -32,8 +30,6 @@ export default function RegisterTechnical({
       }
     } catch (error) {
       console.error("Error Sending OTP:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -43,20 +39,24 @@ export default function RegisterTechnical({
         <p className="sub-head">{t("auth.registerSubtitle")}</p>
       </div>
 
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
         {step === 1 ? (
           <TechnicalStepOne
-            formData={formData}
-            setFormData={setFormData}
             setFormType={setFormType}
             setStep={setStep}
+            register={register}
+            errors={errors}
+            watch={watch}
+            handleSubmit={handleSubmit}
           />
         ) : (
           <TechnicalStepTwo
-            formData={formData}
-            setFormData={setFormData}
-            loading={loading}
+            loading={isSubmitting}
             setStep={setStep}
+            register={register}
+            errors={errors}
+            watch={watch}
+            handleSubmit={handleSubmit}
           />
         )}
       </form>

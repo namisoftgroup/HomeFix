@@ -21,6 +21,7 @@ export default function AuthModal() {
 
   const [formType, setFormType] = useState("login");
   const [userType, setUserType] = useState("client");
+  const [step, setStep] = useState(1);
 
   const registerSchema = yup.object().shape({
     name: yup.string().required(t("validation.nameRequired")),
@@ -41,13 +42,45 @@ export default function AuthModal() {
     city_id: yup.string().required(t("validation.cityRequired")),
   });
 
+  const technicalStepOneSchema = yup.object().shape({
+    name: yup.string().required(t("validation.nameRequired")),
+    phone: yup
+      .string()
+      .required(t("validation.phoneRequired"))
+      .matches(/^7\d{8}$/, t("validation.phoneInvalid")),
+    email: yup
+      .string()
+      .email(t("validation.emailInvalid"))
+      .required(t("validation.emailRequired")),
+    password: yup
+      .string()
+      .required(t("validation.passwordRequired"))
+      .min(8, t("validation.passwordMinLength"))
+      .matches(/[A-Z]/, t("validation.passwordCapitalLetter"))
+      .matches(/[a-z]/, t("validation.passwordSmallLetter")),
+    city_id: yup.string().required(t("validation.cityRequired")),
+    specialty_id: yup.string().required(t("validation.specialtyRequired")),
+  });
+
+  const technicalStepTwoSchema = yup.object().shape({
+    image: yup.mixed().required(t("validation.imageRequired")),
+    front_national_image: yup.mixed().required(t("validation.imageRequired")),
+    back_national_image: yup.mixed().required(t("validation.imageRequired")),
+  });
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: yupResolver(registerSchema),
+    resolver: yupResolver(
+      userType === "client"
+        ? registerSchema
+        : step === 1
+        ? technicalStepOneSchema
+        : technicalStepTwoSchema
+    ),
 
     defaultValues: {
       name: "",
@@ -56,7 +89,6 @@ export default function AuthModal() {
       password: "",
       city_id: "",
       country_code: "+962",
-      type: userType,
       specialty_id: "",
       image: null,
       front_national_image: null,
@@ -108,20 +140,38 @@ export default function AuthModal() {
                 watch={watch}
                 handleSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
+                step={step}
+                setStep={setStep}
               />
             )}
 
             {formType === "confirm-register" && (
               <ConfirmRegister
-                data={{
-                  name: watch("name"),
-                  phone: watch("phone"),
-                  email: watch("email"),
-                  password: watch("password"),
-                  city_id: watch("city_id"),
-                  country_code: watch("country_code"),
-                  type: watch("type"),
-                }}
+                data={
+                  userType === "client"
+                    ? {
+                        name: watch("name"),
+                        phone: watch("phone"),
+                        email: watch("email"),
+                        password: watch("password"),
+                        city_id: watch("city_id"),
+                        country_code: watch("country_code"),
+                        type: "client",
+                      }
+                    : {
+                        name: watch("name"),
+                        phone: watch("phone"),
+                        email: watch("email"),
+                        password: watch("password"),
+                        city_id: watch("city_id"),
+                        country_code: watch("country_code"),
+                        type: "provider",
+                        specialty_id: watch("specialty_id"),
+                        image: watch("image")[0],
+                        front_national_image: watch("front_national_image")[0],
+                        back_national_image: watch("back_national_image")[0],
+                      }
+                }
                 watch={watch}
                 userType={userType}
                 setFormType={setFormType}

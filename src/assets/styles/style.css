@@ -3909,6 +3909,12 @@ body.en .orderStatus .progress_indicator {
   right: initial;
   left: 0;
 }
+body.en .form .input-field input,
+body.en .form .input-field textarea,
+body.en .form .input-field select {
+  direction: ltr;
+  background-position: top calc(0.7em + 0.1875rem) right calc(0.375em + 0.1875rem);
+}
 body input[type=email] {
   text-align: right;
 }/*# sourceMappingURL=style.css.map */

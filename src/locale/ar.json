@@ -287,6 +287,8 @@
     "passwordCapitalLetter": "يجب ان تحتوي كلمة المرور على حرف كبير.",
     "passwordSmallLetter": "يجب ان تحتوي كلمة المرور على حرف صغير.",
     "passwordNotMatch":"كلمة المرور غير متطابقة",
-    "cityRequired": "المدينة مطلوبة."
+    "cityRequired": "المدينة مطلوبة.",
+    "specialtyRequired": "التخصص مطلوب.",
+    "imageRequired": "الصورة مطلوبة."
   }
 }

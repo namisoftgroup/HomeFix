@@ -1,38 +1,39 @@
-import { useEffect, useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
 
-const ImageUpload = ({ formData, setFormData }) => {
+const ImageUpload = ({ register, error, watch }) => {
   const imgView = useRef(null);
-  const inputRef = useRef(null);
+  const [preview, setPreview] = useState("/icons/avatar.svg");
+
+  const selectedFile = watch("image");
 
   useEffect(() => {
-    imgView.current.src = formData?.image
-      ? formData?.image?.type?.startsWith("image/")
-        ? URL.createObjectURL(formData.image)
-        : formData?.image
-      : "/icons/avatar.svg";
-  }, [formData?.image]);
+    if (selectedFile && selectedFile[0]) {
+      const objectUrl = URL.createObjectURL(selectedFile[0]);
+      setPreview(objectUrl);
 
-  const handleImageUpload = (e) => {
-    if (e.target.files[0]) {
-      setFormData({ ...formData, image: e.target.files[0] });
+      return () => URL.revokeObjectURL(objectUrl);
     }
-  };
+  }, [selectedFile]);
 
   return (
     <div className="image-upload-wrapper">
-      <div className="image-container" onClick={() => inputRef.current.click()}>
-        <img ref={imgView} alt="avatar" />
-        <div className="upload-button" onClick={() => inputRef.current.click()}>
+      <label htmlFor="image" className="image-container">
+        <img ref={imgView} src={preview} alt="avatar" />
+        <div className="upload-button">
           <i className="fa-solid fa-camera"></i>
         </div>
-      </div>
+      </label>
       <input
         type="file"
         accept="image/*"
-        onChange={handleImageUpload}
-        ref={inputRef}
+        id="image"
+        {...register("image")}
         style={{ display: "none" }}
       />
+      {error && (
+        <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+      )}
     </div>
   );
 };
