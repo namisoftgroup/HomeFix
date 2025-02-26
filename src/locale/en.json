@@ -7,7 +7,7 @@
   "register": "Register",
   "logout": "Logout",
   "services": "Services",
-  "arabic": "Arabic",
+  "arabic": "العربية",
   "english": "English",
   "support": "Support",
   "company": "Company",
@@ -97,8 +97,8 @@
   "deleteAccountDesc": "Are you sure you want to delete your account?",
   "cancel": "Cancel",
   "myProfile": "My Profile",
-  "contactTitle": "Contact Us",
-  "contactText": "You can contact us through email and WhatsApp to request services or inquire about any matter",
+  "contactTitle": "We Are Here to Serve You, Stay in Touch with Us",
+  "contactText": "You can contact us directly for any inquiries or assistance. Our team is ready to respond quickly and professionally.",
   "messageSentSuccessfully": "Message sent successfully",
   "notifications": "Notifications",
   "noNotifications": "No notifications yet",
@@ -271,5 +271,13 @@
     "confirm_collection": "Payment and collection",
     "set_images": "Attach work images",
     "complete": "Completed"
+  },
+  "validation": {
+    "nameRequired": "Name is required.",
+    "emailInvalid": "Please enter a valid email address.",
+    "emailRequired": "Email is required.",
+    "subjectRequired": "Subject is required.",
+    "messageRequired": "Message is required.",
+    "messageMinLength": "Message must be at least 10 characters long."
   }
 }

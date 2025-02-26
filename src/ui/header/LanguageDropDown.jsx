@@ -1,5 +1,5 @@
 import i18next from "i18next";
-import { Dropdown} from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { setLanguage } from "../../redux/slices/languageSlice";
 import { useTranslation } from "react-i18next";
@@ -25,7 +25,6 @@ export default function LanguageDropDown() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-     
         <Dropdown.Item onClick={() => handleLanguageChange("en")}>
           {t("english")}
         </Dropdown.Item>

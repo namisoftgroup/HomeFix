@@ -260,6 +260,7 @@
         position: relative;
         display: flex;
         align-items: center;
+        flex-direction: column;
 
         .input-icon {
           position: absolute;
@@ -294,81 +295,6 @@
             padding-inline-start: unset;
             padding-inline-end: 40px;
           }
-        }
-      }
-    }
-  }
-}
-//contact
-.contact-container {
-  width: 100%;
-  margin: auto;
-  .contact-image {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    height: auto;
-    width: 250px;
-  }
-
-  .contact-title {
-    color: var(--main);
-    font-weight: bold;
-    font-size: 18px;
-    margin: 10px 20px;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    .input-field {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-
-      .input-wrapper {
-        position: relative;
-        display: flex;
-        align-items: flex-start;
-
-        .input-icon {
-          position: absolute;
-          width: 20px;
-          height: 20px;
-          right: 10px;
-          top: 16px;
-          transition: all 0.3s ease;
-        }
-
-        input.form-control,
-        textarea.form-control {
-          color: var(--main);
-          direction: rtl;
-          height: 52px;
-          width: 100%;
-          border: none;
-          outline: none;
-          padding: 8px 12px;
-          padding-inline-start: 40px;
-          border-radius: 12px;
-          background: var(--input-bg);
-          border: 1px solid var(--border);
-          font-size: 16px;
-          box-shadow: none !important;
-
-          &:focus {
-            border-color: var(--second);
-            outline: none;
-          }
-          &[type="email"] {
-            padding-inline-start: unset;
-            padding-inline-end: 40px;
-          }
-        }
-
-        textarea.form-control {
-          height: 100px;
         }
       }
     }

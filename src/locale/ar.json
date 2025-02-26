@@ -90,7 +90,7 @@
   "choosePaymentType": "اختر طريقة الدفع",
   "cash": "كاش",
   "online": "اونلاين",
-  "confirmAndSend":"تأكيد وارسال",
+  "confirmAndSend": "تأكيد وارسال",
   "rateTechnical": "تقييم الفني",
   "writeYourExperience": "اكتب تجربتك",
   "send": "ارسال",
@@ -99,8 +99,8 @@
   "deleteAccountDesc": "هل أنت متأكد من حذف الحساب؟",
   "cancel": "الغاء",
   "myProfile": "حسابي",
-  "contactTitle": "اتصل بنا",
-  "contactText": "يمكنك التواصل معنا عبر البريد الالكتروني والواتساب لطلب الخدمات أو للاستفسار عن أي شأن",
+  "contactTitle": "نحن هنا لخدمتك, ابقى على تواصل معنا",
+  "contactText": "يمكنك التواصل معنا مباشرة لأي استفسار أو مساعدة. فريقنا جاهز للرد عليك بكل سرعة واحترافية.",
   "messageSentSuccessfully": "تم ارسال الرسالة بنجاح",
   "notifications": "الاشعارات",
   "noNotifications": "لا يوجد اشعارات",
@@ -272,5 +272,13 @@
     "confirm_collection": "الدفع و التحصيل",
     "set_images": "قم بإرفاق صور العمل",
     "complete": "تم الانتهاء"
+  },
+  "validation": {
+    "nameRequired": "الاسم مطلوب.",
+    "emailInvalid": "يرجى إدخال بريد إلكتروني صالح.",
+    "emailRequired": "البريد الإلكتروني مطلوب.",
+    "subjectRequired": "الموضوع مطلوب.",
+    "messageRequired": "الرسالة مطلوبة.",
+    "messageMinLength": "يجب أن تكون الرسالة 10 أحرف على الأقل."
   }
 }
