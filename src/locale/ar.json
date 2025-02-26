@@ -279,6 +279,14 @@
     "emailRequired": "البريد الإلكتروني مطلوب.",
     "subjectRequired": "الموضوع مطلوب.",
     "messageRequired": "الرسالة مطلوبة.",
-    "messageMinLength": "يجب أن تكون الرسالة 10 أحرف على الأقل."
+    "messageMinLength": "يجب أن تكون الرسالة 10 أحرف على الأقل.",
+    "phoneRequired": "رقم الجوال مطلوب.",
+    "phoneInvalid": "يجب أن يبدأ الهاتف بالرقم 7 وأن يتكون من 9 أرقام",
+    "passwordRequired": "كلمة المرور مطلوبة.",
+    "passwordMinLength": "يجب ان تكون كلمة المرور 8 حروف على الاقل.",
+    "passwordCapitalLetter": "يجب ان تحتوي كلمة المرور على حرف كبير.",
+    "passwordSmallLetter": "يجب ان تحتوي كلمة المرور على حرف صغير.",
+    "passwordNotMatch":"كلمة المرور غير متطابقة",
+    "cityRequired": "المدينة مطلوبة."
   }
 }

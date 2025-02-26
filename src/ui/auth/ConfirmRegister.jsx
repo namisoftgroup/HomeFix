@@ -9,13 +9,14 @@ import SubmitButton from "../form-elements/SubmitButton";
 import axiosInstance from "../../utils/axiosInstance";
 
 export default function ConfirmRegister({
-  formData,
+  data,
+  watch,
   userType,
-  setFormData,
   setFormType,
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [code, setCode] = useState("");
   const [, setCookie] = useCookies(["token", "id"]);
   const [loading, setLoading] = useState(false);
   const [timer, setTimer] = useState(60);
@@ -36,29 +37,25 @@ export default function ConfirmRegister({
 
     try {
       const checkResponse = await axiosInstance.post("/auth/confirm-code", {
-        phone: formData.phone,
-        country_code: formData.country_code,
+        phone: watch("phone"),
+        country_code: watch("country_code"),
         type: "register",
-        code: formData.code,
+        code: code,
       });
 
       if (checkResponse.data.code === 200) {
-        const registerResponse = await axiosInstance.post(
-          "/auth/users",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        const registerResponse = await axiosInstance.post("/auth/users", data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
 
         if (registerResponse.data.code === 200) {
           const loginPayload = {
-            phone: formData.phone,
-            password: formData.password,
-            type: formData.type,
-            country_code: formData.country_code,
+            phone: watch("phone"),
+            password: watch("password"),
+            type: watch("type"),
+            country_code: watch("country_code"),
           };
 
           const loginResponse = await axiosInstance.post(
@@ -100,8 +97,8 @@ export default function ConfirmRegister({
   const handleResend = async () => {
     try {
       const res = await axiosInstance.post("/auth/send-code", {
-        phone: formData.phone,
-        country_code: formData.country_code,
+        phone: watch("phone"),
+        country_code: watch("country_code"),
         type: "register",
       });
       if (res.data.code === 200) {
@@ -122,11 +119,11 @@ export default function ConfirmRegister({
       <div className="mb-4">
         <h2 className="head">{t("auth.resetPasswordTitle")} </h2>
         <p className="sub-head">
-          {t("auth.resetPasswordDesc")} <b>{formData.phone}</b>
+          {t("auth.resetPasswordDesc")} <b>{watch("phone")}</b>
         </p>
       </div>
 
-      <OtpContainer formData={formData} setFormData={setFormData} />
+      <OtpContainer setCode={setCode} />
 
       <div className="resend-code">
         <span className={`resend_link ${resendDisabled ? "disabled" : ""}`}>

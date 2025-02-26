@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import AudioRecorder from "../../ui/form-elements/Record";
 import ConfirmationModal from "../modals/ConfirmationModal";
 import useGetServices from "../../hooks/home/useGetServices";
@@ -13,6 +14,7 @@ export default function ServiceDetails() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { data: services } = useGetServices();
+  const { client } = useSelector((state) => state.clientData);
 
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
@@ -60,14 +62,14 @@ export default function ServiceDetails() {
   };
 
   useEffect(() => {
-    if (!id) {
+    if (!id || client?.type !== "client") {
       navigate("/");
     }
 
     if (services) {
       setService(services?.filter((s) => s?.id === +id)[0]);
     }
-  }, [id, navigate, services]);
+  }, [client?.type, id, navigate, services]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

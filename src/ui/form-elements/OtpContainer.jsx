@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const OtpContainer = ({ formData, setFormData }) => {
+const OtpContainer = ({ setCode }) => {
   const [otpValue, setOtpValue] = useState(Array(5).fill(""));
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const OtpContainer = ({ formData, setFormData }) => {
     const newOtpValue = [...otpValue];
     newOtpValue[index] = value;
     setOtpValue(newOtpValue);
-    setFormData({ ...formData, code: newOtpValue.join("") });
+    setCode(newOtpValue.join(""));
 
     if (value && index < 4) {
       document.getElementById(`input${index + 1}`)?.focus();
@@ -35,7 +35,7 @@ const OtpContainer = ({ formData, setFormData }) => {
     const numbers = data.replace(/\D/g, "");
     if (numbers.length <= 5) {
       setOtpValue(numbers.split(""));
-      setFormData({ ...formData, code: numbers });
+      setCode(numbers);
     }
     event.preventDefault();
   };

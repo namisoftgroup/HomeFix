@@ -747,7 +747,7 @@ footer .copy_rights {
   margin-top: 16px;
   border-top: 1px solid var(--input-stroke);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -942,6 +942,7 @@ footer .copy_rights .social_media a:hover {
   align-items: center;
   gap: 6px;
   flex-wrap: wrap;
+  margin: 0 !important;
 }
 .form .input-field label svg,
 .form .input-field label i {
@@ -968,10 +969,11 @@ footer .copy_rights .social_media a:hover {
   outline: none;
   padding: 8px 12px;
   border-radius: 12px;
-  background: var(--input-bg);
-  border: 1px solid var(--border);
+  background-color: var(--input-bg);
+  border: 1px solid var(--border) !important;
   font-size: 16px;
   box-shadow: none !important;
+  background-position: top calc(0.7em + 0.1875rem) left calc(0.375em + 0.1875rem);
 }
 .form .input-field input::-moz-placeholder, .form .input-field textarea::-moz-placeholder, .form .input-field select::-moz-placeholder {
   font-size: 14px;
@@ -1799,6 +1801,10 @@ label div {
 
 .form-check-input {
   box-shadow: none !important;
+}
+
+.invalid-feedback {
+  display: block !important;
 }
 
 .work-card {

@@ -106,6 +106,7 @@
       align-items: center;
       gap: 6px;
       flex-wrap: wrap;
+      margin: 0 !important;
       svg,
       i {
         stroke: var(--main);
@@ -132,13 +133,15 @@
       outline: none;
       padding: 8px 12px;
       border-radius: 12px;
-      background: var(--input-bg);
-      border: 1px solid var(--border);
+      background-color: var(--input-bg);
+      border: 1px solid var(--border) !important;
       font-size: 16px;
       box-shadow: none !important;
       &::placeholder {
         font-size: 14px;
       }
+      background-position: top calc(0.7em + 0.1875rem) left
+        calc(0.375em + 0.1875rem);
     }
     textarea {
       height: 140px;
@@ -963,4 +966,8 @@ label {
 
 .form-check-input {
   box-shadow: none !important;
+}
+
+.invalid-feedback{
+  display: block !important;
 }

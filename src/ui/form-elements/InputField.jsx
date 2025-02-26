@@ -7,7 +7,7 @@ const InputField = forwardRef(
     ref
   ) => {
     return (
-      <div className="input-field mb-3">
+      <div className="input-field">
         {label && (
           <Form.Label htmlFor={props?.id} className="input-label">
             {label} {hint && <span className="hint">{hint}</span>}
