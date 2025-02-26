@@ -226,7 +226,8 @@
     "check": "Confirm",
     "resetPasswordDesc": "Please enter the verification code sent to your phone number",
     "new_password": "New Password",
-    "confirm_password": "Confirm Password"
+    "confirm_password": "Confirm Password",
+    "current_password": "Current Password"
   },
   "header": {
     "list": "Orders",

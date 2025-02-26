@@ -230,7 +230,8 @@
     "confirm": "تاكيد",
     "resetPasswordDesc": "من فضلك ادخل رمز التحقق المرسل الي رقم الجوال",
     "confirm_password": "تاكيد كلمة المرور",
-    "new_password": "كلمة المرور الجديدة"
+    "new_password": "كلمة المرور الجديدة",
+    "current_password": "كلمة المرور الحالية" 
   },
   "header": {
     "list": "طلباتي",

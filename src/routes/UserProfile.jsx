@@ -5,7 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateClientData } from "../redux/slices/clientData";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 import InputField from "../ui/form-elements/InputField";
 import useGetCities from "../hooks/user/useGetCities";
 import SelectField from "../ui/form-elements/SelectField";
@@ -18,59 +21,81 @@ const UserProfile = () => {
   const { t } = useTranslation();
   const { client } = useSelector((state) => state.clientData);
   const { data: cities, isLoading } = useGetCities();
-
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
   const [showPasswordFields, setShowPasswordFields] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    city_id: "",
-    password: "",
-    image: null,
+
+  const schema = yup.object().shape({
+    name: yup.string().required(t("validation.nameRequired")),
+    email: yup
+      .string()
+      .email(t("validation.emailInvalid"))
+      .required(t("validation.emailRequired")),
+    phone: yup
+      .string()
+      .required(t("validation.phoneRequired"))
+      .matches(/^7\d{8}$/, t("validation.phoneInvalid")),
+    city_id: yup.string().required(t("validation.cityRequired")),
+    image: yup.mixed().required(t("validation.imageRequired")),
+    password: yup
+      .string()
+      .required(t("validation.passwordRequired"))
+      .min(8, t("validation.passwordMinLength"))
+      .matches(/[A-Z]/, t("validation.passwordCapitalLetter"))
+      .matches(/[a-z]/, t("validation.passwordSmallLetter")),
+    password_confirmation: yup
+      .string()
+      .required(t("validation.passwordRequired"))
+      .oneOf([yup.ref("password")], t("validation.passwordNotMatch")),
+    current_password: yup
+      .string()
+      .required(t("validation.passwordRequired"))
+      .min(8, t("validation.passwordMinLength"))
+      .matches(/[A-Z]/, t("validation.passwordCapitalLetter"))
+      .matches(/[a-z]/, t("validation.passwordSmallLetter")),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      city_id: "",
+      image: null,
+      password: "",
+      password_confirmation: "",
+      current_password: "",
+    },
   });
 
   useEffect(() => {
     if (client) {
-      setFormData({
-        name: client?.name || "",
-        email: client?.email || "",
-        phone: client?.phone || "",
-        city_id: client?.city.id || "",
-        image: client?.image || null,
-        password: "",
-        confirmPassword: "",
-      });
+      setValue("name", client?.name || "");
+      setValue("email", client?.email || "");
+      setValue("phone", client?.phone || "");
+      setValue("city_id", client?.city.id || "");
+      setValue("image", client?.image || null);
     }
-  }, [client]);
+  }, [client, setValue]);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    if (showPasswordFields && formData.password !== formData.confirmPassword) {
-      toast.error(t("passwordNotMatch"));
-      setLoading(false);
-      return;
-    }
-
+  const onSubmit = async () => {
     const payload = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      city_id: formData.city_id,
-      password: formData.password,
+      name: watch("name"),
+      email: watch("email"),
+      phone: watch("phone"),
+      city_id: watch("city_id"),
+      password: watch("password"),
     };
 
-    if (typeof formData.image !== "string") {
-      payload.image = formData.image;
+    if (typeof watch("image") !== "string") {
+      payload.image = watch("image")[0];
     }
 
     try {
@@ -98,8 +123,6 @@ const UserProfile = () => {
     } catch (error) {
       console.log(error);
       toast.error("Some thing went wrong, please try again or contact us.");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -115,13 +138,17 @@ const UserProfile = () => {
               {t("editProfile")}
             </h2>
 
-            <Form className="profile-form" onSubmit={handleSubmit}>
-              <ImageUpload formData={formData} setFormData={setFormData} />
+            <Form className="profile-form" onSubmit={handleSubmit(onSubmit)}>
+              <ImageUpload
+                error={errors?.image?.message}
+                register={register}
+                watch={watch}
+              />
 
               <InputField
                 label={t("auth.fullName")}
-                onChange={handleChange}
-                value={formData.name}
+                {...register("name")}
+                error={errors?.name?.message}
                 name="name"
                 type="text"
                 icon="/icons/user.svg"
@@ -129,8 +156,8 @@ const UserProfile = () => {
 
               <InputField
                 label={t("auth.phone")}
-                onChange={handleChange}
-                value={formData.phone}
+                disabled
+                {...register("phone")}
                 name="phone"
                 type="tel"
                 icon="/icons/phone.svg"
@@ -138,8 +165,8 @@ const UserProfile = () => {
 
               <InputField
                 label={t("auth.email")}
-                onChange={handleChange}
-                value={formData.email}
+                {...register("email")}
+                error={errors?.email?.message}
                 name="email"
                 type="email"
                 icon="/icons/email.svg"
@@ -153,10 +180,8 @@ const UserProfile = () => {
                 icon="/icons/email.svg"
                 id="city_id"
                 name="city_id"
-                value={formData.city_id}
-                onChange={(e) =>
-                  setFormData({ ...formData, city_id: e.target.value })
-                }
+                {...register("city_id")}
+                error={errors?.city_id?.message}
                 options={
                   cities?.map((city) => ({
                     name: city.name,
@@ -183,27 +208,36 @@ const UserProfile = () => {
               {showPasswordFields && (
                 <>
                   <InputField
-                    label="كلمة المرور"
-                    name="password"
+                    label={t("auth.current_password")}
+                    name="current_password"
                     type="password"
-                    value={formData.password}
-                    onChange={handleChange}
+                    {...register("current_password")}
+                    error={errors?.current_password?.message}
                     icon="/icons/password.svg"
                   />
 
                   <InputField
-                    label="تأكيد كلمة المرور"
+                    label={t("auth.new_password")}
+                    name="password"
+                    type="password"
+                    {...register("password")}
+                    error={errors?.password?.message}
+                    icon="/icons/password.svg"
+                  />
+
+                  <InputField
+                    label={t("auth.confirm_password")}
                     name="confirmPassword"
                     type="password"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
+                    {...register("password_confirmation")}
+                    error={errors?.password_confirmation?.message}
                     icon="/icons/password.svg"
                   />
                 </>
               )}
 
               <SubmitButton
-                loading={loading}
+                loading={isSubmitting}
                 name={t("Services.confirm")}
                 className="confirm-btn"
               />

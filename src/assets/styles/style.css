@@ -3234,6 +3234,7 @@ body .profile-container .profile-form .input-field .input-wrapper .input-icon {
   height: 20px;
   transition: all 0.3s ease;
   left: auto;
+  top: 14px;
   right: 10px;
 }
 body .profile-container .profile-form .input-field .input-wrapper input.form-control,

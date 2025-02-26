@@ -9,7 +9,10 @@ const ImageUpload = ({ register, error, watch }) => {
 
   useEffect(() => {
     if (selectedFile && selectedFile[0]) {
-      const objectUrl = URL.createObjectURL(selectedFile[0]);
+      const objectUrl =
+        typeof selectedFile === "string"
+          ? selectedFile
+          : URL.createObjectURL(selectedFile[0]);
       setPreview(objectUrl);
 
       return () => URL.revokeObjectURL(objectUrl);
