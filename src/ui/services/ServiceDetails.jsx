@@ -73,6 +73,11 @@ export default function ServiceDetails() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (formData?.images_list?.length === 0 && !formData?.voice) {
+      toast.warning(t("pleaseUploadImagesOrVoice"));
+      return;
+    }
     setShowModal(true);
   };
 
