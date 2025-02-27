@@ -17,6 +17,7 @@ function UserRegister({
   watch,
   handleSubmit,
   isSubmitting,
+  reset,
 }) {
   const { t } = useTranslation();
   const { data: cities, isLoading } = useGetCities();
@@ -102,9 +103,15 @@ function UserRegister({
         </span>
 
         <div className="d-flex gap-2">
-          <button className="back_btn" onClick={() => setFormType("login")}>
+          <div
+            className="back_btn"
+            onClick={() => {
+              setFormType("login");
+              reset();
+            }}
+          >
             <i className="fal fa-arrow-right"></i>
-          </button>
+          </div>
           <SubmitButton name={t("auth.send")} loading={isSubmitting} />
         </div>
       </form>

@@ -15,6 +15,7 @@ import SelectField from "../ui/form-elements/SelectField";
 import ImageUpload from "./../ui/form-elements/ImageUpload";
 import axiosInstance from "../utils/axiosInstance";
 import SubmitButton from "./../ui/form-elements/SubmitButton";
+import ResetPasswordModal from "../ui/modals/ResetPasswordModal";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const UserProfile = () => {
   const { data: cities, isLoading } = useGetCities();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [showPasswordFields, setShowPasswordFields] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
 
   const schema = yup.object().shape({
     name: yup.string().required(t("validation.nameRequired")),
@@ -37,22 +38,6 @@ const UserProfile = () => {
       .matches(/^7\d{8}$/, t("validation.phoneInvalid")),
     city_id: yup.string().required(t("validation.cityRequired")),
     image: yup.mixed().required(t("validation.imageRequired")),
-    password: yup
-      .string()
-      .required(t("validation.passwordRequired"))
-      .min(8, t("validation.passwordMinLength"))
-      .matches(/[A-Z]/, t("validation.passwordCapitalLetter"))
-      .matches(/[a-z]/, t("validation.passwordSmallLetter")),
-    password_confirmation: yup
-      .string()
-      .required(t("validation.passwordRequired"))
-      .oneOf([yup.ref("password")], t("validation.passwordNotMatch")),
-    current_password: yup
-      .string()
-      .required(t("validation.passwordRequired"))
-      .min(8, t("validation.passwordMinLength"))
-      .matches(/[A-Z]/, t("validation.passwordCapitalLetter"))
-      .matches(/[a-z]/, t("validation.passwordSmallLetter")),
   });
 
   const {
@@ -200,41 +185,10 @@ const UserProfile = () => {
                 <Form.Switch
                   id="wantChangePassword"
                   name="wantChangePassword"
-                  checked={showPasswordFields}
-                  onChange={() => setShowPasswordFields(!showPasswordFields)}
+                  checked={showResetModal}
+                  onChange={() => setShowResetModal(!showResetModal)}
                 />
               </div>
-
-              {showPasswordFields && (
-                <>
-                  <InputField
-                    label={t("auth.current_password")}
-                    name="current_password"
-                    type="password"
-                    {...register("current_password")}
-                    error={errors?.current_password?.message}
-                    icon="/icons/password.svg"
-                  />
-
-                  <InputField
-                    label={t("auth.new_password")}
-                    name="password"
-                    type="password"
-                    {...register("password")}
-                    error={errors?.password?.message}
-                    icon="/icons/password.svg"
-                  />
-
-                  <InputField
-                    label={t("auth.confirm_password")}
-                    name="confirmPassword"
-                    type="password"
-                    {...register("password_confirmation")}
-                    error={errors?.password_confirmation?.message}
-                    icon="/icons/password.svg"
-                  />
-                </>
-              )}
 
               <SubmitButton
                 loading={isSubmitting}
@@ -242,6 +196,11 @@ const UserProfile = () => {
                 className="confirm-btn"
               />
             </Form>
+
+            <ResetPasswordModal
+              show={showResetModal}
+              setShow={setShowResetModal}
+            />
           </div>
         </div>
       </div>

@@ -72,6 +72,7 @@ export default function AuthModal() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(
@@ -105,6 +106,8 @@ export default function AuthModal() {
           onClick={() => {
             dispatch(setShowAuthModal(false));
             navigate("/");
+            setFormType("login");
+            setUserType("client");
           }}
         >
           <i className="fa-regular fa-x"></i>
@@ -127,6 +130,7 @@ export default function AuthModal() {
                 register={register}
                 errors={errors}
                 watch={watch}
+                reset={reset}
                 handleSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
               />
@@ -141,6 +145,7 @@ export default function AuthModal() {
                 handleSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
                 step={step}
+                reset={reset}
                 setStep={setStep}
               />
             )}

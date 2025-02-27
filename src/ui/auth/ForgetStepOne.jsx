@@ -51,7 +51,7 @@ export default function ForgetStepOne({
       />
 
       <div className="d-flex align-items-center gap-2 mt-2">
-        <button
+        <div
           aria-label="Back"
           className="back_btn"
           onClick={(e) => {
@@ -60,7 +60,7 @@ export default function ForgetStepOne({
           }}
         >
           <i className="fal fa-arrow-right"></i>
-        </button>
+        </div>
 
         <SubmitButton name={t("auth.send")} loading={isSubmitting} />
       </div>

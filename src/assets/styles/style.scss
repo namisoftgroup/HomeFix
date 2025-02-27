@@ -22,7 +22,7 @@ body {
 
   &.en {
     direction: ltr;
-    font-family: "Outfit", sans-serif;
+    font-family: "Open Sans", sans-serif;
     .settings-list .settings-item .arrow {
       transform: scaleX(-1);
     }
@@ -50,6 +50,37 @@ body {
       direction: ltr;
       background-position: top calc(0.7em + 0.1875rem) right
         calc(0.375em + 0.1875rem);
+    }
+    .form .back_btn i {
+      transform: scale(-1);
+    }
+    .closeModal {
+      left: initial;
+      right: 16px;
+    }
+    .contact_page .contact-form .input-field .input-wrapper {
+      input.form-control,
+      textarea.form-control {
+        direction: ltr;
+      }
+      input.form-control[type="email"] {
+        padding-inline-end: unset;
+        padding-inline-start: 40px;
+      }
+      .input-icon {
+        left: 16px;
+        right: unset;
+      }
+    }
+    .profile-container .profile-form .input-field .input-wrapper {
+      input.form-control,
+      select.form-select {
+        direction: ltr;
+      }
+    }
+    .form .resend-code .timer {
+      direction: rtl !important;
+      justify-content: flex-end !important;
     }
   }
   input[type="email"] {

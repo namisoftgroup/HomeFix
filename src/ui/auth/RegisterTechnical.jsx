@@ -13,6 +13,7 @@ export default function RegisterTechnical({
   isSubmitting,
   step,
   setStep,
+  reset
 }) {
   const { t } = useTranslation();
 
@@ -47,6 +48,7 @@ export default function RegisterTechnical({
             register={register}
             errors={errors}
             watch={watch}
+            reset={reset}
             handleSubmit={handleSubmit}
           />
         ) : (

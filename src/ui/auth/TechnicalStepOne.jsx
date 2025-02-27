@@ -11,6 +11,7 @@ export default function TechnicalStepOne({
   register,
   watch,
   setFormType,
+  reset,
   setStep,
   handleSubmit,
 }) {
@@ -91,13 +92,16 @@ export default function TechnicalStepOne({
       />
 
       <div className="d-flex gap-2 mt-2">
-        <button
+        <div
           className="back_btn"
           type="button"
-          onClick={() => setFormType("login")}
+          onClick={() => {
+            setFormType("login");
+            reset();
+          }}
         >
           <i className="fal fa-arrow-right"></i>
-        </button>
+        </div>
 
         <button type="button" onClick={handleSubmit(() => setStep(2))}>
           {t("auth.next")}

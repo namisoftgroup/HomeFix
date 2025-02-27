@@ -1,6 +1,6 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
 @keyframes rotate {
@@ -919,6 +919,9 @@ footer .copy_rights .social_media a:hover {
   cursor: pointer;
   background: none;
   transition: 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .form .back_btn:hover {
   background: var(--second);
@@ -3213,7 +3216,6 @@ body .profile-container .profile-form .input-field {
   gap: 8px;
 }
 body .profile-container .profile-form .input-field label {
-  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3891,7 +3893,7 @@ body .star-rating-service input {
 }
 body.en {
   direction: ltr;
-  font-family: "Outfit", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 body.en .settings-list .settings-item .arrow {
   transform: scaleX(-1);
@@ -3915,6 +3917,33 @@ body.en .form .input-field textarea,
 body.en .form .input-field select {
   direction: ltr;
   background-position: top calc(0.7em + 0.1875rem) right calc(0.375em + 0.1875rem);
+}
+body.en .form .back_btn i {
+  transform: scale(-1);
+}
+body.en .closeModal {
+  left: initial;
+  right: 16px;
+}
+body.en .contact_page .contact-form .input-field .input-wrapper input.form-control,
+body.en .contact_page .contact-form .input-field .input-wrapper textarea.form-control {
+  direction: ltr;
+}
+body.en .contact_page .contact-form .input-field .input-wrapper input.form-control[type=email] {
+  padding-inline-end: unset;
+  padding-inline-start: 40px;
+}
+body.en .contact_page .contact-form .input-field .input-wrapper .input-icon {
+  left: 16px;
+  right: unset;
+}
+body.en .profile-container .profile-form .input-field .input-wrapper input.form-control,
+body.en .profile-container .profile-form .input-field .input-wrapper select.form-select {
+  direction: ltr;
+}
+body.en .form .resend-code .timer {
+  direction: rtl !important;
+  justify-content: flex-end !important;
 }
 body input[type=email] {
   text-align: right;

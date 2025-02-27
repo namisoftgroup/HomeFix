@@ -82,6 +82,7 @@
     cursor: pointer;
     background: none;
     transition: 0.3s ease-in-out;
+    @include centerFlex();
     &:hover {
       background: var(--second);
       color: #fff;
@@ -968,6 +969,6 @@ label {
   box-shadow: none !important;
 }
 
-.invalid-feedback{
+.invalid-feedback {
   display: block !important;
 }
