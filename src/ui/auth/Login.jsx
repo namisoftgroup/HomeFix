@@ -22,7 +22,8 @@ function Login({ setFormType, userType, setUserType }) {
     phone: yup
       .string()
       .required(t("validation.phoneRequired"))
-      .matches(/^7\d{8}$/, t("validation.phoneInvalid")),
+      .matches(/^7\d{8}$/, t("validation.phoneInvalid"))
+      .length(9, t("validation.phoneInvalid")),
     password: yup
       .string()
       .required(t("validation.passwordRequired"))

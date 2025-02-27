@@ -28,7 +28,8 @@ export default function AuthModal() {
     phone: yup
       .string()
       .required(t("validation.phoneRequired"))
-      .matches(/^7\d{8}$/, t("validation.phoneInvalid")),
+      .matches(/^7\d{8}$/, t("validation.phoneInvalid"))
+      .length(9, t("validation.phoneInvalid")),
     email: yup
       .string()
       .email(t("validation.emailInvalid"))
@@ -47,7 +48,8 @@ export default function AuthModal() {
     phone: yup
       .string()
       .required(t("validation.phoneRequired"))
-      .matches(/^7\d{8}$/, t("validation.phoneInvalid")),
+      .matches(/^7\d{8}$/, t("validation.phoneInvalid"))
+      .length(9, t("validation.phoneInvalid")),
     email: yup
       .string()
       .email(t("validation.emailInvalid"))
