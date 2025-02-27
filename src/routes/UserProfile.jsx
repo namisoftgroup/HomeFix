@@ -62,14 +62,14 @@ const UserProfile = () => {
   });
 
   useEffect(() => {
-    if (client) {
+    if (client && cities) {
       setValue("name", client?.name || "");
       setValue("email", client?.email || "");
       setValue("phone", client?.phone || "");
       setValue("city_id", client?.city.id || "");
       setValue("image", client?.image || null);
     }
-  }, [client, setValue]);
+  }, [cities, client, setValue]);
 
   const onSubmit = async () => {
     const payload = {
