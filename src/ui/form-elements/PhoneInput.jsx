@@ -2,7 +2,13 @@ import { forwardRef } from "react";
 import { Form } from "react-bootstrap";
 
 const PhoneInput = forwardRef(
-  ({ label, error, countryCode, ...props }, ref) => {
+  ({ label, error, countryCode, onChange, ...props }, ref) => {
+    const handleChange = (e) => {
+      let value = e.target.value.replace(/\D/g, "");
+      if (value.length > 9) value = value.slice(0, 9);
+      onChange({ target: { name: props.name, value } });
+    };
+
     return (
       <div className="input-field">
         <label htmlFor={props.id}>{label}</label>
@@ -12,6 +18,7 @@ const PhoneInput = forwardRef(
             ref={ref}
             className="form-control"
             isInvalid={!!error}
+            onChange={handleChange}
           />
           <div className="dropdown">
             {countryCode && (

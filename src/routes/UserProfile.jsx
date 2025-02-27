@@ -35,7 +35,8 @@ const UserProfile = () => {
     phone: yup
       .string()
       .required(t("validation.phoneRequired"))
-      .matches(/^7\d{8}$/, t("validation.phoneInvalid")),
+      .matches(/^7\d{8}$/, t("validation.phoneInvalid"))
+      .length(9, t("validation.phoneInvalid")),
     city_id: yup.string().required(t("validation.cityRequired")),
     image: yup.mixed().required(t("validation.imageRequired")),
   });
