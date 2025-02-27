@@ -150,7 +150,7 @@ export default function ConfirmRegister({
       </div>
 
       <div className="d-flex align-items-center gap-2 mt-2">
-        <button
+        <div
           aria-label="Back"
           className="back_btn"
           onClick={(e) => {
@@ -161,7 +161,7 @@ export default function ConfirmRegister({
           }}
         >
           <i className="fal fa-arrow-right"></i>
-        </button>
+        </div>
 
         <SubmitButton name={t("auth.confirm")} loading={loading} />
       </div>

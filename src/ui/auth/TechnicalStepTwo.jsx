@@ -43,9 +43,9 @@ export default function TechnicalStepTwo({
       </div>
 
       <div className="d-flex gap-2 mt-2">
-        <button type="button" className="back_btn" onClick={() => setStep(1)}>
+        <div type="button" className="back_btn" onClick={() => setStep(1)}>
           <i className="fal fa-arrow-right"></i>
-        </button>
+        </div>
         <SubmitButton name={t("auth.send")} loading={loading} />
       </div>
     </>

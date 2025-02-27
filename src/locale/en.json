@@ -104,6 +104,7 @@
   "notifications": "Notifications",
   "noNotifications": "No notifications yet",
   "pleaseUploadImagesOrVoice": "Please upload images or voice to describe your request",
+  "resetPassword": "Set a new password",
   "features": {
     "whyTitle": "Why Choose Us?",
     "whyDesc": "The perfect solution for service providers to manage their business effectively and meet customer requests efficiently. HomeFix allows you to add your services, such as property painting, carpentry, electrical work, and other specialties you offer. You can manage your appointments flexibly, accept or reject requests, and track their status with ease.",
@@ -182,6 +183,7 @@
     "email": "Email",
     "country": "Country",
     "city": "City",
+    "confirm": "Confirm",
     "area": "Area",
     "imgIdTitle": "ID Image",
     "imgIdSubtitle1": "Upload Front Side",
@@ -215,7 +217,7 @@
     "didnotReceiveCode": "Didn't receive code?",
     "resendCode": "Resend code",
     "personal": "Personal Account",
-    "technical": "technical Account",
+    "technical": "technical",
     "accountType": "Account Type",
     "client": "Client",
     "send": "send",
@@ -288,7 +290,7 @@
     "passwordMinLength": "Password must be at least 8 characters",
     "passwordCapitalLetter": "Password must contain at least one capital letter",
     "passwordSmallLetter": "Password must contain at least one lowercase letter",
-    "passwordNotMatch":"Passwords do not match",
+    "passwordNotMatch": "Passwords do not match",
     "cityRequired": "City is required.",
     "specialtyRequired": "Specialty is required.",
     "imageRequired": "Image is required."
