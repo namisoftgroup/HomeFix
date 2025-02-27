@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { handleChange } from "../../utils/helper";
 import { toast } from "sonner";
 import useGetCities from "../../hooks/user/useGetCities";
 import axiosInstance from "../../utils/axiosInstance";
@@ -11,19 +9,23 @@ import SubmitButton from "../form-elements/SubmitButton";
 import InputField from "../form-elements/InputField";
 import SelectField from "../form-elements/SelectField";
 
-function UserRegister({ setFormType, setShow, setFormData, formData }) {
+function UserRegister({
+  setFormType,
+  setShow,
+  register,
+  errors,
+  watch,
+  handleSubmit,
+  isSubmitting,
+}) {
   const { t } = useTranslation();
   const { data: cities, isLoading } = useGetCities();
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
+  const onSubmit = async () => {
     try {
       const res = await axiosInstance.post("/auth/send-code", {
-        phone: formData.phone,
-        country_code: formData.country_code,
+        phone: watch("phone"),
+        country_code: watch("country_code"),
         type: "register",
       });
 
@@ -33,8 +35,6 @@ function UserRegister({ setFormType, setShow, setFormData, formData }) {
       }
     } catch (error) {
       console.error("Error Sending OTP:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -43,49 +43,43 @@ function UserRegister({ setFormType, setShow, setFormData, formData }) {
       <div className="mb-2">
         <p className="sub-head">{t("auth.registerSubtitle")}</p>
       </div>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <InputField
-          required
           label={t("auth.fullName")}
           placeholder={t("auth.fullName")}
           id="name"
           name="name"
-          value={formData.name}
-          onChange={(e) => handleChange(e, setFormData)}
+          {...register("name")}
+          error={errors.name?.message}
         />
 
         <PhoneInput
           label={t("auth.phone")}
-          required
           id="phone"
           name="phone"
           placeholder={t("auth.phone")}
-          value={formData.phone}
-          countryCode={formData.country_code}
-          onChange={(e) => handleChange(e, setFormData)}
+          {...register("phone")}
+          countryCode={watch("country_code")}
+          error={errors.phone?.message}
         />
 
         <InputField
-          required
           label={t("auth.email")}
           placeholder={t("auth.email")}
           id="email"
           name="email"
-          value={formData.email}
-          onChange={(e) => handleChange(e, setFormData)}
+          {...register("email")}
+          error={errors.email?.message}
         />
 
         <SelectField
-          required
           loading={isLoading}
           loadingText={t("isLoading")}
           label={t("auth.city")}
           id="city_id"
           name="city_id"
-          value={formData.city_id}
-          onChange={(e) =>
-            setFormData({ ...formData, city_id: e.target.value })
-          }
+          {...register("city_id")}
+          error={errors.city_id?.message}
           options={
             cities?.map((city) => ({ name: city.name, value: city.id })) || []
           }
@@ -94,11 +88,10 @@ function UserRegister({ setFormType, setShow, setFormData, formData }) {
         <PasswordField
           label={t("auth.password")}
           placeholder={t("auth.password")}
-          required
           id="password"
           name="password"
-          value={formData.password}
-          onChange={(e) => handleChange(e, setFormData)}
+          {...register("password")}
+          error={errors.password?.message}
         />
 
         <span className="noAccount mt-2">
@@ -112,7 +105,7 @@ function UserRegister({ setFormType, setShow, setFormData, formData }) {
           <button className="back_btn" onClick={() => setFormType("login")}>
             <i className="fal fa-arrow-right"></i>
           </button>
-          <SubmitButton name={t("auth.send")} loading={loading} />
+          <SubmitButton name={t("auth.send")} loading={isSubmitting} />
         </div>
       </form>
     </>

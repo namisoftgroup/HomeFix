@@ -1,26 +1,39 @@
+import { forwardRef } from "react";
 import { Form } from "react-bootstrap";
 
-export default function InputField({
-  label,
-  icon,
-  hint,
-  type = "text",
-  as = "input",
-  ...props
-}) {
-  return (
-    <div className="input-field">
-      {label && (
-        <label htmlFor={props?.id} className="input-label">
-          {label} {hint && <span className="hint">{hint}</span>}
-        </label>
-      )}
+const InputField = forwardRef(
+  (
+    { label, icon, hint, type = "text", as = "input", error, ...props },
+    ref
+  ) => {
+    return (
+      <div className="input-field">
+        {label && (
+          <Form.Label htmlFor={props?.id} className="input-label">
+            {label} {hint && <span className="hint">{hint}</span>}
+          </Form.Label>
+        )}
 
-      <div className="input-wrapper">
-        {icon && <img src={icon} alt="input icon" className="input-icon" />}
-
-        <Form.Control as={as} type={type} {...props} />
+        <div className="input-wrapper">
+          {icon && <img src={icon} alt="input icon" className="input-icon" />}
+          <Form.Control
+            as={as}
+            type={type}
+            isInvalid={!!error}
+            ref={ref}
+            {...props}
+          />
+          {error && (
+            <Form.Control.Feedback type="invalid">
+              {error}
+            </Form.Control.Feedback>
+          )}
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+);
+
+InputField.displayName = "InputField";
+
+export default InputField;

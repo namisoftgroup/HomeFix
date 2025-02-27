@@ -7,13 +7,14 @@
   "register": "Register",
   "logout": "Logout",
   "services": "Services",
-  "arabic": "Arabic",
+  "arabic": "العربية",
   "english": "English",
   "support": "Support",
   "company": "Company",
   "help": "Help",
   "cancellationPolicy": "Cancellation Policy",
   "faqs": "FAQs",
+  "select": "Select",
   "quickLinks": "Quick Links",
   "downloadApp": "Download App",
   "privacyPolicy": "Privacy Policy",
@@ -97,11 +98,12 @@
   "deleteAccountDesc": "Are you sure you want to delete your account?",
   "cancel": "Cancel",
   "myProfile": "My Profile",
-  "contactTitle": "Contact Us",
-  "contactText": "You can contact us through email and WhatsApp to request services or inquire about any matter",
+  "contactTitle": "We Are Here to Serve You, Stay in Touch with Us",
+  "contactText": "You can contact us directly for any inquiries or assistance. Our team is ready to respond quickly and professionally.",
   "messageSentSuccessfully": "Message sent successfully",
   "notifications": "Notifications",
   "noNotifications": "No notifications yet",
+  "pleaseUploadImagesOrVoice": "Please upload images or voice to describe your request",
   "features": {
     "whyTitle": "Why Choose Us?",
     "whyDesc": "The perfect solution for service providers to manage their business effectively and meet customer requests efficiently. HomeFix allows you to add your services, such as property painting, carpentry, electrical work, and other specialties you offer. You can manage your appointments flexibly, accept or reject requests, and track their status with ease.",
@@ -225,7 +227,8 @@
     "check": "Confirm",
     "resetPasswordDesc": "Please enter the verification code sent to your phone number",
     "new_password": "New Password",
-    "confirm_password": "Confirm Password"
+    "confirm_password": "Confirm Password",
+    "current_password": "Current Password"
   },
   "header": {
     "list": "Orders",
@@ -271,5 +274,23 @@
     "confirm_collection": "Payment and collection",
     "set_images": "Attach work images",
     "complete": "Completed"
+  },
+  "validation": {
+    "nameRequired": "Name is required.",
+    "emailInvalid": "Please enter a valid email address.",
+    "emailRequired": "Email is required.",
+    "subjectRequired": "Subject is required.",
+    "messageRequired": "Message is required.",
+    "messageMinLength": "Message must be at least 10 characters long.",
+    "phoneRequired": "Phone number is required.",
+    "phoneInvalid": "Phone must start with 7 and be 9 digits long",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordCapitalLetter": "Password must contain at least one capital letter",
+    "passwordSmallLetter": "Password must contain at least one lowercase letter",
+    "passwordNotMatch":"Passwords do not match",
+    "cityRequired": "City is required.",
+    "specialtyRequired": "Specialty is required.",
+    "imageRequired": "Image is required."
   }
 }

@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { handleChange } from "../../utils/helper";
-import { useCookies } from "react-cookie";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { toast } from "sonner";
+import { Form } from "react-bootstrap";
+import { useCookies } from "react-cookie";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { setShowAuthModal } from "../../redux/slices/showAuthModal";
+import * as yup from "yup";
 import axiosInstance from "../../utils/axiosInstance";
 import PasswordField from "../../ui/form-elements/PasswordField";
 import SubmitButton from "../../ui/form-elements/SubmitButton";
@@ -13,26 +16,42 @@ import PhoneInput from "../../ui/form-elements/PhoneInput";
 function Login({ setFormType, userType, setUserType }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
   const [, setCookie] = useCookies(["token", "id"]);
 
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    phone: "",
-    password: "",
-    country_code: "+962",
-    type: userType,
+  const schema = yup.object().shape({
+    phone: yup
+      .string()
+      .required(t("validation.phoneRequired"))
+      .matches(/^7\d{8}$/, t("validation.phoneInvalid")),
+    password: yup
+      .string()
+      .required(t("validation.passwordRequired"))
+      .min(8, t("validation.passwordMinLength"))
+      .matches(/[A-Z]/, t("validation.passwordCapitalLetter"))
+      .matches(/[a-z]/, t("validation.passwordSmallLetter")),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      phone: "",
+      password: "",
+      country_code: "+962",
+      type: userType,
+    },
   });
 
   useEffect(() => {
-    setFormData({ ...formData, type: userType });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userType]);
+    setValue("type", userType);
+  }, [userType, setValue]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
+  const onSubmit = async (formData) => {
     try {
       const res = await axiosInstance.post("/auth/login", formData);
 
@@ -56,10 +75,8 @@ function Login({ setFormType, userType, setUserType }) {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Some thing went wrong, please try again or contact us.");
-    } finally {
-      setLoading(false);
+      console.error(error);
+      toast.error("Something went wrong, please try again or contact support.");
     }
   };
 
@@ -74,57 +91,40 @@ function Login({ setFormType, userType, setUserType }) {
 
       <div className="input-field mb-4">
         <div className="radios">
-          <label htmlFor="client">
-            <input
-              type="radio"
-              name="userState"
-              id="client"
-              value="client"
-              checked={userType === "client"}
-              onChange={(e) => setUserType(e.target.value)}
-            />
-            <span className={`${userType === "client" ? "active" : ""}`}>
-              {t("auth.client")}
-            </span>
-          </label>
-
-          <label htmlFor="provider">
-            <input
-              type="radio"
-              name="userState"
-              id="provider"
-              value="provider"
-              checked={userType === "provider"}
-              onChange={(e) => setUserType(e.target.value)}
-            />
-            <span className={`${userType === "provider" ? "active" : ""}`}>
-              {t("auth.technical")}
-            </span>
-          </label>
+          {["client", "provider"].map((type) => (
+            <label key={type} htmlFor={type}>
+              <input
+                type="radio"
+                name="userState"
+                id={type}
+                value={type}
+                checked={userType === type}
+                onChange={(e) => setUserType(e.target.value)}
+              />
+              <span className={userType === type ? "active" : ""}>
+                {t(`auth.${type === "client" ? "client" : "technical"}`)}
+              </span>
+            </label>
+          ))}
         </div>
       </div>
 
-      <form className="form" onSubmit={handleSubmit}>
+      <Form className="form" onSubmit={handleSubmit(onSubmit)}>
         <PhoneInput
           label={t("auth.phone")}
-          required
-          type="number"
-          id="phone"
-          name="phone"
           placeholder={t("auth.phone")}
-          value={formData.phone}
-          countryCode={formData.country_code}
-          onChange={(e) => handleChange(e, setFormData)}
+          id="phone"
+          countryCode={watch("country_code")}
+          error={errors.phone?.message}
+          {...register("phone")}
         />
 
         <PasswordField
           label={t("auth.password")}
           placeholder={t("auth.password")}
-          required
           id="password"
-          name="password"
-          value={formData.password}
-          onChange={(e) => handleChange(e, setFormData)}
+          error={errors.password?.message}
+          {...register("password")}
         />
 
         <span
@@ -135,7 +135,7 @@ function Login({ setFormType, userType, setUserType }) {
           {t("auth.forgetPassword")}
         </span>
 
-        <SubmitButton name={t("auth.login")} loading={loading} />
+        <SubmitButton name={t("auth.login")} loading={isSubmitting} />
 
         <p className="noAccount">
           {t("auth.dontHaveAccount")}{" "}
@@ -149,7 +149,7 @@ function Login({ setFormType, userType, setUserType }) {
             {t("auth.createAccount")}
           </span>
         </p>
-      </form>
+      </Form>
     </>
   );
 }

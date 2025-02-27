@@ -1,41 +1,44 @@
 import { useTranslation } from "react-i18next";
-import ImageUpload from "../form-elements/ImageUpload";
 import ImageUploadBox from "../form-elements/ImageUploadBox";
 import SubmitButton from "../form-elements/SubmitButton";
+import ImageUpload from "../form-elements/ImageUpload";
 
 export default function TechnicalStepTwo({
-  formData,
-  setFormData,
   loading,
   setStep,
+  errors,
+  register,
+  watch,
 }) {
   const { t } = useTranslation();
 
   return (
     <>
-      <ImageUpload formData={formData} setFormData={setFormData} />
-
-      <p className="upload-hint">{t("auth.UploadHint")}</p>
+      <ImageUpload
+        register={register}
+        error={errors?.image?.message}
+        watch={watch}
+      />
 
       <div className="form_group">
         <ImageUploadBox
           title={t("auth.imgIdTitle")}
+          id="front_national_image"
           subtitle={t("auth.imgIdSubtitle1")}
-          onChange={(e) => {
-            const file = e.target.files[0];
-            setFormData({ ...formData, front_national_image: file });
-          }}
+          watch={watch}
+          register={register}
+          error={errors?.front_national_image?.message}
         />
       </div>
 
       <div className="form_group">
         <ImageUploadBox
+          watch={watch}
           title={t("auth.imgIdTitle")}
+          id="back_national_image"
           subtitle={t("auth.imgIdSubtitle2")}
-          onChange={(e) => {
-            const file = e.target.files[0];
-            setFormData({ ...formData, back_national_image: file });
-          }}
+          register={register}
+          error={errors?.back_national_image?.message}
         />
       </div>
 

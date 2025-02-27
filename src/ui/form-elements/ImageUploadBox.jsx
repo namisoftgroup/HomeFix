@@ -1,25 +1,32 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
 
-const ImageUploadBox = ({ title, subtitle, onChange }) => {
-  const inputRef = useRef(null);
-  const [imagePreview, setImagePreview] = useState(null);
+const ImageUploadBox = ({
+  title,
+  subtitle,
+  error,
+  watch,
+  register,
+  ...props
+}) => {
+  const [preview, setPreview] = useState(null);
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
+  const selectedFile = watch(props.id);
 
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImagePreview(imageUrl);
+  useEffect(() => {
+    if (selectedFile && selectedFile[0]) {
+      const objectUrl = URL.createObjectURL(selectedFile[0]);
+      setPreview(objectUrl);
+
+      return () => URL.revokeObjectURL(objectUrl);
     }
-
-    onChange(e);
-  };
+  }, [selectedFile]);
 
   return (
     <div className="image-container">
-      <div className="upload-box" onClick={() => inputRef.current.click()}>
-        {imagePreview ? (
-          <img src={imagePreview} alt="Uploaded" className="uploaded-image" />
+      <label className="upload-box" htmlFor={props.id}>
+        {preview ? (
+          <img src={preview} alt="Uploaded" className="uploaded-image" />
         ) : (
           <div className="upload-content">
             <i className="fa-solid fa-image"></i>
@@ -30,12 +37,15 @@ const ImageUploadBox = ({ title, subtitle, onChange }) => {
         <input
           type="file"
           accept="image/*"
-          onChange={handleImageUpload}
-          name={name}
-          ref={inputRef}
+          id={props.id}
+          {...register(props.id)}
+          {...props}
           style={{ display: "none" }}
         />
-      </div>
+      </label>
+      {error && (
+        <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+      )}
     </div>
   );
 };

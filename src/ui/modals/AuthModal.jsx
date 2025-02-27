@@ -1,8 +1,12 @@
 import { Modal } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { setShowAuthModal } from "../../redux/slices/showAuthModal";
+import * as yup from "yup";
 import Login from "../auth/Login";
 import UserRegister from "../auth/UserRegister";
 import RegisterTechnical from "../auth/RegisterTechnical";
@@ -13,32 +17,83 @@ export default function AuthModal() {
   const { show } = useSelector((state) => state.showAuthModal);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [formType, setFormType] = useState("login");
   const [userType, setUserType] = useState("client");
+  const [step, setStep] = useState(1);
 
-  const [userRegisterData, setUserRegisterData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    password: "",
-    city_id: "",
-    country_code: "+962",
-    type: userType,
+  const registerSchema = yup.object().shape({
+    name: yup.string().required(t("validation.nameRequired")),
+    phone: yup
+      .string()
+      .required(t("validation.phoneRequired"))
+      .matches(/^7\d{8}$/, t("validation.phoneInvalid")),
+    email: yup
+      .string()
+      .email(t("validation.emailInvalid"))
+      .required(t("validation.emailRequired")),
+    password: yup
+      .string()
+      .required(t("validation.passwordRequired"))
+      .min(8, t("validation.passwordMinLength"))
+      .matches(/[A-Z]/, t("validation.passwordCapitalLetter"))
+      .matches(/[a-z]/, t("validation.passwordSmallLetter")),
+    city_id: yup.string().required(t("validation.cityRequired")),
   });
 
-  const [technicalData, setTechnicalData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    password: "",
-    city_id: "",
-    country_code: "+962",
-    specialty_id: "",
-    image: null,
-    front_national_image: null,
-    back_national_image: null,
-    type: userType,
+  const technicalStepOneSchema = yup.object().shape({
+    name: yup.string().required(t("validation.nameRequired")),
+    phone: yup
+      .string()
+      .required(t("validation.phoneRequired"))
+      .matches(/^7\d{8}$/, t("validation.phoneInvalid")),
+    email: yup
+      .string()
+      .email(t("validation.emailInvalid"))
+      .required(t("validation.emailRequired")),
+    password: yup
+      .string()
+      .required(t("validation.passwordRequired"))
+      .min(8, t("validation.passwordMinLength"))
+      .matches(/[A-Z]/, t("validation.passwordCapitalLetter"))
+      .matches(/[a-z]/, t("validation.passwordSmallLetter")),
+    city_id: yup.string().required(t("validation.cityRequired")),
+    specialty_id: yup.string().required(t("validation.specialtyRequired")),
+  });
+
+  const technicalStepTwoSchema = yup.object().shape({
+    image: yup.mixed().required(t("validation.imageRequired")),
+    front_national_image: yup.mixed().required(t("validation.imageRequired")),
+    back_national_image: yup.mixed().required(t("validation.imageRequired")),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(
+      userType === "client"
+        ? registerSchema
+        : step === 1
+        ? technicalStepOneSchema
+        : technicalStepTwoSchema
+    ),
+
+    defaultValues: {
+      name: "",
+      phone: "",
+      email: "",
+      password: "",
+      city_id: "",
+      country_code: "+962",
+      specialty_id: "",
+      image: null,
+      front_national_image: null,
+      back_national_image: null,
+    },
   });
 
   return (
@@ -69,29 +124,55 @@ export default function AuthModal() {
               <UserRegister
                 setFormType={setFormType}
                 setShow={() => dispatch(setShowAuthModal(false))}
-                setFormData={setUserRegisterData}
-                formData={userRegisterData}
+                register={register}
+                errors={errors}
+                watch={watch}
+                handleSubmit={handleSubmit}
+                isSubmitting={isSubmitting}
               />
             )}
 
             {formType === "register-technical" && (
               <RegisterTechnical
                 setFormType={setFormType}
-                formData={technicalData}
-                setFormData={setTechnicalData}
+                register={register}
+                errors={errors}
+                watch={watch}
+                handleSubmit={handleSubmit}
+                isSubmitting={isSubmitting}
+                step={step}
+                setStep={setStep}
               />
             )}
 
             {formType === "confirm-register" && (
               <ConfirmRegister
-                formData={
-                  userType === "technical" ? technicalData : userRegisterData
+                data={
+                  userType === "client"
+                    ? {
+                        name: watch("name"),
+                        phone: watch("phone"),
+                        email: watch("email"),
+                        password: watch("password"),
+                        city_id: watch("city_id"),
+                        country_code: watch("country_code"),
+                        type: "client",
+                      }
+                    : {
+                        name: watch("name"),
+                        phone: watch("phone"),
+                        email: watch("email"),
+                        password: watch("password"),
+                        city_id: watch("city_id"),
+                        country_code: watch("country_code"),
+                        type: "provider",
+                        specialty_id: watch("specialty_id"),
+                        image: watch("image")[0],
+                        front_national_image: watch("front_national_image")[0],
+                        back_national_image: watch("back_national_image")[0],
+                      }
                 }
-                setFormData={
-                  userType === "technical"
-                    ? setTechnicalData
-                    : setUserRegisterData
-                }
+                watch={watch}
                 userType={userType}
                 setFormType={setFormType}
               />

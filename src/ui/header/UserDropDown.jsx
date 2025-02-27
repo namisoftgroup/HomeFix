@@ -2,7 +2,7 @@ import { Dropdown } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { setShowAuthModal } from "../../redux/slices/showAuthModal";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { logout } from "../../redux/slices/clientData";
 import { useQueryClient } from "@tanstack/react-query";
@@ -16,6 +16,7 @@ export default function UserDropDown() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { isAuthed } = useAuth();
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const { client } = useSelector((state) => state.clientData);
   const [, , deleteCookie] = useCookies(["token", "id"]);
@@ -42,6 +43,8 @@ export default function UserDropDown() {
         dispatch(logout());
 
         queryClient.clear();
+
+        navigate("/");
 
         localStorage.setItem("userType", "client");
 
