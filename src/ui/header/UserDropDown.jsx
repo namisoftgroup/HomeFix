@@ -60,19 +60,9 @@ export default function UserDropDown() {
     <Dropdown>
       <Dropdown.Toggle className="rounded_btn">
         {client?.image ? (
-          <img
-            className="user_img"
-            src={client?.image || ""}
-            alt="user_alt"
-            onClick={handleShow}
-          />
+          <img className="user_img" src={client?.image || ""} alt="user_alt" />
         ) : (
-          <img
-            src="/icons/user.svg"
-            className="user_img_icon"
-            alt="user_alt"
-            onClick={handleShow}
-          />
+          <i className="fa-regular fa-user" onClick={handleShow}></i>
         )}
       </Dropdown.Toggle>
 
