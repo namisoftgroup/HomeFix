@@ -55,7 +55,7 @@ const Notifications = () => {
               </div>
             ))
           ) : (
-            <p className="no-notifications">{t("noNotifications")}</p>
+            <p className="no-data">{t("noNotifications")}</p>
           )}
         </div>
       </div>
