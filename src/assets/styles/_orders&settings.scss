@@ -1,17 +1,16 @@
 .orders-container {
   text-align: center;
-  padding: 24px 0;
+  padding: 0 0 24px;
 
   .tabs {
     display: flex;
     justify-content: center;
     gap: 8px;
     max-width: 500px;
-    margin: 0 auto;
+    margin: 24px auto 16px;
     background: var(--btn-bg);
     border-radius: 100px;
     padding: 4px;
-    margin-bottom: 16px;
 
     button {
       padding: 10px 20px;
@@ -296,8 +295,9 @@
             outline: none;
           }
           &[type="email"] {
-            padding-inline-start: unset;
-            padding-inline-end: 40px;
+            direction: rtl !important;
+            padding-inline-end: unset;
+            padding-inline-start: 40px;
           }
         }
       }
@@ -321,13 +321,10 @@
 
   .notification-item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
     padding: 15px;
     border-bottom: 1px dashed #ddd;
-    &:last-child {
-      border-bottom: none;
-    }
 
     .delete-icon {
       font-size: 18px;
