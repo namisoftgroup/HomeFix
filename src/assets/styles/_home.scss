@@ -335,3 +335,16 @@
     }
   }
 }
+
+.not_verified {
+  background: var(--second);
+  padding: 16px;
+  @include centerFlex();
+  h6 {
+    color: var(--white);
+    margin: 0;
+  }
+  &.rejected {
+    background: red;
+  }
+}

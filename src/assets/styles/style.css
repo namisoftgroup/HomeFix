@@ -655,6 +655,7 @@ header nav .actions {
 }
 header nav .actions .rounded_btn {
   width: 40px;
+  position: relative;
   height: 40px;
   display: flex;
   background: var(--btn-bg);
@@ -674,8 +675,12 @@ header nav .actions .rounded_btn:active {
 header nav .actions .rounded_btn.show {
   background: var(--btn-bg);
 }
-header nav .actions .rounded_btn .fa-globe {
+header nav .actions .rounded_btn i {
   color: var(--second);
+}
+header nav .actions .rounded_btn .user_img_icon {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 header nav .actions .rounded_btn .user_img {
   width: 100%;
@@ -683,6 +688,19 @@ header nav .actions .rounded_btn .user_img {
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+header nav .actions .rounded_btn span {
+  position: absolute;
+  top: 0px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  line-height: normal;
+  border-radius: 50%;
+  background: var(--second);
+  display: flex;
+  justify-content: center;
+  color: var(--white);
 }
 
 footer {
@@ -2653,6 +2671,20 @@ body .contact_page .contact-form .input-field .input-wrapper textarea.form-contr
 body .contact_page .contact-form button {
   margin-top: 8px;
 }
+body .not_verified {
+  background: var(--second);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .not_verified h6 {
+  color: var(--white);
+  margin: 0;
+}
+body .not_verified.rejected {
+  background: red;
+}
 body .auth_section {
   width: 100%;
   display: flex;
@@ -2986,18 +3018,17 @@ body .success-modal .success-text {
 }
 body .orders-container {
   text-align: center;
-  padding: 24px 0;
+  padding: 0 0 24px;
 }
 body .orders-container .tabs {
   display: flex;
   justify-content: center;
   gap: 8px;
   max-width: 500px;
-  margin: 0 auto;
+  margin: 24px auto 16px;
   background: var(--btn-bg);
   border-radius: 100px;
   padding: 4px;
-  margin-bottom: 16px;
 }
 body .orders-container .tabs button {
   padding: 10px 20px;
@@ -3262,8 +3293,9 @@ body .profile-container .profile-form .input-field .input-wrapper select.form-se
 }
 body .profile-container .profile-form .input-field .input-wrapper input.form-control[type=email],
 body .profile-container .profile-form .input-field .input-wrapper select.form-select[type=email] {
-  padding-inline-start: unset;
-  padding-inline-end: 40px;
+  direction: rtl !important;
+  padding-inline-end: unset;
+  padding-inline-start: 40px;
 }
 body .notifications-container {
   width: 100%;
@@ -3280,13 +3312,10 @@ body .notifications-container .notifications-title {
 }
 body .notifications-container .notification-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
   padding: 15px;
   border-bottom: 1px dashed #ddd;
-}
-body .notifications-container .notification-item:last-child {
-  border-bottom: none;
 }
 body .notifications-container .notification-item .delete-icon {
   font-size: 18px;

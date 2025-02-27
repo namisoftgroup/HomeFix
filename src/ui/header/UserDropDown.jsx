@@ -62,12 +62,17 @@ export default function UserDropDown() {
         {client?.image ? (
           <img
             className="user_img"
-            src={client?.image}
+            src={client?.image || ""}
             alt="user_alt"
             onClick={handleShow}
           />
         ) : (
-          <img src="/icons/user.svg" alt="user_alt" onClick={handleShow} />
+          <img
+            src="/icons/user.svg"
+            className="user_img_icon"
+            alt="user_alt"
+            onClick={handleShow}
+          />
         )}
       </Dropdown.Toggle>
 
@@ -82,10 +87,6 @@ export default function UserDropDown() {
               {t("myOrders")}
             </Dropdown.Item>
           )}
-
-          <Dropdown.Item as={Link} to={"/notifications"}>
-            {t("notifications")}
-          </Dropdown.Item>
 
           <Dropdown.Item onClick={performLogout}>{t("logout")}</Dropdown.Item>
 
