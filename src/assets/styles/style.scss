@@ -82,8 +82,8 @@ body {
       direction: rtl !important;
       justify-content: flex-end !important;
     }
-  }
-  input[type="email"] {
-    text-align: right;
+    .profile-container .profile-title .icon {
+      transform: scale(-1);
+    }
   }
 }
