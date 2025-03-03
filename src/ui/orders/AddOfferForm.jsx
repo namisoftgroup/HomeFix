@@ -6,16 +6,21 @@ import { useQueryClient } from "@tanstack/react-query";
 import InputField from "../form-elements/InputField";
 import SubmitButton from "../form-elements/SubmitButton";
 import useChangeOfferStatus from "../../hooks/orders/useChangeOfferStatus";
+import useGetProviderOrders from "../../hooks/orders/useGetProviderOrders";
 
 export default function AddOfferForm({ orderDetails }) {
   const { t } = useTranslation();
   const [cost, setCost] = useState("");
-  const { isPending, changeOfferStatus } = useChangeOfferStatus();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isRefusing, setIsRefusing] = useState(false);
+  const { changeOfferStatus } = useChangeOfferStatus();
+  const { refetch } = useGetProviderOrders();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     changeOfferStatus(
       {
         payload: {
@@ -29,20 +34,24 @@ export default function AddOfferForm({ orderDetails }) {
           if (res?.code === 200) {
             toast.success(res?.message);
             queryClient.invalidateQueries(["order-details", orderDetails?.id]);
-            queryClient.invalidateQueries(["orders"]);
+            refetch();
           } else {
             toast.error(res?.message);
           }
         },
         onError: (err) => {
           console.log(err);
-          toast.error("Some thing went wrong, please try again or contact us.");
+          toast.error("Something went wrong, please try again or contact us.");
+        },
+        onSettled: () => {
+          setIsSubmitting(false);
         },
       }
     );
   };
 
   const handleRefuse = () => {
+    setIsRefusing(true);
     changeOfferStatus(
       {
         payload: {
@@ -55,14 +64,17 @@ export default function AddOfferForm({ orderDetails }) {
           if (res?.code === 200) {
             toast.success(res?.message);
             navigate("/");
-            queryClient.invalidateQueries(["orders"]);
+            refetch();
           } else {
             toast.error(res?.message);
           }
         },
         onError: (err) => {
           console.log(err);
-          toast.error("Some thing went wrong, please try again or contact us.");
+          toast.error("Something went wrong, please try again or contact us.");
+        },
+        onSettled: () => {
+          setIsRefusing(false);
         },
       }
     );
@@ -81,12 +93,15 @@ export default function AddOfferForm({ orderDetails }) {
       <div className="btns">
         <div
           className="unInterested"
-          disabled={isPending}
           onClick={handleRefuse}
+          style={{
+            opacity: isRefusing ? 0.7 : 1,
+            pointerEvents: isRefusing ? "none" : "auto",
+          }}
         >
           {t("unInterested")}
         </div>
-        <SubmitButton name={t("addOffer")} loading={isPending} />
+        <SubmitButton name={t("addOffer")} loading={isSubmitting} />
       </div>
     </form>
   );

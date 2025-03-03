@@ -248,6 +248,9 @@
       color: white;
       border-radius: 12px;
       font-size: 0.9rem;
+      i {
+        color: var(--white);
+      }
     }
 
     .rejectBtn {
@@ -256,6 +259,9 @@
       font-size: 0.9rem;
       background: white;
       color: black;
+      i {
+        color: var(--black);
+      }
     }
   }
 }
