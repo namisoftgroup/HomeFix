@@ -40,13 +40,21 @@ export default function AddItemsModal({
   };
 
   return (
-    <Modal show={show} onHide={() => setShow(false)} centered>
+    <Modal
+      show={show}
+      onHide={() => {
+        setShow(false);
+        setItems([]);
+      }}
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>{t("addItems")}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal-body">
         <form className="form" onSubmit={handleSubmit}>
-          {items.map((item, index) => (
+          <div className="items_container">
+            {items.map((item, index) => (
             <div className="item_row" key={index}>
               <InputField
                 placeholder={t("enterName")}
@@ -60,6 +68,7 @@ export default function AddItemsModal({
                 placeholder={t("price")}
                 value={item?.item_price || ""}
                 required
+                type="number"
                 onChange={(e) =>
                   handleInputChange(index, "item_price", e.target.value)
                 }
@@ -71,6 +80,8 @@ export default function AddItemsModal({
               </div>
             </div>
           ))}
+          </div>
+          
 
           <div
             onClick={() => setItems((prev) => [...prev, orderInitial])}

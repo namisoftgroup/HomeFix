@@ -16,7 +16,7 @@ export default function OrderTimeLine({ orderDetails }) {
   const { isPending, changeOrderStatus } = useChangeOrderStatus();
 
   const [maintenanceCost, setMaintenanceCost] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [orderItems, setOrderItems] = useState([]);
   const [imagesList, setImagesList] = useState([]);
 
@@ -130,6 +130,10 @@ export default function OrderTimeLine({ orderDetails }) {
 
   const handleUploadWorkImages = (e) => {
     e.preventDefault();
+    if (imagesList?.length === 0) {
+      toast.warning(t("pleaseUploadImagesForWorkToConfirmIt"));
+      return;
+    }
     changeOrderStatus(
       {
         orderId: orderDetails?.id,
