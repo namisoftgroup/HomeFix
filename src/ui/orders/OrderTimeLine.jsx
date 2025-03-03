@@ -16,7 +16,7 @@ export default function OrderTimeLine({ orderDetails }) {
   const { isPending, changeOrderStatus } = useChangeOrderStatus();
 
   const [maintenanceCost, setMaintenanceCost] = useState("");
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [orderItems, setOrderItems] = useState([]);
   const [imagesList, setImagesList] = useState([]);
 
