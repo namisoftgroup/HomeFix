@@ -2,11 +2,15 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import useChangeOrderStatus from "../../hooks/orders/useChangeOrderStatus";
+import SubmitButton from "../form-elements/SubmitButton";
+import { useState } from "react";
 
 export default function UserReceipt({ orderDetails }) {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { isPending, changeOrderStatus } = useChangeOrderStatus();
+  const { changeOrderStatus } = useChangeOrderStatus();
+  const [isAccepting, setIsAccepting] = useState(false);
+  const [isRejecting, setIsRejecting] = useState(false);
 
   const viewButtons = () => {
     if (orderDetails?.status === "client_refuse_cost") return false;
@@ -19,6 +23,11 @@ export default function UserReceipt({ orderDetails }) {
   };
 
   const handleAcceptOrReject = (status) => {
+    if (status === "client_accept_cost") {
+      setIsAccepting(true);
+    } else {
+      setIsRejecting(true);
+    }
     changeOrderStatus(
       {
         orderId: orderDetails?.id,
@@ -39,6 +48,10 @@ export default function UserReceipt({ orderDetails }) {
         onError: (err) => {
           console.log(err);
           toast.error("Some thing went wrong, please try again or contact us.");
+        },
+        onSettled: () => {
+          setIsAccepting(false);
+          setIsRejecting(false);
         },
       }
     );
@@ -82,20 +95,18 @@ export default function UserReceipt({ orderDetails }) {
       {viewButtons() && (
         <div className="btns">
           <div className="d-flex gap-3">
-            <button
+            <SubmitButton
               className="button dark"
-              disabled={isPending}
               onClick={() => handleAcceptOrReject("client_refuse_cost")}
-            >
-              {t("rejectPrice")}
-            </button>
-            <button
+              name={t("rejectPrice")}
+              loading={isRejecting}
+            />
+            <SubmitButton
               className="button"
-              disabled={isPending}
               onClick={() => handleAcceptOrReject("client_accept_cost")}
-            >
-              {t("acceptPrice")}
-            </button>
+              name={t("acceptPrice")}
+              loading={isAccepting}
+            />
           </div>
         </div>
       )}

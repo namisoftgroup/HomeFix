@@ -6,7 +6,7 @@ export default function useGetProviderOrders() {
   const [search] = useSearchParams();
   const type = search.get("type") || "new";
 
-  const { isLoading, data, error } = useQuery({
+  const { isLoading, data, error, refetch } = useQuery({
     queryKey: ["provider-orders", type],
 
     queryFn: async () => {
@@ -24,11 +24,11 @@ export default function useGetProviderOrders() {
         throw error;
       }
     },
-    
+
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
   });
-  return { isLoading, data, error };
+  return { isLoading, data, error, refetch };
 }

@@ -9,12 +9,14 @@ import useGetServices from "../../hooks/home/useGetServices";
 import SubmitButton from "../form-elements/SubmitButton";
 import MapSection from "./MapSection";
 import axiosInstance from "../../utils/axiosInstance";
+import useGetOrders from "../../hooks/orders/useGetOrders";
 
 export default function ServiceDetails() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { data: services } = useGetServices();
   const { client } = useSelector((state) => state.clientData);
+  const { refetch } = useGetOrders();
 
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
@@ -111,6 +113,7 @@ export default function ServiceDetails() {
       if (res.data.code === 200) {
         toast.success(res.data.message);
         navigate("/my-orders");
+        refetch();
       } else {
         toast.error(res.data.message);
       }

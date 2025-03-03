@@ -695,6 +695,7 @@ header nav .actions .rounded_btn span {
   right: -6px;
   width: 20px;
   height: 20px;
+  font-size: 14px;
   line-height: normal;
   border-radius: 50%;
   background: var(--second);
@@ -2058,12 +2059,18 @@ label div {
   border-radius: 12px;
   font-size: 0.9rem;
 }
+.driverCard .buttonGroup .acceptBtn i {
+  color: var(--white);
+}
 .driverCard .buttonGroup .rejectBtn {
   border: 1px solid #000;
   border-radius: 12px;
   font-size: 0.9rem;
   background: white;
   color: black;
+}
+.driverCard .buttonGroup .rejectBtn i {
+  color: var(--black);
 }
 
 .orderInfo {
@@ -3861,6 +3868,9 @@ body .user_receipt .btns .button {
   outline: none;
   color: #fff;
   background: var(--second);
+}
+body .user_receipt .btns .button i {
+  color: var(--white);
 }
 body .user_receipt .btns .button.disabled {
   opacity: 0.7;

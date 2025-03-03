@@ -39,7 +39,9 @@ export default function Footer() {
               <div className="links">
                 <Link to="/">{t("home")}</Link>
                 <Link to="/aboutus">{t("aboutus")}</Link>
-                <Link to="/#services">{t("services")}</Link>
+                {localStorage.getItem("userType") === "client" && (
+                  <Link to="/#services">{t("services")}</Link>
+                )}
               </div>
             </div>
           </div>
@@ -70,7 +72,11 @@ export default function Footer() {
           <div className="col-12 p-2">
             <div
               className={`copy_rights ${
-                !client?.id ? "client" : client?.type === "client" ? "client" : ""
+                !client?.id
+                  ? "client"
+                  : client?.type === "client"
+                  ? "client"
+                  : ""
               }`}
             >
               <p>

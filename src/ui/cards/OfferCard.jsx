@@ -1,16 +1,28 @@
 import { Card } from "react-bootstrap";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import StarsRate from "../StarsRate";
 import useChangeOfferStatus from "../../hooks/orders/useChangeOfferStatus";
+import useGetOrders from "../../hooks/orders/useGetOrders";
+import SubmitButton from "../form-elements/SubmitButton";
 
 export default function OfferCard({ offer, orderId }) {
   const { t } = useTranslation();
-  const { isPending, changeOfferStatus } = useChangeOfferStatus();
+  const { changeOfferStatus } = useChangeOfferStatus();
+  const [isAccepting, setIsAccepting] = useState(false);
+  const [isRejecting, setIsRejecting] = useState(false);
+  const { refetch } = useGetOrders();
   const queryClient = useQueryClient();
 
   const handleChange = (status) => {
+    if (status === "accept") {
+      setIsAccepting(true);
+    } else {
+      setIsRejecting(true);
+    }
+
     changeOfferStatus(
       {
         payload: {
@@ -23,7 +35,8 @@ export default function OfferCard({ offer, orderId }) {
         onSuccess: (res) => {
           if (res?.code === 200) {
             toast.success(res?.message);
-            queryClient.invalidateQueries(["orders", "order-details"]);
+            queryClient.invalidateQueries(["order-details"]);
+            refetch();
           } else {
             toast.error(res?.message);
           }
@@ -31,6 +44,10 @@ export default function OfferCard({ offer, orderId }) {
         onError: (err) => {
           console.log(err);
           toast.error("Some thing went wrong, please try again or contact us.");
+        },
+        onSettled: () => {
+          setIsAccepting(false);
+          setIsRejecting(false);
         },
       }
     );
@@ -56,21 +73,19 @@ export default function OfferCard({ offer, orderId }) {
       </div>
 
       <div className="buttonGroup">
-        <button
+        <SubmitButton
           className="acceptBtn"
-          disabled={isPending}
+          loading={isAccepting}
           onClick={() => handleChange("accept")}
-        >
-          {t("accept")}
-        </button>
+          name={t("accept")}
+        />
 
-        <button
+        <SubmitButton
           className="rejectBtn"
-          disabled={isPending}
+          loading={isRejecting}
           onClick={() => handleChange("client_refused")}
-        >
-          {t("refuse")}
-        </button>
+          name={t("refuse")}
+        />
       </div>
     </Card>
   );

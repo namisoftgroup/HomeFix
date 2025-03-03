@@ -8,7 +8,7 @@ export default function useGetOrders() {
   const type = search.get("type") || "current";
   const { client } = useSelector((state) => state.clientData);
 
-  const { isLoading, data, error } = useQuery({
+  const { isLoading, data, error, refetch } = useQuery({
     queryKey: ["orders", type],
 
     queryFn: async () => {
@@ -37,5 +37,5 @@ export default function useGetOrders() {
     refetchOnMount: false,
     refetchOnReconnect: false,
   });
-  return { isLoading, data, error };
+  return { isLoading, data, error, refetch };
 }
