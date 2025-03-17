@@ -20,6 +20,15 @@ body {
   @import "./orders&settings";
   @import "./order-details";
 
+  .download_btn {
+    background: var(--third);
+    padding: 8px 16px;
+    border-radius: 12px;
+    @media screen and (max-width: 576px) {
+      display: none;
+    }
+  }
+
   &.en {
     direction: ltr;
     font-family: "Open Sans", sans-serif;

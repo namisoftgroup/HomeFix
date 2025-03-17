@@ -1,4 +1,5 @@
 {
+  "appName": "HomeFix",
   "hello": "مرحبا",
   "home": "الرئيسية",
   "aboutus": "من نحن",
@@ -295,5 +296,9 @@
     "cityRequired": "المدينة مطلوبة.",
     "specialtyRequired": "التخصص مطلوب.",
     "imageRequired": "الصورة مطلوبة."
+  },
+  "getApp": {
+    "title": "احصل على تطبيق",
+    "subtitle": "قم بمسح رمز الاستجابة السريعة لتنزيل التطبيق الأن."
   }
 }

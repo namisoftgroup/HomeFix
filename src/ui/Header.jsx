@@ -1,21 +1,30 @@
+import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LanguageDropDown from "./header/LanguageDropDown";
 import UserDropDown from "./header/UserDropDown";
 import useGetUserData from "../hooks/user/useGetUserData";
 import useAuth from "../hooks/useAuth";
+import GetApp from "./modals/GetApp";
 
 export default function Header() {
   const { t } = useTranslation();
+  const [show, setShow] = useState(false);
   const { isAuthed } = useAuth();
   const { data: userData } = useGetUserData();
 
   return (
     <header>
       <nav className="container">
-        <Link to="/" className="logo">
-          <img src={"/images/logo.svg"} alt="logo" />
-        </Link>
+        <div className="d-flex align-items-center gap-5">
+          <Link to="/" className="logo">
+            <img src={"/images/logo.svg"} alt="logo" />
+          </Link>
+
+          <button className="download_btn" onClick={() => setShow(true)}>
+            {t("downloadApp")}
+          </button>
+        </div>
 
         <div className="nav_links">
           <>
@@ -48,6 +57,7 @@ export default function Header() {
           <UserDropDown />
         </div>
       </nav>
+      <GetApp show={show} setShow={setShow} />
     </header>
   );
 }

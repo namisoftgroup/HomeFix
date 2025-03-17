@@ -602,6 +602,64 @@ input[type=email] {
   font-size: 16px;
 }
 
+.getAppModal {
+  text-align: center;
+}
+.getAppModal .modal-body {
+  padding: 24px;
+}
+.getAppModal .modalHeader {
+  position: relative;
+}
+.getAppModal .modalHeader .btn-close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.getAppModal .modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.getAppModal .modalTitle {
+  flex: 1;
+  font-weight: bold;
+  text-transform: capitalize;
+  font-size: 28px;
+}
+@media screen and (max-width: 768px) {
+  .getAppModal .modalTitle {
+    font-size: 24px;
+  }
+}
+.getAppModal .modalTitle span {
+  color: var(--second);
+  font-size: 28px;
+}
+@media screen and (max-width: 768px) {
+  .getAppModal .modalTitle span {
+    font-size: 24px;
+  }
+}
+.getAppModal .qrcode {
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  aspect-ratio: 3/2;
+  object-fit: contain;
+}
+.getAppModal .btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.getAppModal .btns img {
+  height: 42px;
+}
+
 header {
   padding: 16px 0;
   position: sticky;
@@ -3952,6 +4010,16 @@ body .items_container .item_row .input-field {
 }
 body .items_container .item_row .input-field:first-child {
   width: 100%;
+}
+body .download_btn {
+  background: var(--third);
+  padding: 8px 16px;
+  border-radius: 12px;
+}
+@media screen and (max-width: 576px) {
+  body .download_btn {
+    display: none;
+  }
 }
 body.en {
   direction: ltr;
