@@ -300,6 +300,8 @@
   },
   "getApp": {
     "title": "Get the App",
-    "subtitle": "Scan the QR code to download the app now."
+    "subtitle": "Scan the QR code to download the app now.",
+    "userApp": "User App",
+    "technicalApp": "Technical App"
   }
 }
