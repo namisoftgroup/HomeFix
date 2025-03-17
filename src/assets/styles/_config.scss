@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap");
 @mixin centerFlex {
   display: flex;
@@ -601,7 +601,7 @@ input[type="email"] {
   margin: 0 auto;
 }
 
-.modal-title{
+.modal-title {
   font-size: 16px;
 }
 
@@ -642,6 +642,18 @@ input[type="email"] {
     }
   }
 
+  h6 {
+    color: var(--second);
+    font-size: 18px;
+  }
+
+  .app_container {
+    padding: 12px 32px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+  }
+
   .qrcode {
     width: 100%;
     object-fit: contain;
@@ -652,6 +664,7 @@ input[type="email"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     gap: 8px;
     img {
       height: 42px;

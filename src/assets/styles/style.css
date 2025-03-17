@@ -643,6 +643,16 @@ input[type=email] {
     font-size: 24px;
   }
 }
+.getAppModal h6 {
+  color: var(--second);
+  font-size: 18px;
+}
+.getAppModal .app_container {
+  padding: 12px 32px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+}
 .getAppModal .qrcode {
   width: 100%;
   -o-object-fit: contain;
@@ -654,6 +664,7 @@ input[type=email] {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   gap: 8px;
 }
 .getAppModal .btns img {
