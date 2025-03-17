@@ -604,3 +604,57 @@ input[type="email"] {
 .modal-title{
   font-size: 16px;
 }
+
+.getAppModal {
+  text-align: center;
+  .modal-body {
+    padding: 24px;
+  }
+  .modalHeader {
+    position: relative;
+    .btn-close {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+  }
+  .modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .modalTitle {
+    flex: 1;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 28px;
+    @media screen and (max-width: 768px) {
+      font-size: 24px;
+    }
+    span {
+      color: var(--second);
+      font-size: 28px;
+      @media screen and (max-width: 768px) {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .qrcode {
+    width: 100%;
+    object-fit: contain;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
+  }
+  .btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    img {
+      height: 42px;
+    }
+  }
+}

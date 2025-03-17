@@ -37,7 +37,7 @@ export default function ConfirmRegister({
 
     try {
       const checkResponse = await axiosInstance.post("/auth/confirm-code", {
-        phone: watch("phone"),
+        phone: watch("phone").startsWith("0") ? watch("phone")?.slice(1) : watch("phone"),
         country_code: watch("country_code"),
         type: "register",
         code: code,
@@ -52,7 +52,7 @@ export default function ConfirmRegister({
 
         if (registerResponse.data.code === 200) {
           const loginPayload = {
-            phone: watch("phone"),
+            phone: watch("phone").startsWith("0") ? watch("phone")?.slice(1) : watch("phone"),
             password: watch("password"),
             type: data?.type,
             country_code: watch("country_code"),
@@ -97,7 +97,7 @@ export default function ConfirmRegister({
   const handleResend = async () => {
     try {
       const res = await axiosInstance.post("/auth/send-code", {
-        phone: watch("phone"),
+        phone: watch("phone").startsWith("0") ? watch("phone")?.slice(1) : watch("phone"),
         country_code: watch("country_code"),
         type: "register",
       });

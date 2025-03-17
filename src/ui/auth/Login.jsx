@@ -22,8 +22,7 @@ function Login({ setFormType, userType, setUserType }) {
     phone: yup
       .string()
       .required(t("validation.phoneRequired"))
-      .matches(/^7\d{8}$/, t("validation.phoneInvalid"))
-      .length(9, t("validation.phoneInvalid")),
+      .matches(/^0|7\d{8}$/, t("validation.phoneInvalid")),
     password: yup
       .string()
       .required(t("validation.passwordRequired"))
@@ -52,9 +51,16 @@ function Login({ setFormType, userType, setUserType }) {
     setValue("type", userType);
   }, [userType, setValue]);
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async () => {
     try {
-      const res = await axiosInstance.post("/auth/login", formData);
+      const res = await axiosInstance.post("/auth/login", {
+        phone: watch("phone").startsWith("0")
+          ? watch("phone")?.slice(1)
+          : watch("phone"),
+        password: watch("password"),
+        type: watch("type"),
+        country_code: watch("country_code"),
+      });
 
       if (res.data.code === 200) {
         setCookie("token", res.data?.data?.token, {

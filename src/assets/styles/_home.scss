@@ -77,9 +77,12 @@
 .services {
   text-align: center;
   padding: 16px 0 40px;
-  h2 {
+
+  .section-title {
+    padding: 16px 0;
+    border-radius: 12px;
+    background: var(--third);
     font-size: 24px;
-    font-weight: bold;
     margin-bottom: 8px;
   }
 
