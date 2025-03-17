@@ -15,8 +15,7 @@ function ForgetPassword({ setFormType }) {
     phone: yup
       .string()
       .required(t("validation.phoneRequired"))
-      .matches(/^7\d{8}$/, t("validation.phoneInvalid"))
-      .length(9, t("validation.phoneInvalid")),
+      .matches(/^0|7\d{8}$/, t("validation.phoneInvalid")),
   });
 
   const stepThreeSchema = yup.object().shape({

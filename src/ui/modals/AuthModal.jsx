@@ -28,8 +28,7 @@ export default function AuthModal() {
     phone: yup
       .string()
       .required(t("validation.phoneRequired"))
-      .matches(/^7\d{8}$/, t("validation.phoneInvalid"))
-      .length(9, t("validation.phoneInvalid")),
+      .matches(/^0|7\d{8}$/, t("validation.phoneInvalid")),
     email: yup
       .string()
       .email(t("validation.emailInvalid"))
@@ -48,8 +47,7 @@ export default function AuthModal() {
     phone: yup
       .string()
       .required(t("validation.phoneRequired"))
-      .matches(/^7\d{8}$/, t("validation.phoneInvalid"))
-      .length(9, t("validation.phoneInvalid")),
+      .matches(/^0|7\d{8}$/, t("validation.phoneInvalid")),
     email: yup
       .string()
       .email(t("validation.emailInvalid"))
@@ -158,7 +156,7 @@ export default function AuthModal() {
                   userType === "client"
                     ? {
                         name: watch("name"),
-                        phone: watch("phone"),
+                        phone: watch("phone").startsWith("0") ? watch("phone")?.slice(1) : watch("phone"),
                         email: watch("email"),
                         password: watch("password"),
                         city_id: watch("city_id"),
@@ -167,7 +165,7 @@ export default function AuthModal() {
                       }
                     : {
                         name: watch("name"),
-                        phone: watch("phone"),
+                        phone: watch("phone").startsWith("0") ? watch("phone")?.slice(1) : watch("phone"),
                         email: watch("email"),
                         password: watch("password"),
                         city_id: watch("city_id"),

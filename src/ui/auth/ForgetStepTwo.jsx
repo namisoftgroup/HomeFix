@@ -27,7 +27,7 @@ export default function ForgetStepTwo({ setStep, watch }) {
     setLoading(true);
     try {
       const res = await axiosInstance.post("/auth/confirm-code", {
-        phone: watch("phone"),
+        phone: watch("phone").startsWith("0") ? watch("phone")?.slice(1) : watch("phone"),
         country_code: watch("country_code"),
         type: "reset",
         code: code,
@@ -49,7 +49,7 @@ export default function ForgetStepTwo({ setStep, watch }) {
   const handleResend = async () => {
     try {
       const res = await axiosInstance.post("/auth/send-code", {
-        phone: watch("phone"),
+        phone: watch("phone").startsWith("0") ? watch("phone")?.slice(1) : watch("phone"),
         country_code: watch("country_code"),
         type: "reset",
       });

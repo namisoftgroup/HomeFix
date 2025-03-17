@@ -10,9 +10,8 @@ export default function Services() {
     <section className="services" id="services">
       <div className="container">
         <div className="row">
-          <div className="col-12 p-2 mb-3">
-            <h2>{t("Services.title")}</h2>
-            <p className="subtitle">{t("Services.description")}</p>
+          <div className="col-12 p-2">
+            <h2 className="section-title">{t("Services.title")}</h2>
           </div>
           {services?.map((service) => (
             <div key={service.id} className="col-lg-3 col-6 p-2">

@@ -17,7 +17,7 @@ export default function ForgetStepThree({
   const onSubmit = async () => {
     try {
       const res = await axiosInstance.post("/auth/reset-password", {
-        phone: watch("phone"),
+        phone: watch("phone").startsWith("0") ? watch("phone")?.slice(1) : watch("phone"),
         new_password: watch("new_password"),
         confirm_password: watch("confirm_password"),
       });

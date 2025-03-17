@@ -11,13 +11,13 @@ const HowItWorksSection = () => {
       delay: 100,
     },
     {
-      icon: "fa-solid fa-bags-shopping",
+      icon: "fa-brands fa-dropbox",
       title: t("howItWorks.manageRequests"),
       description: t("howItWorks.manageRequestsDesc"),
       delay: 150,
     },
     {
-      icon: "fa-solid fa-thumbs-up",
+      icon: "fa-regular fa-thumbs-up",
       title: t("howItWorks.chooseBestOffer"),
       description: t("howItWorks.chooseBestOfferDesc"),
       delay: 200,
@@ -26,7 +26,7 @@ const HowItWorksSection = () => {
 
   const rightSteps = [
     {
-      icon: "fa-solid fa-shop",
+      icon: "fa-solid fa-users",
       title: t("howItWorks.startShopping"),
       description: t("howItWorks.startShoppingDesc"),
       delay: 100,
@@ -61,7 +61,7 @@ const HowItWorksSection = () => {
                 <div className="col-12 d-flex align-items-center" key={index}>
                   <div className="h-card d-flex gap-2" data-aos="fade-up">
                     <div className="icon">
-                      <i className={`fa-solid ${step.icon} fs-3 px-1`}></i>
+                      <i className={`${step.icon} fs-3 px-1`}></i>
                     </div>
                     <div className="text">
                       <h5>{step.title}</h5>

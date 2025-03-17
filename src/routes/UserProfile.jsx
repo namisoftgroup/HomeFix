@@ -35,8 +35,7 @@ const UserProfile = () => {
     phone: yup
       .string()
       .required(t("validation.phoneRequired"))
-      .matches(/^7\d{8}$/, t("validation.phoneInvalid"))
-      .length(9, t("validation.phoneInvalid")),
+      .matches(/^0|7\d{8}$/, t("validation.phoneInvalid")),
     city_id: yup.string().required(t("validation.cityRequired")),
     image: yup.mixed().required(t("validation.imageRequired")),
   });
@@ -75,7 +74,7 @@ const UserProfile = () => {
     const payload = {
       name: watch("name"),
       email: watch("email"),
-      phone: watch("phone"),
+      phone: watch("phone").startsWith("0") ? watch("phone")?.slice(1) : watch("phone"),
       city_id: watch("city_id"),
       password: watch("password"),
     };

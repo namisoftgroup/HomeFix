@@ -80,9 +80,9 @@ export default function UserDropDown() {
 
           <Dropdown.Item onClick={performLogout}>{t("logout")}</Dropdown.Item>
 
-          <Dropdown.Item onClick={() => setShow(true)}>
+          {/* <Dropdown.Item onClick={() => setShow(true)}>
             {t("deleteAccount")}
-          </Dropdown.Item>
+          </Dropdown.Item> */}
         </Dropdown.Menu>
       )}
 

@@ -287,7 +287,7 @@
     "messageRequired": "Message is required.",
     "messageMinLength": "Message must be at least 10 characters long.",
     "phoneRequired": "Phone number is required.",
-    "phoneInvalid": "Phone must start with 7 and be 9 digits long",
+    "phoneInvalid": "Phone must start with 7 or 0 and be 9 digits long",
     "passwordRequired": "Password is required.",
     "passwordMinLength": "Password must be at least 8 characters",
     "passwordCapitalLetter": "Password must contain at least one capital letter",

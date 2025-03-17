@@ -12,9 +12,9 @@ const PhoneInput = forwardRef(
             ref={ref}
             className="form-control"
             isInvalid={!!error}
-            maxLength={9}
+            maxLength={10}
             onInput={(e) => {
-              e.target.value = e.target.value.replace(/\D/g, "").slice(0, 9);
+              e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10);
             }}
           />
           <div className="dropdown">

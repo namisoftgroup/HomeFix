@@ -25,7 +25,7 @@ function UserRegister({
   const onSubmit = async () => {
     try {
       const res = await axiosInstance.post("/auth/send-code", {
-        phone: watch("phone"),
+        phone: watch("phone").startsWith("0") ? watch("phone")?.slice(1) : watch("phone"),
         country_code: watch("country_code"),
         type: "register",
       });
