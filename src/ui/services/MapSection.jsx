@@ -17,21 +17,43 @@ export default function MapSection({ formData, setFormData }) {
   });
 
   const [searchInput, setSearchInput] = useState("");
-
   const [markerPosition, setMarkerPosition] = useState({
-    lat: Number(formData.latitude),
-    lng: Number(formData.longitude),
+    lat: formData.latitude ? Number(formData.latitude) : 0,
+    lng: formData.longitude ? Number(formData.longitude) : 0,
   });
 
   useEffect(() => {
-    if (formData?.longitude && formData?.longitude) {
-      const position = {
+    if (formData?.latitude && formData?.longitude) {
+      setMarkerPosition({
         lat: Number(formData.latitude),
         lng: Number(formData.longitude),
-      };
-      setMarkerPosition(position);
-      reverseGeocodeMarkerPosition(position);
+      });
+      reverseGeocodeMarkerPosition({
+        lat: Number(formData.latitude),
+        lng: Number(formData.longitude),
+      });
+    } else {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const userPosition = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            setMarkerPosition(userPosition);
+            setFormData({
+              ...formData,
+              latitude: userPosition.lat.toFixed(6),
+              longitude: userPosition.lng.toFixed(6),
+            });
+            reverseGeocodeMarkerPosition(userPosition);
+          },
+          (error) => console.error("Error getting location:", error),
+          { enableHighAccuracy: true }
+        );
+      }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
   const handleMarkerDragEnd = (event) => {
@@ -58,6 +80,10 @@ export default function MapSection({ formData, setFormData }) {
     geocoder.geocode({ location: position }, (results, status) => {
       if (status === "OK" && results[0]) {
         setSearchInput(results[0].formatted_address);
+        setFormData((prev) => ({
+          ...prev,
+          address: results[0].formatted_address,
+        }));
       } else {
         console.error("Geocoder failed: " + status);
       }

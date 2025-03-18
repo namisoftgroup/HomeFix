@@ -27,9 +27,9 @@ export default function ServiceDetails() {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     service_id: +id,
-    address: "XW8P+V9 Amman, Jordan",
-    latitude: 31.9632,
-    longitude: 35.9304,
+    address: "",
+    latitude: null,
+    longitude: null,
     description: "",
     images_list: [],
     voice: null,
