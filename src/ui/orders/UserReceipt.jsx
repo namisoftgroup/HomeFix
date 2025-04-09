@@ -18,8 +18,10 @@ export default function UserReceipt({ orderDetails }) {
     if (orderDetails?.status === "start_maintenance") return false;
     if (orderDetails?.status === "end_maintenance") return false;
     if (orderDetails?.status === "confirm_collection") return false;
+    if (orderDetails?.status === "set_maintenance_cost") return false;
+    if (orderDetails?.status === "confirm_items") return true;
 
-    return true;
+    return false;
   };
 
   const handleAcceptOrReject = (status) => {

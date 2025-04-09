@@ -262,7 +262,8 @@
     "new": "جاري تلقي العروض",
     "accept": "تم الاتفاق وفي انتظار الوصول",
     "arrivedAndInspected": "تم الوصول وجارى المعاينة",
-    "finalCostReachedBeingDetermined": "جاري تحديد التكلفة النهائية",
+    "settingMaintenanceCost": "جاري تحديد تكلفة الصيانة",
+    "confirmingItems": "جاري تحديد المنتجات والخامات",
     "inProgress": "قيد التنفيذ",
     "completedWaitingPayment": "تم الانتهاء وفي انتظار الدفع",
     "done": "تم الانتهاء"

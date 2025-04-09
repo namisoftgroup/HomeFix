@@ -24,8 +24,8 @@ export default function OrderTimeLine({ orderDetails }) {
     "new",
     "accept",
     "confirm_arrival",
-    "confirm_items",
     "set_maintenance_cost",
+    "confirm_items",
     "client_accept_cost",
     "start_maintenance",
     "end_maintenance",
@@ -234,6 +234,24 @@ export default function OrderTimeLine({ orderDetails }) {
                   )}
 
                 {orderDetails?.status === "confirm_arrival" &&
+                  status === "set_maintenance_cost" && (
+                    <form className="form">
+                      <div className="d-flex gap-2">
+                        <InputField
+                          placeholder="00"
+                          value={maintenanceCost}
+                          onChange={(e) => setMaintenanceCost(e.target.value)}
+                        />
+                        <SubmitButton
+                          name={t("confirm")}
+                          loading={isPending}
+                          onClick={handleSetMaintenanceCost}
+                        />
+                      </div>
+                    </form>
+                  )}
+
+                {orderDetails?.status === "set_maintenance_cost" &&
                   status === "confirm_items" && (
                     <div className="form">
                       {orderItems?.length > 0 && (
@@ -282,24 +300,6 @@ export default function OrderTimeLine({ orderDetails }) {
                   )}
 
                 {orderDetails?.status === "confirm_items" &&
-                  status === "set_maintenance_cost" && (
-                    <form className="form">
-                      <div className="d-flex gap-2">
-                        <InputField
-                          placeholder="00"
-                          value={maintenanceCost}
-                          onChange={(e) => setMaintenanceCost(e.target.value)}
-                        />
-                        <SubmitButton
-                          name={t("confirm")}
-                          loading={isPending}
-                          onClick={handleSetMaintenanceCost}
-                        />
-                      </div>
-                    </form>
-                  )}
-
-                {orderDetails?.status === "set_maintenance_cost" &&
                   status === "client_accept_cost" && (
                     <Receipt orderDetails={orderDetails} />
                   )}

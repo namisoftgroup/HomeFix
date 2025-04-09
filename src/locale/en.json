@@ -263,7 +263,8 @@
     "new": "Receiving offers",
     "accept": "Agreement reached, waiting for arrival",
     "arrivedAndInspected": "Arrived and under inspection",
-    "finalCostReachedBeingDetermined": "Final cost is being determined",
+    "settingMaintenanceCost": "Setting maintenance cost",
+    "confirmingItems": "Confirming products and materials",
     "inProgress": "In progress",
     "completedWaitingPayment": "Completed, waiting for payment",
     "done": "Completed"

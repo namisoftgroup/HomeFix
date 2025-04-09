@@ -26,7 +26,8 @@ export default function OffersSide({ orderDetails }) {
   const queryClient = useQueryClient();
 
   const viewReciept = () => {
-    if (orderDetails?.status === "set_maintenance_cost") return true;
+    if (orderDetails?.status === "set_maintenance_cost") return false;
+    if (orderDetails?.status === "confirm_items") return true;
     if (orderDetails?.status === "client_accept_cost") return true;
     if (orderDetails?.status === "start_maintenance") return true;
     if (orderDetails?.status === "end_maintenance") return true;
