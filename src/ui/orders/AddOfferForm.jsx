@@ -33,7 +33,7 @@ export default function AddOfferForm({ orderDetails }) {
         onSuccess: (res) => {
           if (res?.code === 200) {
             toast.success(res?.message);
-            queryClient.invalidateQueries(["order-details", orderDetails?.id]);
+            queryClient.invalidateQueries({ queryKey: ["order-details"] });
             refetch();
           } else {
             toast.error(res?.message);

@@ -35,7 +35,7 @@ export default function OfferCard({ offer, orderId }) {
         onSuccess: (res) => {
           if (res?.code === 200) {
             toast.success(res?.message);
-            queryClient.invalidateQueries(["order-details"]);
+            queryClient.invalidateQueries({ queryKey: ["order-details"] });
             refetch();
           } else {
             toast.error(res?.message);
