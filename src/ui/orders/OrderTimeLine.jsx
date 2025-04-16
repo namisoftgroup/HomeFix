@@ -337,7 +337,7 @@ export default function OrderTimeLine({ orderDetails }) {
                       <SubmitButton
                         name={t("confirmCollection")}
                         disabled={!orderDetails?.is_paid}
-                        style={!orderDetails?.is_paid ? { color: "#777" } : {}}
+                        style={!orderDetails?.is_paid ? { background: "#777" } : {}}
                         loading={isPending}
                         onClick={() => handleChangeStatus("confirm_collection")}
                       />
