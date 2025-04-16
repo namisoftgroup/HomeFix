@@ -49,7 +49,7 @@ export default function OrderDetails() {
             setCancelReason("");
             setShowModal(false);
             refetch();
-            queryClient.invalidateQueries(["order-details"]);
+            queryClient.invalidateQueries({ queryKey: ["order-details"] });
           } else {
             toast.error(res?.message);
           }

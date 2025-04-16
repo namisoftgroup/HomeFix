@@ -1,9 +1,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { useState } from "react";
 import useChangeOrderStatus from "../../hooks/orders/useChangeOrderStatus";
 import SubmitButton from "../form-elements/SubmitButton";
-import { useState } from "react";
 
 export default function UserReceipt({ orderDetails }) {
   const { t } = useTranslation();
@@ -39,8 +39,8 @@ export default function UserReceipt({ orderDetails }) {
         onSuccess: (res) => {
           if (res?.code === 200) {
             toast.success(res?.message);
-            queryClient.invalidateQueries(["orders"]);
-            queryClient.invalidateQueries(["order-details", orderDetails?.id]);
+            queryClient.invalidateQueries({ queryKey: ["orders"] });
+            queryClient.invalidateQueries({ queryKey: ["order-details"] });
           } else {
             toast.error(res?.message);
           }

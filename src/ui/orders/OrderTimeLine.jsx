@@ -46,8 +46,8 @@ export default function OrderTimeLine({ orderDetails }) {
         onSuccess: (res) => {
           if (res?.code === 200) {
             toast.success(res?.message);
-            queryClient.invalidateQueries(["orders"]);
-            queryClient.invalidateQueries(["order-details", orderDetails?.id]);
+            queryClient.invalidateQueries({ queryKey: ["orders"] });
+            queryClient.invalidateQueries({ queryKey: ["order-details"] });
           } else {
             toast.error(res?.message);
           }
@@ -73,8 +73,8 @@ export default function OrderTimeLine({ orderDetails }) {
         onSuccess: (res) => {
           if (res?.code === 200) {
             toast.success(res?.message);
-            queryClient.invalidateQueries(["orders"]);
-            queryClient.invalidateQueries(["order-details", orderDetails?.id]);
+            queryClient.invalidateQueries({ queryKey: ["orders"] });
+            queryClient.invalidateQueries({ queryKey: ["order-details"] });
           } else {
             toast.error(res?.message);
           }
@@ -104,8 +104,8 @@ export default function OrderTimeLine({ orderDetails }) {
         onSuccess: (res) => {
           if (res?.code === 200) {
             toast.success(res?.message);
-            queryClient.invalidateQueries(["orders"]);
-            queryClient.invalidateQueries(["order-details", orderDetails?.id]);
+            queryClient.invalidateQueries({ queryKey: ["orders"] });
+            queryClient.invalidateQueries({ queryKey: ["order-details"] });
           } else {
             toast.error(res?.message);
           }
@@ -146,8 +146,8 @@ export default function OrderTimeLine({ orderDetails }) {
         onSuccess: (res) => {
           if (res?.code === 200) {
             toast.success(res?.message);
-            queryClient.invalidateQueries(["orders"]);
-            queryClient.invalidateQueries(["order-details", orderDetails?.id]);
+            queryClient.invalidateQueries({ queryKey: ["orders"] });
+            queryClient.invalidateQueries({ queryKey: ["order-details"] });
           } else {
             toast.error(res?.message);
           }

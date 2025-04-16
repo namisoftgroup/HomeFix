@@ -60,7 +60,7 @@ export default function OffersSide({ orderDetails }) {
 
       if (res?.data?.code === 200) {
         setShow(false);
-        queryClient.invalidateQueries(["order-details", orderDetails?.id]);
+        queryClient.invalidateQueries({ queryKey: ["order-details"] });
         toast.success(res?.data?.message);
       }
     } catch (error) {
@@ -83,7 +83,7 @@ export default function OffersSide({ orderDetails }) {
 
       if (res?.data?.code === 200) {
         setShowRate(false);
-        queryClient.invalidateQueries(["order-details", orderDetails?.id]);
+        queryClient.invalidateQueries({ queryKey: ["order-details"] });
         toast.success(res?.data?.message);
       }
     } catch (error) {
