@@ -55,35 +55,40 @@ const listenToMessages = (queryClient) => {
 
       if (!notification || Notification.permission !== "granted") return;
 
+      if (document.visibilityState === "visible") {
+        updateQueries(queryClient, payload);
+        return;
+      }
+
       const title = notification.title || "New Notification";
       const options = {
         body: notification.body || "",
         icon: "/images/fav.svg",
+        tag: "notification",
+        data: payload.data,
       };
 
       new Notification(title, options);
-
-      console.log("Notification received:", payload);
-
-      queryClient.refetchQueries({ queryKey: ["notifications"] });
-      queryClient.refetchQueries({ queryKey: ["user-data"] });
-
-      if (
-        payload.data?.notification_type === "order" &&
-        payload.data?.order_id
-      ) {
-        queryClient.refetchQueries({
-          queryKey: ["order-details", payload.data.order_id],
-        });
-        queryClient.refetchQueries({ queryKey: ["provider-orders"] });
-        queryClient.refetchQueries({ queryKey: ["orders"] });
-      }
+      updateQueries(queryClient, payload);
     } catch (error) {
       console.error("Error handling incoming message:", error);
     }
   });
 
   return unsubscribe;
+};
+
+const updateQueries = (queryClient, payload) => {
+  queryClient.refetchQueries({ queryKey: ["notifications"] });
+  queryClient.refetchQueries({ queryKey: ["user-data"] });
+
+  if (payload.data?.notification_type === "order" && payload.data?.order_id) {
+    queryClient.refetchQueries({
+      queryKey: ["order-details", payload.data.order_id],
+    });
+    queryClient.refetchQueries({ queryKey: ["provider-orders"] });
+    queryClient.refetchQueries({ queryKey: ["orders"] });
+  }
 };
 
 export { requestPermission, listenToMessages };
