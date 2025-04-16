@@ -267,15 +267,15 @@ export default function OrderTimeLine({ orderDetails }) {
 
                       <div className="d-flex gap-2">
                         <SubmitButton
+                          name={t("add")}
+                          disabled={isPending}
+                          onClick={() => setShowModal(true)}
+                        />
+                        <SubmitButton
                           className="finish"
                           name={t("finish")}
                           loading={isPending}
                           onClick={confirmItems}
-                        />
-                        <SubmitButton
-                          name={t("add")}
-                          disabled={isPending}
-                          onClick={() => setShowModal(true)}
                         />
                       </div>
                     </div>
@@ -337,6 +337,7 @@ export default function OrderTimeLine({ orderDetails }) {
                       <SubmitButton
                         name={t("confirmCollection")}
                         disabled={!orderDetails?.is_paid}
+                        style={!orderDetails?.is_paid ? { color: "#777" } : {}}
                         loading={isPending}
                         onClick={() => handleChangeStatus("confirm_collection")}
                       />

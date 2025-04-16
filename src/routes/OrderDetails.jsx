@@ -28,6 +28,11 @@ export default function OrderDetails() {
   const viewCancelButton = () => {
     if (orderDetails?.status === "canceled") return false;
     if (orderDetails?.status === "complete") return false;
+    if (orderDetails?.status === "set_images") return false;
+    if (orderDetails?.status === "end_maintenance") return false;
+    if (orderDetails?.status === "start_maintenance") return false;
+    if (orderDetails?.status === "confirm_collection") return false;
+    if (orderDetails?.status === "client_accept_cost") return false;
 
     return true;
   };
