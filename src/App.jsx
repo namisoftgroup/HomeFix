@@ -24,8 +24,15 @@ export default function App() {
   }, [client]);
 
   useEffect(() => {
-    requestPermission();
-    listenToMessages(queryClient);
+    const initializeNotifications = async () => {
+      await requestPermission();
+      const unsubscribe = listenToMessages(queryClient);
+      return () => {
+        if (unsubscribe) unsubscribe();
+      };
+    };
+
+    initializeNotifications();
   }, [queryClient]);
 
   return (
