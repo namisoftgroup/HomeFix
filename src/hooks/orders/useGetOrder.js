@@ -7,7 +7,7 @@ export default function useGetOrder() {
   const { id } = useParams();
   const { client } = useSelector((state) => state.clientData);
 
-  const { isLoading, data, error } = useQuery({
+  const { isLoading, data, error, refetch } = useQuery({
     queryKey: ["order-details", id],
 
     queryFn: async () => {
@@ -26,5 +26,5 @@ export default function useGetOrder() {
       }
     },
   });
-  return { isLoading, data, error };
+  return { isLoading, data, error, refetch };
 }
