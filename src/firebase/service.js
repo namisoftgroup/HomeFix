@@ -22,7 +22,7 @@ const sendTokenToServer = async (token) => {
 
 const requestPermission = async () => {
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  
+
   if (isSafari && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
     console.log("iOS Safari doesn't support web notifications");
     return;
@@ -55,7 +55,13 @@ const requestPermission = async () => {
   }
 };
 
-const listenToMessages = (queryClient) => {
+const listenToMessages = (
+  refetchOrder,
+  refetchProviderOrders,
+  refetchOrders,
+  refetchNotifications,
+  refetchUserData
+) => {
   const unsubscribe = onMessage(messaging, (payload) => {
     try {
       const { notification } = payload;
@@ -63,7 +69,14 @@ const listenToMessages = (queryClient) => {
       if (!notification || Notification.permission !== "granted") return;
 
       if (document.visibilityState === "visible") {
-        updateQueries(queryClient, payload);
+        updateQueries(
+          refetchOrder,
+          refetchProviderOrders,
+          refetchOrders,
+          refetchNotifications,
+          refetchUserData,
+          payload
+        );
         return;
       }
 
@@ -76,7 +89,14 @@ const listenToMessages = (queryClient) => {
       };
 
       new Notification(title, options);
-      updateQueries(queryClient, payload);
+      updateQueries(
+        refetchOrder,
+        refetchOrders,
+        refetchProviderOrders,
+        refetchUserData,
+        refetchNotifications,
+        payload
+      );
     } catch (error) {
       console.error("Error handling incoming message:", error);
     }
@@ -85,16 +105,21 @@ const listenToMessages = (queryClient) => {
   return unsubscribe;
 };
 
-const updateQueries = (queryClient, payload) => {
-  queryClient.refetchQueries({ queryKey: ["notifications"] });
-  queryClient.refetchQueries({ queryKey: ["user-data"] });
+const updateQueries = (
+  refetchOrder,
+  refetchProviderOrders,
+  refetchOrders,
+  refetchNotifications,
+  refetchUserData,
+  payload
+) => {
+  refetchNotifications();
+  refetchUserData();
 
   if (payload.data?.notification_type === "order" && payload.data?.order_id) {
-    queryClient.refetchQueries({
-      queryKey: ["order-details", payload.data.order_id],
-    });
-    queryClient.refetchQueries({ queryKey: ["provider-orders"] });
-    queryClient.refetchQueries({ queryKey: ["orders"] });
+    refetchOrder();
+    refetchProviderOrders();
+    refetchOrders();
   }
 };
 

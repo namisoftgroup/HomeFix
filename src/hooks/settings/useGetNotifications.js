@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../utils/axiosInstance";
 
 export default function useGetNotifications() {
-  const { isLoading, data, error } = useQuery({
+  const { isLoading, data, error, refetch } = useQuery({
     queryKey: ["notifications"],
     queryFn: async () => {
       try {
@@ -16,5 +16,5 @@ export default function useGetNotifications() {
       }
     },
   });
-  return { isLoading, data, error };
+  return { isLoading, data, error, refetch };
 }

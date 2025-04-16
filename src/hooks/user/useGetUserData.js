@@ -5,7 +5,7 @@ import axiosInstance from "../../utils/axiosInstance";
 export default function useGetUserData() {
   const { lang } = useSelector((state) => state.language);
 
-  const { isLoading, data, error } = useQuery({
+  const { isLoading, data, error, refetch } = useQuery({
     queryKey: ["user-data", lang],
     queryFn: async () => {
       try {
@@ -19,5 +19,5 @@ export default function useGetUserData() {
       }
     },
   });
-  return { isLoading, data, error };
+  return { isLoading, data, error, refetch };
 }
