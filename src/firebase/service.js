@@ -25,14 +25,20 @@ const requestPermission = async () => {
     const permission = await Notification.requestPermission();
     if (permission !== "granted") return;
 
+    console.log("Notification permission granted.");
+
     const registration = await navigator.serviceWorker.register(
       "/firebase-messaging-sw.js"
     );
+
+    console.log("Service Worker registered:", registration);
 
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_VAPID_KEY,
       serviceWorkerRegistration: registration,
     });
+
+    console.log("FCM Token:", token);
 
     if (token) {
       await sendTokenToServer(token);
@@ -56,6 +62,8 @@ const listenToMessages = (queryClient) => {
       };
 
       new Notification(title, options);
+
+      console.log("Notification received:", payload);
 
       queryClient.refetchQueries({ queryKey: ["notifications"] });
       queryClient.refetchQueries({ queryKey: ["user-data"] });
