@@ -21,6 +21,13 @@ const sendTokenToServer = async (token) => {
 };
 
 const requestPermission = async () => {
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  
+  if (isSafari && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    console.log("iOS Safari doesn't support web notifications");
+    return;
+  }
+
   try {
     const permission = await Notification.requestPermission();
     if (permission !== "granted") return;
