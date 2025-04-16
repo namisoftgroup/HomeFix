@@ -1,4 +1,5 @@
 import { getToken, messaging, onMessage } from "./config";
+import { toast } from "sonner";
 import axiosInstance from "../utils/axiosInstance";
 
 const sendTokenToServer = async (token) => {
@@ -12,7 +13,6 @@ const sendTokenToServer = async (token) => {
     });
 
     if (response.status === 200) {
-      console.log("Token sent to server successfully:", response.data);
       localStorage.setItem("firebase_token", token);
     }
   } catch (error) {
@@ -32,20 +32,14 @@ const requestPermission = async () => {
     const permission = await Notification.requestPermission();
     if (permission !== "granted") return;
 
-    console.log("Notification permission granted.");
-
     const registration = await navigator.serviceWorker.register(
       "/firebase-messaging-sw.js"
     );
-
-    console.log("Service Worker registered:", registration);
 
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_VAPID_KEY,
       serviceWorkerRegistration: registration,
     });
-
-    console.log("FCM Token:", token);
 
     if (token) {
       await sendTokenToServer(token);
@@ -87,6 +81,8 @@ const listenToMessages = (
         tag: "notification",
         data: payload.data,
       };
+
+      toast.info(payload.notification?.title);
 
       new Notification(title, options);
       updateQueries(
