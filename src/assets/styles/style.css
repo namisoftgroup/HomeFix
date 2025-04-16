@@ -1997,6 +1997,11 @@ label div {
   gap: 8px;
   text-align: start;
   margin-inline-end: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .order-card .order-content .order-info p i {
   color: var(--main);

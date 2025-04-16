@@ -36,6 +36,19 @@ export default function OffersSide({ orderDetails }) {
     return false;
   };
 
+  const showRating = () => {
+    if (!orderDetails?.has_rated) {
+      if (orderDetails?.status === "end_maintenance") return true;
+      if (orderDetails?.status === "confirm_collection") return true;
+      if (orderDetails?.status === "set_images") return true;
+      if (orderDetails?.status === "complete") return true;
+
+      return false;
+    } else {
+      return false;
+    }
+  };
+
   const handlePayment = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -111,16 +124,15 @@ export default function OffersSide({ orderDetails }) {
                   >
                     <img src="/icons/phone-fill.svg" alt="" />
                   </Link>
-                  {!orderDetails?.has_rated &&
-                    orderDetails?.status === "end_maintenance" && (
-                      <button
-                        className="rate_btn"
-                        onClick={() => setShowRate(true)}
-                      >
-                        <img src="/icons/star.svg" alt="star" />
-                        {t("rateTechnical")}
-                      </button>
-                    )}
+                  {showRating() && (
+                    <button
+                      className="rate_btn"
+                      onClick={() => setShowRate(true)}
+                    >
+                      <img src="/icons/star.svg" alt="star" />
+                      {t("rateTechnical")}
+                    </button>
+                  )}
                 </div>
               </div>
             ))}

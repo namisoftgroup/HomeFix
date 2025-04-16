@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { Col, Container, Row } from "react-bootstrap";
 import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import OrderInfo from "../ui/cards/OrderInfoCard";
 import useGetOrder from "../hooks/orders/useGetOrder";
 import CancelOrder from "../ui/modals/CancelOrder";
@@ -11,18 +11,19 @@ import useChangeOrderStatus from "../hooks/orders/useChangeOrderStatus";
 import OrderStatus from "../ui/cards/OrderStatus";
 import DataLoader from "../ui/loaders/DataLoader";
 import OffersSide from "../ui/orders/OffersSide";
+import useGetOrders from "../hooks/orders/useGetOrders";
 
 export default function OrderDetails() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const [search] = useSearchParams();
   const [showModal, setShowModal] = useState(false);
   const [cancelReason, setCancelReason] = useState("");
 
   const { data: orderDetails, isLoading } = useGetOrder();
   const { changeOrderStatus, isPending } = useChangeOrderStatus();
+  const { refetch } = useGetOrders();
 
   const viewCancelButton = () => {
     if (orderDetails?.status === "canceled") return false;
@@ -47,7 +48,7 @@ export default function OrderDetails() {
             toast.success(res?.message);
             setCancelReason("");
             setShowModal(false);
-            queryClient.invalidateQueries(["orders", search.get("type")]);
+            refetch();
             queryClient.invalidateQueries(["order-details"]);
           } else {
             toast.error(res?.message);

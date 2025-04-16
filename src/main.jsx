@@ -6,7 +6,17 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import App from "./App";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: true,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      retry: false,
+      staleTime: 0,
+    },
+  },
+});
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./assets/styles/all.min.css";

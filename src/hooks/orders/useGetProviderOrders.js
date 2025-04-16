@@ -24,11 +24,6 @@ export default function useGetProviderOrders() {
         throw error;
       }
     },
-
-    retry: false,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
   });
   return { isLoading, data, error, refetch };
 }

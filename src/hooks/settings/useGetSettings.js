@@ -15,11 +15,6 @@ export default function useGetSettings() {
         throw error;
       }
     },
-
-    retry: false,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
   });
   return { isLoading, data, error };
 }
