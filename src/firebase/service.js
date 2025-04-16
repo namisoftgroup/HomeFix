@@ -51,8 +51,8 @@ const requestPermission = async () => {
 
 const listenToMessages = (
   refetchOrder,
-  refetchProviderOrders,
   refetchOrders,
+  refetchProviderOrders,
   refetchNotifications,
   refetchUserData
 ) => {
@@ -82,15 +82,15 @@ const listenToMessages = (
         data: payload.data,
       };
 
+      new Notification(title, options);
       toast.info(payload.notification?.title);
 
-      new Notification(title, options);
       updateQueries(
         refetchOrder,
-        refetchOrders,
         refetchProviderOrders,
-        refetchUserData,
+        refetchOrders,
         refetchNotifications,
+        refetchUserData,
         payload
       );
     } catch (error) {

@@ -25,6 +25,8 @@ export default function useGetOrder() {
         throw error;
       }
     },
+
+    enabled: !!id,
   });
   return { isLoading, data, error, refetch };
 }
