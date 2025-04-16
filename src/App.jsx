@@ -3,12 +3,14 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./providers/router";
 import { Toaster } from "sonner";
 import { useSelector } from "react-redux";
-
+import { listenToMessages, requestPermission } from "./firebase/service";
+import { useQueryClient } from "@tanstack/react-query";
 import i18n from "./utils/i18n";
 
 export default function App() {
   const { lang } = useSelector((state) => state.language);
   const { client } = useSelector((state) => state.clientData);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     localStorage.setItem("lang", lang);
@@ -20,6 +22,11 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("userType", client?.type || "client");
   }, [client]);
+
+  useEffect(() => {
+    requestPermission();
+    listenToMessages(queryClient);
+  }, [queryClient]);
 
   return (
     <>
