@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -9,6 +9,7 @@ import UserReceipt from "./UserReceipt";
 import PaymentModal from "../modals/PaymentModal";
 import axiosInstance from "../../utils/axiosInstance";
 import TechnicalRate from "../modals/TechnicalRate";
+import useWebSocket from "../../hooks/useWebSocket";
 
 export default function OffersSide({ orderDetails }) {
   const { t } = useTranslation();
@@ -24,6 +25,7 @@ export default function OffersSide({ orderDetails }) {
     provider_id: orderDetails?.technical?.id,
   });
   const queryClient = useQueryClient();
+  const { subscribeToOrderUpdates, subscribeToOfferUpdates } = useWebSocket();
 
   const viewReciept = () => {
     if (orderDetails?.status === "set_maintenance_cost") return false;
@@ -49,6 +51,27 @@ export default function OffersSide({ orderDetails }) {
     }
   };
 
+  // استخدام WebSocket للاشتراك في تحديثات الطلبات والعروض
+  useEffect(() => {
+    if (orderDetails?.id) {
+      // الاشتراك في تحديثات الطلب الحالي
+      const orderUnsubscribe = subscribeToOrderUpdates((data) => {
+        console.log("تم استلام تحديث للطلب عبر WebSocket:", data);
+      });
+
+      // الاشتراك في تحديثات العروض
+      const offerUnsubscribe = subscribeToOfferUpdates((data) => {
+        console.log("تم استلام تحديث للعروض عبر WebSocket:", data);
+      });
+
+      // إلغاء الاشتراك عند إزالة المكون
+      return () => {
+        orderUnsubscribe();
+        offerUnsubscribe();
+      };
+    }
+  }, [orderDetails?.id, subscribeToOrderUpdates, subscribeToOfferUpdates]);
+
   const handlePayment = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -61,7 +84,8 @@ export default function OffersSide({ orderDetails }) {
 
       if (res?.data?.code === 200) {
         setShow(false);
-        queryClient.invalidateQueries({ queryKey: ["order-details"] });
+        // لا نحتاج لاستدعاء invalidateQueries هنا لأن WebSocket سيقوم بذلك
+        // عند استلام تحديث من الخادم
         toast.success(res?.data?.message);
       }
     } catch (error) {
@@ -84,7 +108,8 @@ export default function OffersSide({ orderDetails }) {
 
       if (res?.data?.code === 200) {
         setShowRate(false);
-        queryClient.invalidateQueries({ queryKey: ["order-details"] });
+        // لا نحتاج لاستدعاء invalidateQueries هنا لأن WebSocket سيقوم بذلك
+        // عند استلام تحديث من الخادم
         toast.success(res?.data?.message);
       }
     } catch (error) {
