@@ -40,6 +40,11 @@ export default function Header() {
             )}
 
             <NavLink to="/contactus">{t("contactus")}</NavLink>
+
+            {isAuthed &&
+              localStorage.getItem("userType") === "client" && (
+                <NavLink to="/my-orders">{t("myOrders")}</NavLink>
+              )}
           </>
         </div>
 
