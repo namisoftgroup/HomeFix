@@ -72,11 +72,11 @@ export default function UserDropDown() {
             {t("editProfile")}
           </Dropdown.Item>
 
-          {localStorage.getItem("userType") === "client" && (
+          {/* {localStorage.getItem("userType") === "client" && (
             <Dropdown.Item as={Link} to={"/my-orders"}>
               {t("myOrders")}
             </Dropdown.Item>
-          )}
+          )} */}
 
           <Dropdown.Item onClick={performLogout}>{t("logout")}</Dropdown.Item>
 

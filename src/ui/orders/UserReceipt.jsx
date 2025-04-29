@@ -1,9 +1,10 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useChangeOrderStatus from "../../hooks/orders/useChangeOrderStatus";
 import SubmitButton from "../form-elements/SubmitButton";
+import useWebSocket from "../../hooks/useWebSocket";
 
 export default function UserReceipt({ orderDetails }) {
   const { t } = useTranslation();
@@ -11,6 +12,7 @@ export default function UserReceipt({ orderDetails }) {
   const { changeOrderStatus } = useChangeOrderStatus();
   const [isAccepting, setIsAccepting] = useState(false);
   const [isRejecting, setIsRejecting] = useState(false);
+  const { subscribeToOrderUpdates } = useWebSocket();
 
   const viewButtons = () => {
     if (orderDetails?.status === "client_refuse_cost") return false;
@@ -23,6 +25,20 @@ export default function UserReceipt({ orderDetails }) {
 
     return false;
   };
+
+  // استخدام WebSocket للاشتراك في تحديثات الطلبات
+  useEffect(() => {
+    if (orderDetails?.id) {
+      // الاشتراك في تحديثات الطلب الحالي
+      const unsubscribe = subscribeToOrderUpdates((data) => {
+        // يمكن إضافة منطق إضافي هنا للتعامل مع تحديثات محددة
+        console.log("تم استلام تحديث للطلب عبر WebSocket:", data);
+      });
+
+      // إلغاء الاشتراك عند إزالة المكون
+      return () => unsubscribe();
+    }
+  }, [orderDetails?.id, subscribeToOrderUpdates]);
 
   const handleAcceptOrReject = (status) => {
     if (status === "client_accept_cost") {
@@ -41,8 +57,8 @@ export default function UserReceipt({ orderDetails }) {
         onSuccess: (res) => {
           if (res?.code === 200) {
             toast.success(res?.message);
-            queryClient.invalidateQueries({ queryKey: ["orders"] });
-            queryClient.invalidateQueries({ queryKey: ["order-details"] });
+            // لا نحتاج لاستدعاء invalidateQueries هنا لأن WebSocket سيقوم بذلك
+            // عند استلام تحديث من الخادم
           } else {
             toast.error(res?.message);
           }

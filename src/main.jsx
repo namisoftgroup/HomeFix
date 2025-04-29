@@ -3,8 +3,20 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import websocketService from "./utils/websocketService";
 
 import App from "./App";
+
+// تهيئة اتصال WebSocket عند بدء التطبيق
+store.subscribe(() => {
+  const state = store.getState();
+  const isAuthenticated = state.clientData?.client?.id;
+
+  // إنشاء اتصال WebSocket فقط عندما يكون المستخدم مسجل الدخول
+  if (isAuthenticated && !websocketService.isConnected()) {
+    websocketService.connect();
+  }
+});
 
 const queryClient = new QueryClient({
   defaultOptions: {
