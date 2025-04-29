@@ -1,0 +1,50 @@
+/* أنماط الإشعارات المخصصة لمتصفح Safari على نظام iOS */
+
+.ios-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  padding: 15px;
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  border-right: 4px solid #007aff; /* لون أزرق مشابه لنظام iOS */
+  direction: rtl; /* لدعم اللغة العربية */
+}
+
+.ios-notification-hide {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.ios-notification-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.ios-notification-content h3 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.ios-notification-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* تعديلات للشاشات الصغيرة */
+@media (max-width: 480px) {
+  .ios-notification {
+    width: calc(100% - 40px);
+    top: 10px;
+    right: 10px;
+  }
+}

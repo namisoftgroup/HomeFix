@@ -7,9 +7,16 @@ const sendTokenToServer = async (token) => {
   if (prevToken === token) return;
 
   try {
+    // تحديد نوع الجهاز ونظام التشغيل
+    const isSafari = localStorage.getItem("browser_is_safari") === "true";
+    const isIOS = localStorage.getItem("device_is_ios") === "true";
+    const deviceType = isIOS ? "ios" : "web";
+    
     const response = await axiosInstance.post("/auth/firebase-token", {
       token,
-      type: "web",
+      type: deviceType,
+      browser: isSafari ? "safari" : navigator.userAgent.includes("Chrome") ? "chrome" : "other",
+      platform: isIOS ? "ios" : navigator.platform
     });
 
     if (response.status === 200) {
@@ -22,9 +29,23 @@ const sendTokenToServer = async (token) => {
 
 const requestPermission = async () => {
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-  if (isSafari && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
-    console.log("iOS Safari doesn't support web notifications");
+  // تخزين معلومات عن نوع المتصفح ونظام التشغيل
+  localStorage.setItem("browser_is_safari", isSafari);
+  localStorage.setItem("device_is_ios", isIOS);
+
+  if (isSafari && isIOS) {
+    console.log("iOS Safari doesn't fully support web notifications, using alternative method");
+    // محاولة تسجيل رمز الجهاز بطريقة بديلة لـ iOS Safari
+    try {
+      // استخدام طريقة بديلة للحصول على رمز الجهاز لـ iOS Safari
+      const deviceToken = localStorage.getItem("device_id") || `ios_${Date.now()}`;
+      localStorage.setItem("device_id", deviceToken);
+      await sendTokenToServer(deviceToken);
+    } catch (error) {
+      console.error("Error with iOS alternative method:", error);
+    }
     return;
   }
 
@@ -56,6 +77,25 @@ const listenToMessages = (
   refetchNotifications,
   refetchUserData
 ) => {
+  // التحقق من نوع المتصفح ونظام التشغيل
+  const isSafari = localStorage.getItem("browser_is_safari") === "true";
+  const isIOS = localStorage.getItem("device_is_ios") === "true";
+  
+  // إذا كان المتصفح Safari على نظام iOS، نستخدم طريقة بديلة للإشعارات
+  if (isSafari && isIOS) {
+    console.log("Using alternative notification method for iOS Safari");
+    
+    // إنشاء مؤقت للتحقق من الإشعارات الجديدة كل دقيقة
+    const checkInterval = setInterval(() => {
+      refetchNotifications();
+      refetchUserData();
+    }, 60000); // كل دقيقة
+    
+    // إرجاع دالة لإيقاف المؤقت
+    return () => clearInterval(checkInterval);
+  }
+  
+  // للمتصفحات الأخرى، نستخدم Firebase Messaging كالمعتاد
   const unsubscribe = onMessage(messaging, (payload) => {
     try {
       const { notification } = payload;

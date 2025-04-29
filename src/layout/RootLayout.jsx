@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { requestPermission, listenToMessages } from "../firebase/service";
+import { setupIOSSafariNotifications } from "../firebase/iosSafariNotifications";
 import AOS from "aos";
 import useAuth from "../hooks/useAuth";
 
@@ -67,17 +68,61 @@ export default function RootLayout() {
 
   useEffect(() => {
     const initializeNotifications = async () => {
-      await requestPermission();
-      const unsubscribe = listenToMessages(
-        refetchOrder,
-        refetchOrders,
-        refetchProviderOrders,
-        refetchNotifications,
-        refetchUserData
-      );
-      return () => {
-        if (unsubscribe) unsubscribe();
-      };
+      try {
+        // التحقق من نوع المتصفح ونظام التشغيل
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        
+        if (isSafari && isIOS) {
+          // استخدام الحل المخصص لمتصفح Safari على نظام iOS
+          console.log("Using iOS Safari specific notification solution");
+          const unsubscribeIOS = setupIOSSafariNotifications(
+            refetchNotifications,
+            refetchUserData
+          );
+          return () => {
+            if (unsubscribeIOS) unsubscribeIOS();
+          };
+        } else {
+          // استخدام Firebase للمتصفحات الأخرى
+          // طلب الإذن لإرسال الإشعارات
+          await requestPermission();
+          
+          // الاستماع للإشعارات الجديدة
+          const unsubscribe = listenToMessages(
+            refetchOrder,
+            refetchOrders,
+            refetchProviderOrders,
+            refetchNotifications,
+            refetchUserData
+          );
+          
+          // تحديث الإشعارات عند تحميل الصفحة
+          refetchNotifications();
+          
+          // إضافة مستمع للتركيز على النافذة لتحديث الإشعارات
+          const handleFocus = () => {
+            refetchNotifications();
+          };
+          
+          window.addEventListener('focus', handleFocus);
+          
+          return () => {
+            if (unsubscribe) unsubscribe();
+            window.removeEventListener('focus', handleFocus);
+          };
+        }
+      } catch (error) {
+        console.error("Error initializing notifications:", error);
+        // محاولة استخدام الحل البديل في حالة حدوث خطأ
+        const unsubscribeIOS = setupIOSSafariNotifications(
+          refetchNotifications,
+          refetchUserData
+        );
+        return () => {
+          if (unsubscribeIOS) unsubscribeIOS();
+        };
+      }
     };
 
     initializeNotifications();
